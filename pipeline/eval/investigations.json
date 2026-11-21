@@ -1,0 +1,752 @@
+{
+ "mock": false,
+ "mode": "live",
+ "agent": "antigravity-preview-09-2026",
+ "started": "2026-11-21T20:02:57+00:00",
+ "ended": "2026-11-21T20:04:13+00:00",
+ "wall_seconds": 75.7,
+ "flags": 6,
+ "valid_replies": 6,
+ "rule": "Y5: evidence attaches; layout_status is never changed",
+ "status_guard": {
+  "elements_checked": 107,
+  "layout_status_changed": 0,
+  "model_json_modified": false
+ },
+ "inputs": {
+  "model": "eval\\model.json",
+  "run": "eval\\run.json"
+ },
+ "prompt_policy": "flag text + element location only; checker suggested_fix and review conclusions never sent",
+ "results": [
+  {
+   "flag_id": "flag-01-door-f4-stair-c",
+   "element_ids": [
+    "door-f4-stair-c"
+   ],
+   "flag_text": "On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8).",
+   "flag_source": "checker",
+   "check": "missing_referenced_note",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "door-f4-stair-c",
+    "question": "What does 'F.D. - SEE NOTE 7' mean for Stair C's fourth-floor door when sheet A-4 omits Note 7 from its General Notes?",
+    "probable_meaning": "'F.D.' most probably stands for Fire Door and Note 7 most probably means 'STAIR C DOORS ARE FIRE DOORS,' as printed on sheets A-1, A-2, and A-301 and likely omitted from A-4 by drafting error; however, a note on other sheets does not prove it applies to A-4, so on-site inspection is needed to confirm that door-f4-stair-c is a fire-rated door and to verify its fire-rating label and self-closing hardware.",
+    "evidence": [
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.7245,
+       0.3108,
+       0.7605,
+       0.3662
+      ],
+      "quote": "Door swing symbol between Stair C and N.E. HALL with leader line terminating at the door"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.69,
+       0.1,
+       0.79,
+       0.45
+      ],
+      "quote": "F.D. - SEE NOTE 7 (leader line pointing through boxed C down to Stair C door at N.E. HALL)"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.81,
+       0.03,
+       0.99,
+       0.52
+      ],
+      "quote": "FOURTH FLOOR PLAN / GENERAL NOTES: lists 1-6 and 8 (omits Note 7); 1. ALL CORRIDOR DOORS SELF-CLOSING, 1-1/2 HR RATED."
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.81,
+       0.03,
+       0.99,
+       0.52
+      ],
+      "quote": "FIRST FLOOR PLAN / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.81,
+       0.03,
+       0.99,
+       0.52
+      ],
+      "quote": "TYPICAL FLOOR PLAN (FLOORS 2, 3, 5) / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.81,
+       0.03,
+       0.99,
+       0.52
+      ],
+      "quote": "STAIR SECTION / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+     }
+    ],
+    "confidence": "medium",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 72.7,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5dmdCYV9XRFBPMmw1Tm9QbElHMm1RMBIXOXZnQmFfV0RQTzJsNU5vUGxJRzJtUTA"
+   ],
+   "usage": {
+    "total_cached_tokens": 61690,
+    "total_input_tokens": 91822,
+    "total_output_tokens": 2250,
+    "total_thought_tokens": 2766,
+    "total_tokens": 96838,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0874,
+   "layout_status_before": {
+    "door-f4-stair-c": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "door-f4-stair-c": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-02-f1-mech",
+   "element_ids": [
+    "f1-mech"
+   ],
+   "flag_text": "On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-mech",
+    "question": "Why is the first-floor MECH. room on sheet A-1 enclosed by solid walls on all four sides with no door or access opening?",
+    "probable_meaning": "No direct evidence or note explaining access to MECH. was found on any sheet in the set. It most probably represents a drafting omission of the access door (or hatch), since a mechanical room requires physical entry; on site, an inspector must check which adjacent space (such as STAIR HALL, EXIT PASSAGEWAY, or the south alcove) actually provides the door or access opening into MECH.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.36,
+       0.3385,
+       0.48,
+       0.5231
+      ],
+      "quote": "MECH. enclosed by solid black walls on all four sides with no door swing or opening"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.24,
+       0.2,
+       0.72,
+       0.66
+      ],
+      "quote": "Adjacent spaces EXIT PASSAGEWAY, STAIR HALL, Stairs A/B, and E1 show no door into MECH. (unlike BOILER RM., which has a door to STAIR HALL)"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.8,
+       0.02,
+       0.99,
+       0.55
+      ],
+      "quote": "FIRST FLOOR PLAN / GENERAL NOTES 1-8; no note mentions MECH. or mechanical room access"
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.34,
+       0.2,
+       0.5,
+       0.66
+      ],
+      "quote": "EAST LOBBY occupies this central location on floors 2, 3, and 5; no MECH. room shown"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.34,
+       0.2,
+       0.5,
+       0.66
+      ],
+      "quote": "EAST LOBBY occupies this central location on floor 4; no MECH. room shown"
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.05,
+       0.05,
+       0.8,
+       0.9
+      ],
+      "quote": "STAIR A / STAIR B - SCISSOR (ONE SHAFT) and STAIR C (REAR SERVICE); FL 1 notes A -> EXIT PASSAGE -> 142 and B -> STAIR HALL -> 144, with no mention of MECH."
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 64.5,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5dmdCYV9iYU9aZkN4ZElQdnVUV21BTRIXOXZnQmFfYmFPWmZDeGRJUHZ1VFdtQU0"
+   ],
+   "usage": {
+    "total_cached_tokens": 61423,
+    "total_input_tokens": 90264,
+    "total_output_tokens": 2150,
+    "total_thought_tokens": 2775,
+    "total_tokens": 95189,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0848,
+   "layout_status_before": {
+    "f1-mech": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-mech": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-03-f1-unlabeled-north",
+   "element_ids": [
+    "f1-unlabeled-north"
+   ],
+   "flag_text": "On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening.",
+   "flag_source": "checker",
+   "check": "unlabeled_enclosed_space",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-unlabeled-north",
+    "question": "What is the purpose and access condition of the unlabeled, doorless enclosed space along the north wall on sheet A-1 behind Exit Passageway, Stairs A/B, and Stair Hall?",
+    "probable_meaning": "No direct evidence in the drawing set identifies this space. Because it has no door or access opening on A-1 and aligns with a narrower unlabeled, doorless enclosure behind Stairs A and B on A-2 and A-4, it most probably represents an inaccessible building void, a concealed utility/mechanical chase (adjacent to Boiler Rm. and Mech.), or a drafting omission (missing door, label, or exterior setback). On-site inspection is needed to confirm whether it is a sealed void/chase, a room with an omitted access opening, or an exterior recess.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.24,
+       0.1077,
+       0.6,
+       0.2
+      ],
+      "quote": "Enclosed rectangular space along north wall with solid boundary lines, no text label, and no door or access opening"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.05,
+       0.02,
+       0.8,
+       0.48
+      ],
+      "quote": "Bounded by NORTH SERVICE ALLEY (north), 1A (SUPER) (west), BOILER RM. (east), and EXIT PASSAGEWAY, A, B, STAIR HALL (south)"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.8,
+       0.0,
+       1.0,
+       0.55
+      ],
+      "quote": "GENERAL NOTES 1-8 make no mention of any north enclosure, chase, or void"
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.2,
+       0.08,
+       0.65,
+       0.35
+      ],
+      "quote": "Narrower unlabeled, doorless enclosed rectangle along north wall directly behind Stairs A and B, between 2A and 2C"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.2,
+       0.08,
+       0.65,
+       0.35
+      ],
+      "quote": "Narrower unlabeled, doorless enclosed rectangle along north wall directly behind Stairs A and B, between 4A and 4C"
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.02,
+       0.05,
+       0.8,
+       0.9
+      ],
+      "quote": "STAIR A / STAIR B - SCISSOR (ONE SHAFT): FL 1 shows A -> EXIT PASSAGE -> 142 and B -> STAIR HALL -> 144, with no north enclosure or chase shown"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 75.7,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5X2dCYTZfRURZSE9pTE1QMXZuSzJBTRIXOV9nQmE2X0VEWUhPaUxNUDF2bksyQU0"
+   ],
+   "usage": {
+    "total_cached_tokens": 80365,
+    "total_input_tokens": 110928,
+    "total_output_tokens": 2539,
+    "total_thought_tokens": 3499,
+    "total_tokens": 116966,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0972,
+   "layout_status_before": {
+    "f1-unlabeled-north": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-unlabeled-north": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-04-f1-unlabeled-south",
+   "element_ids": [
+    "f1-unlabeled-south"
+   ],
+   "flag_text": "On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening.",
+   "flag_source": "checker",
+   "check": "unlabeled_enclosed_space",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-unlabeled-south",
+    "question": "What is the purpose and access of the unlabeled, doorless enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) on Floor 1?",
+    "probable_meaning": "No direct evidence on any sheet identifies this space. Because A-2 and A-4 show REFUSE immediately east of E1 above an identical unlabeled, doorless southern rectangle, the Floor 1 enclosure most probably represents an inaccessible void or vertical/utility chase (potentially related to the upper-floor REFUSE stack, though Floor 1 TRASH is separate at the northeast corner), or an incomplete drawing where a room label and door (e.g., elevator equipment or storage) were omitted. On-site inspection is required to verify whether the enclosure is a sealed void/chase or an accessible room with an unshown door.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.36,
+       0.5231,
+       0.48,
+       0.7538
+      ],
+      "quote": "L-shaped enclosed area east and south of E1 shaft with no room label and no door or opening"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.8,
+       0.0,
+       1.0,
+       0.55
+      ],
+      "quote": "3. ELEVATOR E1 NOT FOR FIRE SERVICE USE. / 6. REFUSE ROOMS SPRINKLERED."
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.35,
+       0.5,
+       0.5,
+       0.76
+      ],
+      "quote": "REFUSE room east of E1 (no door shown); unlabeled, doorless enclosed rectangle south of E1 and REFUSE"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.35,
+       0.5,
+       0.5,
+       0.76
+      ],
+      "quote": "REFUSE room east of E1 (no door shown); unlabeled, doorless enclosed rectangle south of E1 and REFUSE"
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.05,
+       0.7,
+       0.78,
+       0.9
+      ],
+      "quote": "FL 1: A -> EXIT PASSAGE -> 142; B -> STAIR HALL -> 144; -> REAR VESTIBULE -> ALLEY GATE (no mention of E1 enclosure)"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 73.4,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5X2dCYS1fWUJiQ1F5dE1Qbi1TZGtBURIXOV9nQmEtX1lCYkNReXRNUG4tU2RrQVE"
+   ],
+   "usage": {
+    "total_cached_tokens": 62491,
+    "total_input_tokens": 91346,
+    "total_output_tokens": 1999,
+    "total_thought_tokens": 4128,
+    "total_tokens": 97473,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0939,
+   "layout_status_before": {
+    "f1-unlabeled-south": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-unlabeled-south": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-05-f2-refuse",
+   "element_ids": [
+    "f2-refuse",
+    "f3-refuse",
+    "f5-refuse"
+   ],
+   "flag_text": "On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f2-refuse",
+    "question": "How is the REFUSE room on typical floors 2, 3, and 5 (sheet A-2) accessed when it is drawn enclosed by solid walls on all four sides with no door?",
+    "probable_meaning": "No direct evidence on any sheet explains the missing door; it is most likely a drafting omission of an access door (probably on the north wall from EAST LOBBY, given elevator E1 is to the west and apartment 2D to the east) or a sealed/decommissioned refuse room, and must be checked on site to confirm whether a door exists and where it is located.",
+    "evidence": [
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.42,
+       0.5231,
+       0.48,
+       0.6385
+      ],
+      "quote": "REFUSE (enclosed by solid walls on all four sides with no door opening)"
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.34,
+       0.44,
+       0.52,
+       0.68
+      ],
+      "quote": "E1 / REFUSE (REFUSE sits south of EAST LOBBY and east of elevator E1 with no door drawn)"
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.8,
+       0.0,
+       1.0,
+       0.55
+      ],
+      "quote": "6. REFUSE ROOMS SPRINKLERED."
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.34,
+       0.44,
+       0.52,
+       0.68
+      ],
+      "quote": "REFUSE (fourth floor REFUSE room also drawn enclosed by solid walls on all four sides with no door)"
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.68,
+       0.3,
+       0.8,
+       0.56
+      ],
+      "quote": "TRASH (first-floor trash room drawn with a door opening south)"
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.8,
+       0.0,
+       1.0,
+       0.55
+      ],
+      "quote": "6. REFUSE ROOMS SPRINKLERED. (no mention of refuse room doors or access)"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 69.0,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5X2dCYTUtY0NwZUUxc2dQZ1lydC1RMBIXOV9nQmE1LWNDcGVFMXNnUGdZcnQtUTA"
+   ],
+   "usage": {
+    "total_cached_tokens": 62643,
+    "total_input_tokens": 93838,
+    "total_output_tokens": 2343,
+    "total_thought_tokens": 2880,
+    "total_tokens": 99061,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0907,
+   "layout_status_before": {
+    "f2-refuse": "drafted_awaiting_review",
+    "f3-refuse": "drafted_awaiting_review",
+    "f5-refuse": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f2-refuse": "drafted_awaiting_review",
+    "f3-refuse": "drafted_awaiting_review",
+    "f5-refuse": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-06-f4-refuse",
+   "element_ids": [
+    "f4-refuse"
+   ],
+   "flag_text": "On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f4-refuse",
+    "question": "How is the floor 4 REFUSE room accessed, or is it an enclosed shaft with no door?",
+    "probable_meaning": "No direct evidence on any sheet resolves the missing door: A-4 and A-2 (floors 2, 3, 5) both draw REFUSE enclosed by solid walls on all four sides, and A-301 omits it. General Note 6 ('REFUSE ROOMS SPRINKLERED.') on A-4 and the other sheets implies an active refuse space\u2014suggesting either an omitted door (most plausibly from EAST LOBBY to the north) or a chute-only/sealed enclosure\u2014rather than an unserviced void. On site, verify whether an access door, hopper/chute, or solid wall exists at floor 4 REFUSE.",
+    "evidence": [
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.42,
+       0.5231,
+       0.48,
+       0.6385
+      ],
+      "quote": "REFUSE room enclosed by solid walls on all four sides with no door"
+     },
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.81,
+       0.02,
+       0.99,
+       0.55
+      ],
+      "quote": "FOURTH FLOOR PLAN ... 6. REFUSE ROOMS SPRINKLERED."
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.35,
+       0.45,
+       0.5,
+       0.68
+      ],
+      "quote": "REFUSE room next to E1 and south of EAST LOBBY, enclosed by solid walls on all four sides with no door"
+     },
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.81,
+       0.02,
+       0.99,
+       0.55
+      ],
+      "quote": "TYPICAL FLOOR PLAN (FLOORS 2, 3, 5) ... 6. REFUSE ROOMS SPRINKLERED."
+     },
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.68,
+       0.38,
+       0.79,
+       0.55
+      ],
+      "quote": "TRASH room with door opening on its south wall (different location from upper-floor REFUSE)"
+     },
+     {
+      "sheet": "A-301",
+      "region_norm": [
+       0.02,
+       0.05,
+       0.8,
+       0.9
+      ],
+      "quote": "Stair section showing Stairs A, B, and C across FL 1 to FL 5; REFUSE not shown"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 74.6,
+   "turns": 1,
+   "interaction_ids": [
+    "v1_Chc5X2dCYTc2VUNiMmp1TVlQNk1XeGtBRRIXOV9nQmE3NlVDYjJqdU1ZUDZNV3hrQUU"
+   ],
+   "usage": {
+    "total_cached_tokens": 72268,
+    "total_input_tokens": 103785,
+    "total_output_tokens": 2379,
+    "total_thought_tokens": 3109,
+    "total_tokens": 109273,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0939,
+   "layout_status_before": {
+    "f4-refuse": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f4-refuse": "drafted_awaiting_review"
+   }
+  }
+ ],
+ "totals": {
+  "total_tokens": 614800,
+  "total_input_tokens": 581983,
+  "total_output_tokens": 13660,
+  "total_cached_tokens": 400880,
+  "total_thought_tokens": 19157,
+  "cost_usd": 0.5479
+ },
+ "turns": [
+  {
+   "agent": "investigator:f1-mech",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:01+00:00",
+   "seconds": 64.5,
+   "status": "completed",
+   "interaction_id": "v1_Chc5dmdCYV9iYU9aZkN4ZElQdnVUV21BTRIXOXZnQmFfYmFPWmZDeGRJUHZ1VFdtQU0",
+   "usage": {
+    "total_cached_tokens": 61423,
+    "total_input_tokens": 90264,
+    "total_output_tokens": 2150,
+    "total_thought_tokens": 2775,
+    "total_tokens": 95189,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0848,
+   "error": null
+  },
+  {
+   "agent": "investigator:f2-refuse",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:06+00:00",
+   "seconds": 69.0,
+   "status": "completed",
+   "interaction_id": "v1_Chc5X2dCYTUtY0NwZUUxc2dQZ1lydC1RMBIXOV9nQmE1LWNDcGVFMXNnUGdZcnQtUTA",
+   "usage": {
+    "total_cached_tokens": 62643,
+    "total_input_tokens": 93838,
+    "total_output_tokens": 2343,
+    "total_thought_tokens": 2880,
+    "total_tokens": 99061,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0907,
+   "error": null
+  },
+  {
+   "agent": "investigator:door-f4-stair-c",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:10+00:00",
+   "seconds": 72.7,
+   "status": "completed",
+   "interaction_id": "v1_Chc5dmdCYV9XRFBPMmw1Tm9QbElHMm1RMBIXOXZnQmFfV0RQTzJsNU5vUGxJRzJtUTA",
+   "usage": {
+    "total_cached_tokens": 61690,
+    "total_input_tokens": 91822,
+    "total_output_tokens": 2250,
+    "total_thought_tokens": 2766,
+    "total_tokens": 96838,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0874,
+   "error": null
+  },
+  {
+   "agent": "investigator:f1-unlabeled-south",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:10+00:00",
+   "seconds": 73.4,
+   "status": "completed",
+   "interaction_id": "v1_Chc5X2dCYS1fWUJiQ1F5dE1Qbi1TZGtBURIXOV9nQmEtX1lCYkNReXRNUG4tU2RrQVE",
+   "usage": {
+    "total_cached_tokens": 62491,
+    "total_input_tokens": 91346,
+    "total_output_tokens": 1999,
+    "total_thought_tokens": 4128,
+    "total_tokens": 97473,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0939,
+   "error": null
+  },
+  {
+   "agent": "investigator:f4-refuse",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:11+00:00",
+   "seconds": 74.6,
+   "status": "completed",
+   "interaction_id": "v1_Chc5X2dCYTc2VUNiMmp1TVlQNk1XeGtBRRIXOV9nQmE3NlVDYjJqdU1ZUDZNV3hrQUU",
+   "usage": {
+    "total_cached_tokens": 72268,
+    "total_input_tokens": 103785,
+    "total_output_tokens": 2379,
+    "total_thought_tokens": 3109,
+    "total_tokens": 109273,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0939,
+   "error": null
+  },
+  {
+   "agent": "investigator:f1-unlabeled-north",
+   "step": "investigate",
+   "start": "2026-11-21T20:02:57+00:00",
+   "end": "2026-11-21T20:04:13+00:00",
+   "seconds": 75.7,
+   "status": "completed",
+   "interaction_id": "v1_Chc5X2dCYTZfRURZSE9pTE1QMXZuSzJBTRIXOV9nQmE2X0VEWUhPaUxNUDF2bksyQU0",
+   "usage": {
+    "total_cached_tokens": 80365,
+    "total_input_tokens": 110928,
+    "total_output_tokens": 2539,
+    "total_thought_tokens": 3499,
+    "total_tokens": 116966,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0972,
+   "error": null
+  }
+ ],
+ "pricing": {
+  "basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+  "price_per_million": {
+   "input": 1.5,
+   "cached_input": 0.075,
+   "output": 7.5
+  }
+ },
+ "log_dir": "logs\\live-investigate-20261121-150256"
+}

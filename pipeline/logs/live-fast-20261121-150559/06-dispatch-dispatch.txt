@@ -1,0 +1,1 @@
+{"target_space_id": "f4-apt-4c", "reports": [{"space_id": "f4-apt-4c", "kind": "smoke", "text": "smoke showing from apartment 4C"}, {"space_id": "f4-east-lobby", "kind": "smoke", "text": "heavy smoke in the fourth floor east lobby"}]}

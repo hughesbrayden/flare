@@ -1,0 +1,45 @@
+No sheet in the drawing set (A-1, A-2, A-4, or A-301) labels or explains the enclosed north space on A-1.
+A narrower unlabeled, doorless enclosure also appears directly behind Stairs A and B on upper-floor plans A-2 and A-4, while A-301 and all General Notes are silent on it.
+Because no direct evidence is printed, this space is most probably an inaccessible void, a concealed utility/mechanical chase, or an incomplete drafting item (e.g., omitted door/label or exterior setback) and must be verified on site.
+
+```json
+{
+  "element_id": "f1-unlabeled-north",
+  "question": "What is the purpose and access condition of the unlabeled, doorless enclosed space along the north wall on sheet A-1 behind Exit Passageway, Stairs A/B, and Stair Hall?",
+  "probable_meaning": "No direct evidence in the drawing set identifies this space. Because it has no door or access opening on A-1 and aligns with a narrower unlabeled, doorless enclosure behind Stairs A and B on A-2 and A-4, it most probably represents an inaccessible building void, a concealed utility/mechanical chase (adjacent to Boiler Rm. and Mech.), or a drafting omission (missing door, label, or exterior setback). On-site inspection is needed to confirm whether it is a sealed void/chase, a room with an omitted access opening, or an exterior recess.",
+  "evidence": [
+    {
+      "sheet": "A-1",
+      "region_norm": [0.24, 0.1077, 0.6, 0.2],
+      "quote": "Enclosed rectangular space along north wall with solid boundary lines, no text label, and no door or access opening"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.05, 0.02, 0.8, 0.48],
+      "quote": "Bounded by NORTH SERVICE ALLEY (north), 1A (SUPER) (west), BOILER RM. (east), and EXIT PASSAGEWAY, A, B, STAIR HALL (south)"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.8, 0.0, 1.0, 0.55],
+      "quote": "GENERAL NOTES 1-8 make no mention of any north enclosure, chase, or void"
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.2, 0.08, 0.65, 0.35],
+      "quote": "Narrower unlabeled, doorless enclosed rectangle along north wall directly behind Stairs A and B, between 2A and 2C"
+    },
+    {
+      "sheet": "A-4",
+      "region_norm": [0.2, 0.08, 0.65, 0.35],
+      "quote": "Narrower unlabeled, doorless enclosed rectangle along north wall directly behind Stairs A and B, between 4A and 4C"
+    },
+    {
+      "sheet": "A-301",
+      "region_norm": [0.02, 0.05, 0.8, 0.9],
+      "quote": "STAIR A / STAIR B - SCISSOR (ONE SHAFT): FL 1 shows A -> EXIT PASSAGE -> 142 and B -> STAIR HALL -> 144, with no north enclosure or chase shown"
+    }
+  ],
+  "confidence": "low",
+  "keep_status": "drafted_awaiting_review"
+}
+```

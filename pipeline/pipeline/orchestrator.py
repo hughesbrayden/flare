@@ -11,7 +11,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
-from . import config, schema, scorer
+from . import config, schema, scorer, stitch
 from .agent_client import AgentTask, now_iso
 from .invariants import check_model
 
@@ -89,9 +89,18 @@ class Run:
         if not errs:
             return obj, res, []
         self.log(f"[{task.name}] invalid reply ({len(errs)} problems), retrying once: {errs[:3]}")
-        retry = AgentTask(name=task.name, role=task.role,
-                          prompt=_prompt("retry_bad_json.md").replace("{ERRORS}", "\n".join(f"- {e}" for e in errs[:40])),
-                          previous=(res.interaction_id, res.environment_id), meta=task.meta)
+        retry = AgentTask(
+            name=task.name,
+            role=task.role,
+            prompt=_prompt("retry_bad_json.md").replace("{ERRORS}", "\n".join(f"- {e}" for e in errs[:40])),
+            previous=(res.interaction_id, res.environment_id),
+            meta=task.meta,
+            mode=task.mode,
+            model=task.model,
+            thinking_level=task.thinking_level,
+            image_resolution=task.image_resolution,
+            response_format=task.response_format,
+        )
         res2 = self._turn(retry, step + "-retry")
         if res2.status not in ("completed", "idle"):
             return None, res2, [f"retry status {res2.status}: {res2.error}"]
@@ -308,21 +317,15 @@ def _full(run, result):
                              "counts": {k: len(o["layout"].get(k, [])) for k in ("spaces", "openings", "verticals", "entrances")}}
                          for s, o in slices.items()}
 
-    # 2. stitcher
-    run.log("Stage 2: stair stitcher")
-    st_task = AgentTask(name="stitcher", role="stitcher", prompt=_prompt("stitcher.md"), images=[("A-301", _sheet_png("A-301"))],
-                        sources=[(f"/workspace/input/slices/{s}.json", json.dumps(o, indent=1)) for s, o in slices.items()]
-                        + [("/workspace/input/format.md", _prompt("format.md"))],
-                        meta={"slices": slices})
-    obj, res, errs = run.run_validated(st_task, schema.validate_stitcher_reply, "stitch")
-    if obj is None:
-        result["status"] = "blocked"; result["blocker"] = f"stitcher failed: {errs[:5]}"
-        return
-    stitch_state = (res.interaction_id, res.environment_id)
-    layout = obj["layout"]
-    result["stitch_notes"] = obj.get("stitch_notes")
+    # 2. deterministic plain-code stitcher (~4 ms; replaces the 113.5 s agent stitcher)
+    t_st = time.perf_counter()
+    layout, stitch_notes = stitch.stitch(slices)
+    stitch_ms = round((time.perf_counter() - t_st) * 1000.0, 2)
+    run.log(f"Stage 2: deterministic stair stitcher completed in {stitch_ms} ms")
+    result["stitch_notes"] = stitch_notes
+    result["stitch_ms"] = stitch_ms
     before_layout = copy.deepcopy(layout)
-    json.dump(wrap_model(before_layout), open(os.path.join(run.out_dir, "model_before_checker.json"), "w", encoding="utf-8"), indent=1)
+    _write_json_atomic(os.path.join(run.out_dir, "model_before_checker.json"), wrap_model(before_layout))
 
     # 3. checker loop
     catches, ambiguities, rounds = [], [], []
@@ -420,18 +423,9 @@ def _full(run, result):
                     reader_state[sheet] = (r.interaction_id, r.environment_id)
                     slices[sheet] = o; updated[sheet] = o
         pre = copy.deepcopy(layout)
-        task = AgentTask(name="stitcher", role="stitcher",
-                         prompt=_prompt("restitch.md").replace("{UPDATED_SLICES}", json.dumps(updated))
-                         .replace("{FINDINGS}", json.dumps(by_owner.get("stitcher", []), indent=1)),
-                         previous=stitch_state, meta={"slices": slices})
-        o, r, e = run.run_validated(task, schema.validate_stitcher_reply, f"restitch-r{rnd}")
-        if o is None:
-            run.log(f"re-stitch failed: {e[:3]}; keeping previous model")
-            for f in errors:
-                catches.append({"round": rnd, "severity": "error", "finding": f, "action": "fix failed (re-stitch)", "diff": []})
-            break
-        stitch_state = (r.interaction_id, r.environment_id)
-        layout = apply_ambiguities(o["layout"], ambiguities)
+        new_layout, new_notes = stitch.stitch(slices)
+        result["stitch_notes"] = new_notes
+        layout = apply_ambiguities(new_layout, ambiguities)
         any_changed = False
         for f in errors:
             d = diff_elements(pre, layout, f.get("element_ids", []))

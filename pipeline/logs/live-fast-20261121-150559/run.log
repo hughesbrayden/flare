@@ -1,0 +1,11 @@
+2026-11-21T20:05:59+00:00 Fast Stage 1: 4 parallel readers (gemini-4-hydrogen, thinking=low, res=ultra_high)
+2026-11-21T20:06:07+00:00 [reader:A-301] completed in 7.9s, tokens=5613, est $0.0153
+2026-11-21T20:06:28+00:00 [reader:A-2] completed in 29.2s, tokens=11271, est $0.0581
+2026-11-21T20:06:30+00:00 [reader:A-1] completed in 30.8s, tokens=11099, est $0.0571
+2026-11-21T20:06:31+00:00 [reader:A-4] completed in 32.4s, tokens=11822, est $0.0627
+2026-11-21T20:06:31+00:00 Fast Stage 2: local stitch + invariants in 5.61 ms -> model ready at 32.4s
+2026-11-21T20:06:31+00:00 Fast Stage 3 (off critical path): visual checker (gemini-4-hydrogen, thinking=medium)
+2026-11-21T20:07:09+00:00 [checker] completed in 37.2s, tokens=26614, est $0.0864
+2026-11-21T20:07:09+00:00 Fast Stage 4: at-dispatch report mapping call
+2026-11-21T20:07:12+00:00 [dispatch] completed in 3.4s, tokens=1637, est $0.0045
+2026-11-21T20:07:12+00:00 Fast pipeline completed; wrote C:\Users\Brayden\OneDrive\Documents\AI Workspace\dry-run\first-look\pipeline\eval\fast_run.json

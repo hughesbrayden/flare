@@ -5,7 +5,7 @@ Flare is an interactive model of a building that a fire crew can question on the
 This repo has two parts:
 
 - **The site** (this folder): a four-chapter story at `/` and the full-screen demo at `/demo`. It's static. Nothing calls an API at runtime.
-- **The pipeline** (`pipeline/`): Gemini Managed Agents that read a building's plan sheets and build the model the demo uses. It runs before any call, not during one.
+- **The pipeline** (`pipeline/`): two-tier architecture — **before the call**, Gemini Managed Agents read each sheet in parallel, plain code stitches the floors (4 ms), a checker flags ambiguities, and parallel **investigator agents** attach cited cross-sheet evidence without ever clearing `drafted_awaiting_review`; **at dispatch**, a saved model loads in ~1 s and one small call maps a caller report (~5 s), or an unmapped building uses `run.py fast` (~35 s to model, checker off the critical path).
 
 The demo building, **Marlowe House (142–144 Marlowe St), is fictional.** We drew its four plan sheets and an answer key for it.
 
@@ -50,16 +50,18 @@ python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt     # macOS/Linux: .venv/bin/pip
 .venv\Scripts\python run.py all --mock            # no key needed
 .venv\Scripts\python run.py one-agent             # live: one sheet reader on A-4
-.venv\Scripts\python run.py full                  # live: the whole pipeline
+.venv\Scripts\python run.py full                  # live: full Managed Agents pipeline
+.venv\Scripts\python run.py fast                  # live: fast pass (~35 s) for unmapped buildings
+.venv\Scripts\python -m pipeline.investigate      # live: parallel investigator agents (1 per flag)
 ```
 
-How it works:
+How the two-tier pipeline works:
 
-1. **Four sheet readers, in parallel**, one per sheet (A-1 floor 1; A-2 floors 2, 3, 5; A-4 floor 4; A-301 stair section). Each runs in its own Managed Agents sandbox, writes every room, door and stair with the spot on the sheet it came from, then redraws its reading and compares it to the sheet (up to 2 passes).
-2. **Stair stitcher** copies the typical plan to floors 2, 3 and 5 and joins each stair from floor to floor.
-3. **Checker** runs fixed rule checks and compares the model with the sheets. It can send an error back to the reader that made it (up to 2 rounds). Things the drawings themselves leave open are kept and marked for a person to review.
+1. **Before the call (Managed Agents):** Four sheet readers run in parallel in isolated sandboxes (each redraws its reading against the sheet, up to 2 passes). Plain deterministic code stitches typical floors and vertical shafts (~6 ms). A checker runs fixed invariants and visual inspection (can send errors back up to 2 rounds). Then **investigator agents** (6 parallel agents in 75.7 s, one per `drafted_awaiting_review` flag) crop and compare across all four sheets to attach cited context while keeping `layout_status: "drafted_awaiting_review"` unchanged until verified on scene.
+2. **At dispatch (seconds):** A saved building loads in ~1 s, one small call maps a caller report (**3.4 s** live), and deterministic JS code routes locally.
+3. **Unmapped building (`run.py fast`):** Parallel plain-call readers + local stitcher produce a navigable model in **32.4 s** live (checker finishes off the critical path at **69.6 s**).
 
-Managed Agents has no built-in fan-out, so the orchestrator starts the four readers itself and waits for all of them. `scorer.py` is the only code that opens the answer key; no agent sees it.
+We do not claim Managed Agents are more accurate than plain calls on Marlowe House; agents earn their keep via sandbox render checks and cross-sheet investigations before any call. Smoke simulation is deferred post-MVP. Managed Agents has no built-in fan-out, so the orchestrator starts parallel agents itself. `scorer.py` is the only code that opens the answer key; no agent sees it.
 
 ## Results (latest live run, 2026-11-21)
 

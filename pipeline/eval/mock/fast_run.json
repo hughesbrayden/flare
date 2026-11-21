@@ -1,0 +1,544 @@
+{
+ "mock": true,
+ "mode": "fast-mock",
+ "model": "gemini-4-hydrogen",
+ "reader_thinking": "low",
+ "checker_thinking": "medium",
+ "image_resolution": "ultra_high",
+ "started": "2026-11-21T20:03:32+00:00",
+ "status": "completed",
+ "pricing": {
+  "basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+  "price_per_million": {
+   "input": 1.5,
+   "cached_input": 0.075,
+   "output": 7.5
+  }
+ },
+ "mock_notice": "MOCK FAST RUN: canned replies; timings, tokens and costs are simulated.",
+ "time_to_model_s": 0.7,
+ "stitch_and_invariants_ms": 8.1,
+ "time_to_checker_s": 1.0,
+ "stitch_notes": [
+  "Copied A-2 floor 2 to floor 3 (ids f2- -> f3-).",
+  "Copied A-2 floor 2 to floor 5 (ids f2- -> f5-).",
+  "stair-a floor 4: section says opens to 'EAST LOBBY', plan stop space is 'WEST CORRIDOR' (kept plan; words differ only)."
+ ],
+ "local_invariant_findings": [
+  {
+   "check": "doors_connect_touching_spaces",
+   "severity": "error",
+   "owner": "reader:A-4",
+   "element_ids": [
+    "door-f4-stair-a",
+    "stair-a",
+    "f4-west-corridor"
+   ],
+   "message": "opening door-f4-stair-a connects stair-a [10, 9, 12, 12] and f4-west-corridor [0, 6, 10, 8], which do not touch on floor 4",
+   "suggested_fix": "Re-read the door on the sheet: which two spaces does its swing actually join?",
+   "source": "deterministic"
+  }
+ ],
+ "checker_catches": [
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "missing_referenced_note",
+    "severity": "ambiguity",
+    "owner": "reader:A-4",
+    "element_ids": [
+     "door-f4-stair-c"
+    ],
+    "message": "Stair C floor-4 door is annotated 'F.D. - SEE NOTE 7'; note 7 is missing from A-4's general notes.",
+    "suggested_fix": "Keep the door, mark drafted_awaiting_review, verify on arrival.",
+    "evidence": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.7,
+      0.12,
+      0.78,
+      0.15
+     ]
+    }
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "door-f4-stair-c",
+     "before": {
+      "id": "door-f4-stair-c",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-c",
+       "f4-ne-hall"
+      ],
+      "pos_m": [
+       22.75,
+       9
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.725,
+        0.311,
+        0.76,
+        0.366
+       ],
+       "callout": "F.D. - SEE NOTE 7"
+      },
+      "layout_status": "verified_on_plan"
+     },
+     "after": {
+      "id": "door-f4-stair-c",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-c",
+       "f4-ne-hall"
+      ],
+      "pos_m": [
+       22.75,
+       9
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.725,
+        0.311,
+        0.76,
+        0.366
+       ],
+       "callout": "F.D. - SEE NOTE 7"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Stair C floor-4 door is annotated 'F.D. - SEE NOTE 7'; note 7 is missing from A-4's general notes."
+     },
+     "changed_fields": [
+      "layout_status",
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "error",
+   "finding": {
+    "check": "callout_vs_geometry",
+    "severity": "error",
+    "owner": "reader:A-4",
+    "element_ids": [
+     "door-f4-stair-a"
+    ],
+    "message": "Stair A floor-4 door is wired to the West Corridor because of the 'STAIR A (W) ->' callout, but the door swing on A-4 opens into the East Lobby.",
+    "suggested_fix": "Connect stair-a on floor 4 to the East Lobby and mark the callout for review.",
+    "evidence": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.36,
+      0.33,
+      0.42,
+      0.38
+     ]
+    }
+   },
+   "action": "reported off critical path (no send-back in fast mode)",
+   "diff": []
+  }
+ ],
+ "dispatch_call": {
+  "text": "Engine 7 respond 144 Marlowe St, smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby.",
+  "seconds": 0.5,
+  "status": "completed",
+  "cost_usd": 0.3205,
+  "usage": {
+   "total_input_tokens": 202530,
+   "total_cached_tokens": 121518,
+   "total_output_tokens": 16877,
+   "total_thought_tokens": 8438,
+   "total_tool_use_tokens": 0,
+   "total_tokens": 227845
+  },
+  "result": {
+   "target_space_id": "f4-apt-4c",
+   "reports": [
+    {
+     "space_id": "f4-apt-4c",
+     "kind": "smoke",
+     "text": "smoke showing from apartment 4C"
+    },
+    {
+     "space_id": "f4-east-lobby",
+     "kind": "smoke",
+     "text": "heavy smoke in the fourth floor east lobby"
+    }
+   ]
+  },
+  "error": null
+ },
+ "accuracy": {
+  "before_checker": {
+   "spaces_matched": 41,
+   "spaces_true": 45,
+   "spaces_recall": 0.911,
+   "spaces_precision": 1.0,
+   "spaces_f1": 0.953,
+   "spaces_missing": [
+    "f1-trash",
+    "f2-refuse",
+    "f3-refuse",
+    "f5-refuse"
+   ],
+   "spaces_extra": [],
+   "openings_true": 53,
+   "openings_found": 52,
+   "openings_correct": 51,
+   "openings_found_rate": 0.981,
+   "openings_correct_rate": 0.962,
+   "openings_wrong": [
+    {
+     "true": "door-f4-stair-a",
+     "pred": "door-f4-stair-a",
+     "pred_connects_mapped": [
+      "stair-a",
+      "f4-west-corr"
+     ],
+     "true_connects": [
+      "stair-a",
+      "f4-east-lobby"
+     ]
+    }
+   ],
+   "connections_true": 53,
+   "connections_pred": 52,
+   "connections_correct": 51,
+   "connections_recall": 0.962,
+   "connections_precision": 0.981,
+   "connections_f1": 0.971,
+   "stops_true": 20,
+   "stops_correct": 19,
+   "stops_rate": 0.95,
+   "stop_errors": [
+    {
+     "vertical": "stair-a",
+     "floor": 4,
+     "expected": "f4-east-lobby",
+     "got": "f4-west-corr"
+    }
+   ],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-west-corr",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": false,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": false
+   },
+   "stair_c_f4_door_status": "verified_on_plan",
+   "overall": 0.767
+  },
+  "after_checker": {
+   "spaces_matched": 41,
+   "spaces_true": 45,
+   "spaces_recall": 0.911,
+   "spaces_precision": 1.0,
+   "spaces_f1": 0.953,
+   "spaces_missing": [
+    "f1-trash",
+    "f2-refuse",
+    "f3-refuse",
+    "f5-refuse"
+   ],
+   "spaces_extra": [],
+   "openings_true": 53,
+   "openings_found": 52,
+   "openings_correct": 51,
+   "openings_found_rate": 0.981,
+   "openings_correct_rate": 0.962,
+   "openings_wrong": [
+    {
+     "true": "door-f4-stair-a",
+     "pred": "door-f4-stair-a",
+     "pred_connects_mapped": [
+      "stair-a",
+      "f4-west-corr"
+     ],
+     "true_connects": [
+      "stair-a",
+      "f4-east-lobby"
+     ]
+    }
+   ],
+   "connections_true": 53,
+   "connections_pred": 52,
+   "connections_correct": 51,
+   "connections_recall": 0.962,
+   "connections_precision": 0.981,
+   "connections_f1": 0.971,
+   "stops_true": 20,
+   "stops_correct": 19,
+   "stops_rate": 0.95,
+   "stop_errors": [
+    {
+     "vertical": "stair-a",
+     "floor": 4,
+     "expected": "f4-east-lobby",
+     "got": "f4-west-corr"
+    }
+   ],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-west-corr",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": false,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": false
+   },
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 0.767
+  },
+  "summary": {
+   "spaces_recall": [
+    0.911,
+    0.911
+   ],
+   "spaces_precision": [
+    1.0,
+    1.0
+   ],
+   "spaces_f1": [
+    0.953,
+    0.953
+   ],
+   "openings_found_rate": [
+    0.981,
+    0.981
+   ],
+   "openings_correct_rate": [
+    0.962,
+    0.962
+   ],
+   "connections_recall": [
+    0.962,
+    0.962
+   ],
+   "connections_precision": [
+    0.981,
+    0.981
+   ],
+   "connections_f1": [
+    0.971,
+    0.971
+   ],
+   "stops_rate": [
+    0.95,
+    0.95
+   ],
+   "overall": [
+    0.767,
+    0.767
+   ]
+  },
+  "trap_holds": [
+   false,
+   false
+  ]
+ },
+ "final_model_path": "eval\\mock\\fast_model.json",
+ "ended": "2026-11-21T20:03:33+00:00",
+ "wall_seconds": 1.6,
+ "timeline": [
+  {
+   "agent": "reader:A-2",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:03:32+00:00",
+   "end": "2026-11-21T20:03:32+00:00",
+   "seconds": 0.4,
+   "status": "completed",
+   "interaction_id": "mock-interaction-003",
+   "environment_id": "mock-env-003",
+   "usage": {
+    "total_input_tokens": 320478,
+    "total_cached_tokens": 192286,
+    "total_output_tokens": 26706,
+    "total_thought_tokens": 13353,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 360537
+   },
+   "cost_usd": 0.5072,
+   "error": null,
+   "mock": true
+  },
+  {
+   "agent": "reader:A-301",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:03:32+00:00",
+   "end": "2026-11-21T20:03:32+00:00",
+   "seconds": 0.4,
+   "status": "completed",
+   "interaction_id": "mock-interaction-004",
+   "environment_id": "mock-env-004",
+   "usage": {
+    "total_input_tokens": 332774,
+    "total_cached_tokens": 199664,
+    "total_output_tokens": 27731,
+    "total_thought_tokens": 13865,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 374370
+   },
+   "cost_usd": 0.5266,
+   "error": null,
+   "mock": true
+  },
+  {
+   "agent": "reader:A-1",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:03:32+00:00",
+   "end": "2026-11-21T20:03:32+00:00",
+   "seconds": 0.6,
+   "status": "completed",
+   "interaction_id": "mock-interaction-001",
+   "environment_id": "mock-env-001",
+   "usage": {
+    "total_input_tokens": 219544,
+    "total_cached_tokens": 131726,
+    "total_output_tokens": 18295,
+    "total_thought_tokens": 9147,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 246986
+   },
+   "cost_usd": 0.3474,
+   "error": null,
+   "mock": true
+  },
+  {
+   "agent": "reader:A-4",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:03:32+00:00",
+   "end": "2026-11-21T20:03:32+00:00",
+   "seconds": 0.7,
+   "status": "completed",
+   "interaction_id": "mock-interaction-002",
+   "environment_id": "mock-env-002",
+   "usage": {
+    "total_input_tokens": 192657,
+    "total_cached_tokens": 115594,
+    "total_output_tokens": 16054,
+    "total_thought_tokens": 8027,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 216738
+   },
+   "cost_usd": 0.3049,
+   "error": null,
+   "mock": true
+  },
+  {
+   "agent": "checker",
+   "role": "checker",
+   "step": "fast-check",
+   "start": "2026-11-21T20:03:32+00:00",
+   "end": "2026-11-21T20:03:33+00:00",
+   "seconds": 0.4,
+   "status": "completed",
+   "interaction_id": "mock-interaction-005",
+   "environment_id": "mock-env-005",
+   "usage": {
+    "total_input_tokens": 313021,
+    "total_cached_tokens": 187812,
+    "total_output_tokens": 26085,
+    "total_thought_tokens": 13042,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 352148
+   },
+   "cost_usd": 0.4954,
+   "error": null,
+   "mock": true
+  },
+  {
+   "agent": "dispatch",
+   "role": "dispatch",
+   "step": "dispatch",
+   "start": "2026-11-21T20:03:33+00:00",
+   "end": "2026-11-21T20:03:33+00:00",
+   "seconds": 0.5,
+   "status": "completed",
+   "interaction_id": "mock-interaction-006",
+   "environment_id": "mock-env-006",
+   "usage": {
+    "total_input_tokens": 202530,
+    "total_cached_tokens": 121518,
+    "total_output_tokens": 16877,
+    "total_thought_tokens": 8438,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 227845
+   },
+   "cost_usd": 0.3205,
+   "error": null,
+   "mock": true
+  }
+ ],
+ "per_agent": {
+  "reader:A-2": {
+   "turns": 1,
+   "total_tokens": 360537,
+   "cost_usd": 0.5072,
+   "seconds": 0.4
+  },
+  "reader:A-301": {
+   "turns": 1,
+   "total_tokens": 374370,
+   "cost_usd": 0.5266,
+   "seconds": 0.4
+  },
+  "reader:A-1": {
+   "turns": 1,
+   "total_tokens": 246986,
+   "cost_usd": 0.3474,
+   "seconds": 0.6
+  },
+  "reader:A-4": {
+   "turns": 1,
+   "total_tokens": 216738,
+   "cost_usd": 0.3049,
+   "seconds": 0.7
+  },
+  "checker": {
+   "turns": 1,
+   "total_tokens": 352148,
+   "cost_usd": 0.4954,
+   "seconds": 0.4
+  },
+  "dispatch": {
+   "turns": 1,
+   "total_tokens": 227845,
+   "cost_usd": 0.3205,
+   "seconds": 0.5
+  }
+ },
+ "totals": {
+  "total_tokens": 1778624,
+  "total_input_tokens": 1581004,
+  "total_output_tokens": 131748,
+  "total_cached_tokens": 948600,
+  "total_thought_tokens": 65872,
+  "cost_usd": 2.502
+ }
+}

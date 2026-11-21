@@ -1,0 +1,46 @@
+On sheet A-1, the first-floor `MECH.` room is drawn enclosed by solid walls on all four sides with no door or access opening.
+No general notes, callouts, or details on A-1, A-2, A-4, or A-301 mention `MECH.` or explain how it is accessed.
+Upper floors (A-2 and A-4) show `EAST LOBBY` in this central footprint, and A-301 only documents Stairs A, B, and C.
+This is most likely a drafting omission of the room's access door, and the actual entry location must be verified on site.
+
+```json
+{
+  "element_id": "f1-mech",
+  "question": "Why is the first-floor MECH. room on sheet A-1 enclosed by solid walls on all four sides with no door or access opening?",
+  "probable_meaning": "No direct evidence or note explaining access to MECH. was found on any sheet in the set. It most probably represents a drafting omission of the access door (or hatch), since a mechanical room requires physical entry; on site, an inspector must check which adjacent space (such as STAIR HALL, EXIT PASSAGEWAY, or the south alcove) actually provides the door or access opening into MECH.",
+  "evidence": [
+    {
+      "sheet": "A-1",
+      "region_norm": [0.36, 0.3385, 0.48, 0.5231],
+      "quote": "MECH. enclosed by solid black walls on all four sides with no door swing or opening"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.24, 0.2, 0.72, 0.66],
+      "quote": "Adjacent spaces EXIT PASSAGEWAY, STAIR HALL, Stairs A/B, and E1 show no door into MECH. (unlike BOILER RM., which has a door to STAIR HALL)"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.8, 0.02, 0.99, 0.55],
+      "quote": "FIRST FLOOR PLAN / GENERAL NOTES 1-8; no note mentions MECH. or mechanical room access"
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.34, 0.2, 0.5, 0.66],
+      "quote": "EAST LOBBY occupies this central location on floors 2, 3, and 5; no MECH. room shown"
+    },
+    {
+      "sheet": "A-4",
+      "region_norm": [0.34, 0.2, 0.5, 0.66],
+      "quote": "EAST LOBBY occupies this central location on floor 4; no MECH. room shown"
+    },
+    {
+      "sheet": "A-301",
+      "region_norm": [0.05, 0.05, 0.8, 0.9],
+      "quote": "STAIR A / STAIR B - SCISSOR (ONE SHAFT) and STAIR C (REAR SERVICE); FL 1 notes A -> EXIT PASSAGE -> 142 and B -> STAIR HALL -> 144, with no mention of MECH."
+    }
+  ],
+  "confidence": "low",
+  "keep_status": "drafted_awaiting_review"
+}
+```

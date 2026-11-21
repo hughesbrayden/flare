@@ -1,0 +1,667 @@
+{
+ "mock": false,
+ "mode": "fast-live",
+ "model": "gemini-4-hydrogen",
+ "reader_thinking": "low",
+ "checker_thinking": "medium",
+ "image_resolution": "ultra_high",
+ "started": "2026-11-21T20:05:59+00:00",
+ "status": "completed",
+ "pricing": {
+  "basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+  "price_per_million": {
+   "input": 1.5,
+   "cached_input": 0.075,
+   "output": 7.5
+  }
+ },
+ "time_to_model_s": 32.4,
+ "stitch_and_invariants_ms": 5.61,
+ "time_to_checker_s": 69.6,
+ "stitch_notes": [
+  "Copied A-2 floor 2 to floor 3 (ids f2- -> f3-).",
+  "Copied A-2 floor 2 to floor 5 (ids f2- -> f5-)."
+ ],
+ "local_invariant_findings": [],
+ "checker_catches": [
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "callout-arrow-contradiction",
+    "severity": "ambiguity",
+    "owner": "reader:A-4",
+    "element_ids": [
+     "stair-a",
+     "door-f4-stair-a"
+    ],
+    "related_ids": [
+     "f4-apt-4a",
+     "f4-east-lobby"
+    ],
+    "message": "On sheet A-4, the callout 'STAIR A (W) ->' inside unit 4A pairs a '(W)' (west) label with an arrow '->' pointing east toward EAST LOBBY and STAIR A.",
+    "suggested_fix": "Mark as drafted_awaiting_review; confirm with the architect whether '(W)' refers to Stair A being the west scissor stair or is a mislabeled directional note.",
+    "evidence": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.23,
+      0.34,
+      0.32,
+      0.39
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "stair-a",
+     "before": {
+      "id": "stair-a",
+      "kind": "stair",
+      "label": "STAIR A",
+      "floors_connected": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "stops": [
+       {
+        "floor": 1,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f1-stair-a",
+        "space_id": "f1-exit-passageway"
+       },
+       {
+        "floor": 2,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f2-stair-a",
+        "space_id": "f2-east-lobby"
+       },
+       {
+        "floor": 3,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f3-stair-a",
+        "space_id": "f3-east-lobby"
+       },
+       {
+        "floor": 4,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f4-stair-a",
+        "space_id": "f4-east-lobby"
+       },
+       {
+        "floor": 5,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f5-stair-a",
+        "space_id": "f5-east-lobby"
+       }
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.2,
+        0.42,
+        0.34
+       ],
+       "callout": "A"
+      },
+      "layout_status": "verified_on_plan"
+     },
+     "after": {
+      "id": "stair-a",
+      "kind": "stair",
+      "label": "STAIR A",
+      "floors_connected": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "stops": [
+       {
+        "floor": 1,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f1-stair-a",
+        "space_id": "f1-exit-passageway"
+       },
+       {
+        "floor": 2,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f2-stair-a",
+        "space_id": "f2-east-lobby"
+       },
+       {
+        "floor": 3,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f3-stair-a",
+        "space_id": "f3-east-lobby"
+       },
+       {
+        "floor": 4,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f4-stair-a",
+        "space_id": "f4-east-lobby"
+       },
+       {
+        "floor": 5,
+        "bbox_m": [
+         10.0,
+         9.0,
+         12.0,
+         12.0
+        ],
+        "opening_id": "door-f5-stair-a",
+        "space_id": "f5-east-lobby"
+       }
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.2,
+        0.42,
+        0.34
+       ],
+       "callout": "A"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "On sheet A-4, the callout 'STAIR A (W) ->' inside unit 4A pairs a '(W)' (west) label with an arrow '->' pointing east toward EAST LOBBY and STAIR A."
+     },
+     "changed_fields": [
+      "layout_status",
+      "review_note"
+     ]
+    },
+    {
+     "element_id": "door-f4-stair-a",
+     "before": {
+      "id": "door-f4-stair-a",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-a",
+       "f4-east-lobby"
+      ],
+      "pos_m": [
+       11.0,
+       9.0
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.37,
+        0.31,
+        0.41,
+        0.35
+       ],
+       "callout": "A"
+      },
+      "layout_status": "verified_on_plan"
+     },
+     "after": {
+      "id": "door-f4-stair-a",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-a",
+       "f4-east-lobby"
+      ],
+      "pos_m": [
+       11.0,
+       9.0
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.37,
+        0.31,
+        0.41,
+        0.35
+       ],
+       "callout": "A"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "On sheet A-4, the callout 'STAIR A (W) ->' inside unit 4A pairs a '(W)' (west) label with an arrow '->' pointing east toward EAST LOBBY and STAIR A."
+     },
+     "changed_fields": [
+      "layout_status",
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "error",
+   "finding": {
+    "check": "room-bbox-mismatch",
+    "severity": "error",
+    "owner": "reader:A-2",
+    "element_ids": [
+     "f2-apt-2d",
+     "f3-apt-3d",
+     "f5-apt-5d"
+    ],
+    "related_ids": [
+     "f2-ne-hall",
+     "f3-ne-hall",
+     "f5-ne-hall"
+    ],
+    "message": "On sheet A-2, apartment 2D (representing 2D, 3D, and 5D) extends east to the exterior wall at x=24.0 m underneath N.E. HALL, but the model truncates f2-apt-2d, f3-apt-3d, and f5-apt-5d at x=21.5 m.",
+    "suggested_fix": "Update bbox_m for f2-apt-2d, f3-apt-3d, and f5-apt-5d from [14.0, 0.0, 21.5, 6.0] to [14.0, 0.0, 24.0, 6.0].",
+    "evidence": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.47,
+      0.78,
+      0.75
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "reported off critical path (no send-back in fast mode)",
+   "diff": []
+  }
+ ],
+ "dispatch_call": {
+  "text": "Engine 7 respond 144 Marlowe St, smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby.",
+  "seconds": 3.4,
+  "status": "completed",
+  "cost_usd": 0.0045,
+  "usage": {
+   "initial_input_tokens": 1294,
+   "total_cached_tokens": 0,
+   "total_input_tokens": 1294,
+   "total_output_tokens": 99,
+   "total_thought_tokens": 244,
+   "total_tokens": 1637,
+   "total_tool_use_tokens": 0
+  },
+  "result": {
+   "target_space_id": "f4-apt-4c",
+   "reports": [
+    {
+     "space_id": "f4-apt-4c",
+     "kind": "smoke",
+     "text": "smoke showing from apartment 4C"
+    },
+    {
+     "space_id": "f4-east-lobby",
+     "kind": "smoke",
+     "text": "heavy smoke in the fourth floor east lobby"
+    }
+   ]
+  },
+  "error": null
+ },
+ "accuracy": {
+  "before_checker": {
+   "spaces_matched": 45,
+   "spaces_true": 45,
+   "spaces_recall": 1.0,
+   "spaces_precision": 1.0,
+   "spaces_f1": 1.0,
+   "spaces_missing": [],
+   "spaces_extra": [],
+   "openings_true": 53,
+   "openings_found": 53,
+   "openings_correct": 53,
+   "openings_found_rate": 1.0,
+   "openings_correct_rate": 1.0,
+   "openings_wrong": [],
+   "connections_true": 53,
+   "connections_pred": 53,
+   "connections_correct": 53,
+   "connections_recall": 1.0,
+   "connections_precision": 1.0,
+   "connections_f1": 1.0,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1.0,
+   "stop_errors": [],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-east-lobby",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": true,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": true
+   },
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 1.0
+  },
+  "after_checker": {
+   "spaces_matched": 45,
+   "spaces_true": 45,
+   "spaces_recall": 1.0,
+   "spaces_precision": 1.0,
+   "spaces_f1": 1.0,
+   "spaces_missing": [],
+   "spaces_extra": [],
+   "openings_true": 53,
+   "openings_found": 53,
+   "openings_correct": 53,
+   "openings_found_rate": 1.0,
+   "openings_correct_rate": 1.0,
+   "openings_wrong": [],
+   "connections_true": 53,
+   "connections_pred": 53,
+   "connections_correct": 53,
+   "connections_recall": 1.0,
+   "connections_precision": 1.0,
+   "connections_f1": 1.0,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1.0,
+   "stop_errors": [],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-east-lobby",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": true,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": true
+   },
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 1.0
+  },
+  "summary": {
+   "spaces_recall": [
+    1.0,
+    1.0
+   ],
+   "spaces_precision": [
+    1.0,
+    1.0
+   ],
+   "spaces_f1": [
+    1.0,
+    1.0
+   ],
+   "openings_found_rate": [
+    1.0,
+    1.0
+   ],
+   "openings_correct_rate": [
+    1.0,
+    1.0
+   ],
+   "connections_recall": [
+    1.0,
+    1.0
+   ],
+   "connections_precision": [
+    1.0,
+    1.0
+   ],
+   "connections_f1": [
+    1.0,
+    1.0
+   ],
+   "stops_rate": [
+    1.0,
+    1.0
+   ],
+   "overall": [
+    1.0,
+    1.0
+   ]
+  },
+  "trap_holds": [
+   true,
+   true
+  ]
+ },
+ "final_model_path": "eval\\fast_model.json",
+ "ended": "2026-11-21T20:07:12+00:00",
+ "wall_seconds": 73.1,
+ "timeline": [
+  {
+   "agent": "reader:A-301",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:05:59+00:00",
+   "end": "2026-11-21T20:06:07+00:00",
+   "seconds": 7.9,
+   "status": "completed",
+   "interaction_id": "v1_ChdxdmtCYTUtd0F0ejZ5dE1QMjc2cG1BRRIXcXZrQmE1LXdBdHo2eXRNUDI3NnBtQUU",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 4462,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 4462,
+    "total_output_tokens": 667,
+    "total_thought_tokens": 484,
+    "total_tokens": 5613,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0153,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-2",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:05:59+00:00",
+   "end": "2026-11-21T20:06:28+00:00",
+   "seconds": 29.2,
+   "status": "completed",
+   "interaction_id": "v1_ChdxZmtCYTlENU9PdkdpTE1Qb09DMnNBRRIXcWZrQmE5RDVPT3ZHaUxNUG9PQzJzQUU",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 4407,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 4407,
+    "total_output_tokens": 4139,
+    "total_thought_tokens": 2725,
+    "total_tokens": 11271,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0581,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-1",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:05:59+00:00",
+   "end": "2026-11-21T20:06:30+00:00",
+   "seconds": 30.8,
+   "status": "completed",
+   "interaction_id": "v1_ChdxZmtCYTl2VlBMaWdvX1VQaUt1V21RRRIXcWZrQmE5dlZQTGlnb19VUGlLdVdtUUU",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 4362,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 4362,
+    "total_output_tokens": 4436,
+    "total_thought_tokens": 2301,
+    "total_tokens": 11099,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0571,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-4",
+   "role": "reader",
+   "step": "fast-read",
+   "start": "2026-11-21T20:05:59+00:00",
+   "end": "2026-11-21T20:06:31+00:00",
+   "seconds": 32.4,
+   "status": "completed",
+   "interaction_id": "v1_ChdxZmtCYS02UU9LMmhvX1VQdmJTOGlRYxIXcWZrQmEtNlFPSzJob19VUHZiUzhpUWM",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 4323,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 4323,
+    "total_output_tokens": 4203,
+    "total_thought_tokens": 3296,
+    "total_tokens": 11822,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0627,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "checker",
+   "role": "checker",
+   "step": "fast-check",
+   "start": "2026-11-21T20:06:31+00:00",
+   "end": "2026-11-21T20:07:09+00:00",
+   "seconds": 37.2,
+   "status": "completed",
+   "interaction_id": "v1_Chd5UGtCYTRtMkk5RFp5dE1QaF9lRTJRdxIXeVBrQmE0bTJJOURaeXRNUGhfZUUyUXc",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 18865,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 18865,
+    "total_output_tokens": 686,
+    "total_thought_tokens": 7063,
+    "total_tokens": 26614,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0864,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "dispatch",
+   "role": "dispatch",
+   "step": "dispatch",
+   "start": "2026-11-21T20:07:09+00:00",
+   "end": "2026-11-21T20:07:12+00:00",
+   "seconds": 3.4,
+   "status": "completed",
+   "interaction_id": "v1_Chc3ZmtCYV9QWUxPMnV5dE1QbjZyTGtBcxIXN2ZrQmFfUFlMTzJ1eXRNUG42ckxrQXM",
+   "environment_id": null,
+   "usage": {
+    "initial_input_tokens": 1294,
+    "total_cached_tokens": 0,
+    "total_input_tokens": 1294,
+    "total_output_tokens": 99,
+    "total_thought_tokens": 244,
+    "total_tokens": 1637,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.0045,
+   "error": null,
+   "mock": false
+  }
+ ],
+ "per_agent": {
+  "reader:A-301": {
+   "turns": 1,
+   "total_tokens": 5613,
+   "cost_usd": 0.0153,
+   "seconds": 7.9
+  },
+  "reader:A-2": {
+   "turns": 1,
+   "total_tokens": 11271,
+   "cost_usd": 0.0581,
+   "seconds": 29.2
+  },
+  "reader:A-1": {
+   "turns": 1,
+   "total_tokens": 11099,
+   "cost_usd": 0.0571,
+   "seconds": 30.8
+  },
+  "reader:A-4": {
+   "turns": 1,
+   "total_tokens": 11822,
+   "cost_usd": 0.0627,
+   "seconds": 32.4
+  },
+  "checker": {
+   "turns": 1,
+   "total_tokens": 26614,
+   "cost_usd": 0.0864,
+   "seconds": 37.2
+  },
+  "dispatch": {
+   "turns": 1,
+   "total_tokens": 1637,
+   "cost_usd": 0.0045,
+   "seconds": 3.4
+  }
+ },
+ "totals": {
+  "total_tokens": 68056,
+  "total_input_tokens": 37713,
+  "total_output_tokens": 14230,
+  "total_cached_tokens": 0,
+  "total_thought_tokens": 16113,
+  "cost_usd": 0.2841
+ }
+}

@@ -1,0 +1,46 @@
+Sheet A-4 draws the floor 4 `REFUSE` room enclosed by solid walls on all four sides with no door or opening, while General Note 6 states `"REFUSE ROOMS SPRINKLERED."`
+Sheet A-2 (Typical Floor Plan for floors 2, 3, and 5) draws the same `REFUSE` room identically enclosed with no door, and sheet A-301 only sections Stairs A, B, and C.
+Sheet A-1 shows a first-floor `TRASH` room in a different location with a south door, which does not establish how floor 4 `REFUSE` is accessed.
+Because no sheet depicts a door or explains the solid enclosure, the item has low confidence and remains `drafted_awaiting_review` pending on-site verification.
+
+```json
+{
+  "element_id": "f4-refuse",
+  "question": "How is the floor 4 REFUSE room accessed, or is it an enclosed shaft with no door?",
+  "probable_meaning": "No direct evidence on any sheet resolves the missing door: A-4 and A-2 (floors 2, 3, 5) both draw REFUSE enclosed by solid walls on all four sides, and A-301 omits it. General Note 6 ('REFUSE ROOMS SPRINKLERED.') on A-4 and the other sheets implies an active refuse space—suggesting either an omitted door (most plausibly from EAST LOBBY to the north) or a chute-only/sealed enclosure—rather than an unserviced void. On site, verify whether an access door, hopper/chute, or solid wall exists at floor 4 REFUSE.",
+  "evidence": [
+    {
+      "sheet": "A-4",
+      "region_norm": [0.42, 0.5231, 0.48, 0.6385],
+      "quote": "REFUSE room enclosed by solid walls on all four sides with no door"
+    },
+    {
+      "sheet": "A-4",
+      "region_norm": [0.81, 0.02, 0.99, 0.55],
+      "quote": "FOURTH FLOOR PLAN ... 6. REFUSE ROOMS SPRINKLERED."
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.35, 0.45, 0.5, 0.68],
+      "quote": "REFUSE room next to E1 and south of EAST LOBBY, enclosed by solid walls on all four sides with no door"
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.81, 0.02, 0.99, 0.55],
+      "quote": "TYPICAL FLOOR PLAN (FLOORS 2, 3, 5) ... 6. REFUSE ROOMS SPRINKLERED."
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.68, 0.38, 0.79, 0.55],
+      "quote": "TRASH room with door opening on its south wall (different location from upper-floor REFUSE)"
+    },
+    {
+      "sheet": "A-301",
+      "region_norm": [0.02, 0.05, 0.8, 0.9],
+      "quote": "Stair section showing Stairs A, B, and C across FL 1 to FL 5; REFUSE not shown"
+    }
+  ],
+  "confidence": "low",
+  "keep_status": "drafted_awaiting_review"
+}
+```

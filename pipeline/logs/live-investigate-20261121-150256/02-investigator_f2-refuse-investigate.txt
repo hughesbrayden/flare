@@ -1,0 +1,43 @@
+No sheet explains why the `REFUSE` room on sheet A-2 (floors 2, 3, and 5) is drawn with four solid walls and no door. Sheet A-4 draws the same `REFUSE` room on floor 4 without a door as well, while sheet A-1 shows a first-floor `TRASH` room with a door and all sheets state `REFUSE ROOMS SPRINKLERED.` This is most likely a drafting omission of a door from `EAST LOBBY` (or a sealed/inaccessible room), so on-site verification is required.
+
+```json
+{
+  "element_id": "f2-refuse",
+  "question": "How is the REFUSE room on typical floors 2, 3, and 5 (sheet A-2) accessed when it is drawn enclosed by solid walls on all four sides with no door?",
+  "probable_meaning": "No direct evidence on any sheet explains the missing door; it is most likely a drafting omission of an access door (probably on the north wall from EAST LOBBY, given elevator E1 is to the west and apartment 2D to the east) or a sealed/decommissioned refuse room, and must be checked on site to confirm whether a door exists and where it is located.",
+  "evidence": [
+    {
+      "sheet": "A-2",
+      "region_norm": [0.42, 0.5231, 0.48, 0.6385],
+      "quote": "REFUSE (enclosed by solid walls on all four sides with no door opening)"
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.34, 0.44, 0.52, 0.68],
+      "quote": "E1 / REFUSE (REFUSE sits south of EAST LOBBY and east of elevator E1 with no door drawn)"
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.8, 0.0, 1.0, 0.55],
+      "quote": "6. REFUSE ROOMS SPRINKLERED."
+    },
+    {
+      "sheet": "A-4",
+      "region_norm": [0.34, 0.44, 0.52, 0.68],
+      "quote": "REFUSE (fourth floor REFUSE room also drawn enclosed by solid walls on all four sides with no door)"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.68, 0.3, 0.8, 0.56],
+      "quote": "TRASH (first-floor trash room drawn with a door opening south)"
+    },
+    {
+      "sheet": "A-301",
+      "region_norm": [0.8, 0.0, 1.0, 0.55],
+      "quote": "6. REFUSE ROOMS SPRINKLERED. (no mention of refuse room doors or access)"
+    }
+  ],
+  "confidence": "low",
+  "keep_status": "drafted_awaiting_review"
+}
+```

@@ -1,0 +1,38 @@
+No sheet in the drawing set labels the enclosed area east and south of Elevator E1 on Floor 1 (`A-1`) or explains why it has no door. On the upper-floor plans (`A-2`, `A-4`), the northeast part of this same footprint (east of `E1`) is walled off as `REFUSE`, while the southern rectangle below `E1` and `REFUSE` remains unlabeled and doorless on every floor. The Floor 1 enclosure is therefore either an inaccessible void/chase (potentially aligning with the upper-floor refuse stack or building utilities) or an incomplete drawing missing a label and door.
+
+```json
+{
+  "element_id": "f1-unlabeled-south",
+  "question": "What is the purpose and access of the unlabeled, doorless enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) on Floor 1?",
+  "probable_meaning": "No direct evidence on any sheet identifies this space. Because A-2 and A-4 show REFUSE immediately east of E1 above an identical unlabeled, doorless southern rectangle, the Floor 1 enclosure most probably represents an inaccessible void or vertical/utility chase (potentially related to the upper-floor REFUSE stack, though Floor 1 TRASH is separate at the northeast corner), or an incomplete drawing where a room label and door (e.g., elevator equipment or storage) were omitted. On-site inspection is required to verify whether the enclosure is a sealed void/chase or an accessible room with an unshown door.",
+  "evidence": [
+    {
+      "sheet": "A-1",
+      "region_norm": [0.36, 0.5231, 0.48, 0.7538],
+      "quote": "L-shaped enclosed area east and south of E1 shaft with no room label and no door or opening"
+    },
+    {
+      "sheet": "A-1",
+      "region_norm": [0.8, 0.0, 1.0, 0.55],
+      "quote": "3. ELEVATOR E1 NOT FOR FIRE SERVICE USE. / 6. REFUSE ROOMS SPRINKLERED."
+    },
+    {
+      "sheet": "A-2",
+      "region_norm": [0.35, 0.5, 0.5, 0.76],
+      "quote": "REFUSE room east of E1 (no door shown); unlabeled, doorless enclosed rectangle south of E1 and REFUSE"
+    },
+    {
+      "sheet": "A-4",
+      "region_norm": [0.35, 0.5, 0.5, 0.76],
+      "quote": "REFUSE room east of E1 (no door shown); unlabeled, doorless enclosed rectangle south of E1 and REFUSE"
+    },
+    {
+      "sheet": "A-301",
+      "region_norm": [0.05, 0.7, 0.78, 0.9],
+      "quote": "FL 1: A -> EXIT PASSAGE -> 142; B -> STAIR HALL -> 144; -> REAR VESTIBULE -> ALLEY GATE (no mention of E1 enclosure)"
+    }
+  ],
+  "confidence": "low",
+  "keep_status": "drafted_awaiting_review"
+}
+```

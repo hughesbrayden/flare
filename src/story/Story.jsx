@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import App from '../App.jsx';
 import IsoBuilding from './IsoBuilding.jsx';
-import { ClockFigure, PinFigure, TrapFigure, SanbornMap, LanesFigure, PipelineFigure } from './Figures.jsx';
+import { ClockFigure, PinFigure, TrapFigure, SanbornMap, LanesFigure, PipelineFigure, TwoTierFigure } from './Figures.jsx';
 import { SOURCES, SOURCE_ORDER } from './sources.js';
 import proof from '../data/proof.json';
 import { StairIcon, FireDoorIcon, ReportPinIcon } from '../NfpaSymbols.jsx';
@@ -372,6 +372,8 @@ function SheetsFigure() {
 }
 
 function FlagsFigure() {
+  const inv = proof.investigations || { pending: true };
+  const note7 = inv.note7;
   return (
     <div className="flags-figure">
       <Crop
@@ -388,6 +390,50 @@ function FlagsFigure() {
           </li>
         ))}
       </ul>
+
+      {/* Investigator example (Note 7): cites cross-sheet evidence, never clears drafted status */}
+      <div className="investigator-card">
+        <div className="inv-head">
+          <span className="mono small">INVESTIGATOR AGENT · NOTE 7 EXAMPLE</span>
+          <span className="inv-status">STILL MARKED DRAFTED · VERIFY ON SCENE</span>
+        </div>
+        {!inv.pending && note7 ? (
+          <>
+            <p className="inv-body">{note7.probable_meaning}</p>
+            {note7.evidence?.length > 0 && (
+              <ul className="inv-evidence">
+                {[
+                  note7.evidence.find((e) => e.sheet === 'A-4' && e.quote.includes('GENERAL NOTES')) ?? note7.evidence[0],
+                  note7.evidence.find((e) => e.sheet === 'A-301' || e.sheet === 'A-1') ?? note7.evidence[1],
+                ]
+                  .filter(Boolean)
+                  .map((ev, idx) => (
+                    <li key={idx}>
+                      <b>Sheet {ev.sheet}:</b> “{ev.quote}”
+                    </li>
+                  ))}
+              </ul>
+            )}
+            <p className="inv-foot mono small">
+              Status kept as <code>{note7.keep_status}</code>
+              {note7.seconds ? ` · ${Math.round(note7.seconds)} s` : ''}
+              {note7.cost_usd != null ? ` · ~$${note7.cost_usd.toFixed(2)}` : ''}
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="inv-body">
+              An investigator agent crops and compares all four sheets to trace why Note 7 is missing on A-4 (for
+              example, checking whether Note 7 appears on another sheet such as A-301), then attaches the exact sheet
+              citation.
+            </p>
+            <p className="inv-foot mono small">
+              Hard rule: evidence attaches, but <code>door-f4-stair-c</code> stays <code>drafted_awaiting_review</code>{' '}
+              until verified on scene. (Live investigator output pending sync.)
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -396,53 +442,52 @@ function Solution({ onNavigate }) {
   const readers = proof.lanes.filter((l) => l.role === 'reader');
   const slowest = Math.max(...readers.map((l) => l.seconds));
   const fastest = Math.min(...readers.map((l) => l.seconds));
-  const stitch = proof.lanes.find((l) => l.role === 'stitcher');
   const check = proof.lanes.find((l) => l.role === 'checker');
   const nFlags = proof.checker_flags.length;
+  const fast = proof.fast_run || { pending: true };
+  const fastModelText = !fast.pending && fast.time_to_model_s ? `${Math.round(fast.time_to_model_s)} s` : 'about 35 s';
+  const dispatchText = !fast.pending && fast.dispatch_call_s ? `${fast.dispatch_call_s.toFixed(1)} s` : 'about 5 s';
 
   const steps = [
     <>
       <div className="mono small">2:14 AM · DISPATCH</div>
       <h3>The call names an apartment. The plans are four sheets.</h3>
       <p>
-        Marlowe House has drawings: a floor-1 plan, a typical plan for floors 2, 3 and 5, a floor-4 plan, and a stair
-        section. They were never meant to be read in a moving truck. Flare turns them into one model ahead of time,
-        long before any call.
+        Marlowe House has four drawings: floor 1, a typical plan for floors 2, 3 and 5, floor 4, and a stair section.
+        They were never meant to be read in a moving truck. Flare builds the model ahead of time so it loads in about
+        1 second at dispatch — and if a building isn’t mapped yet, a fast pass builds a navigable model in {fastModelText}.
       </p>
     </>,
     <>
-      <div className="mono small">BEFORE ANY CALL · STEP 1</div>
-      <h3>Four agents read the four sheets at the same time.</h3>
+      <div className="mono small">BEFORE THE CALL · STEP 1</div>
+      <h3>Four agents read the four sheets in parallel.</h3>
       <p>
-        Each sheet reader is a Gemini Managed Agent with its own sandbox. It writes down every room, door and stair on
-        its sheet, with the spot on the sheet each one came from. Then it redraws what it wrote and compares that with
-        the sheet, and fixes what doesn’t line up.
+        Before any call, each sheet reader runs in its own Managed Agents sandbox. It extracts every room, door and
+        stair with the exact spot on the sheet it came from, redraws its reading over the sheet to check alignment, and
+        fixes what doesn’t line up. Plain code stitches the floors together in milliseconds.
       </p>
       <p className="mono small">
         Real run: readers took {Math.round(fastest)}–{Math.round(slowest)} s, side by side.
       </p>
     </>,
     <>
-      <div className="mono small">STEP 2 AND 3</div>
-      <h3>A stitcher joins the floors. A checker flags what a person should look at.</h3>
+      <div className="mono small">STEP 2 AND 3 · CHECK &amp; INVESTIGATE</div>
+      <h3>A checker flags what a person should verify. Investigators gather cross-sheet evidence.</h3>
       <p>
-        The stair stitcher copies the typical plan to floors 2, 3 and 5 and connects each stair from floor to floor
-        ({Math.round(stitch.seconds)} s). The checker then runs fixed rule checks and compares the model against the
-        sheets ({Math.round(check.seconds)} s). It can send a mistake back to the reader that made it. Anything the
-        drawings themselves leave open, it keeps and marks for review.
-      </p>
-      <p>
-        In this run it marked {nFlags} things for review. The one that matters for the call: Stair C’s floor-4 door
-        points to a note that isn’t on the sheet.
+        The checker runs fixed rule checks and compares the model against the sheets ({Math.round(check.seconds)} s). It
+        can send a model mistake back to the reader that made it. For each item the drawings leave open ({nFlags} in
+        this run), a parallel investigator agent checks all four sheets for context — such as tracing Note 7 — and
+        attaches the citation, without ever clearing the unverified flag.
       </p>
     </>,
     <>
-      <div className="mono small">THE MODEL</div>
-      <h3>One building model: five floors, three stairs, three entrances.</h3>
+      <div className="mono small">AT DISPATCH · SECONDS, NOT MINUTES</div>
+      <h3>One saved model, ready when the bell rings.</h3>
       <p>
-        Every element keeps the sheet it came from and whether the drawing was clear. The full run took{' '}
-        {fmtTime(proof.wall_seconds)} and cost about ${proof.totals.cost_usd.toFixed(2)}. That happens once per
-        building, not once per call.
+        At dispatch, the saved model loads in about 1 second, one small call maps the caller’s report in {dispatchText},
+        and deterministic code routes locally. Building and checking the model ahead of time took{' '}
+        {fmtTime(proof.wall_seconds)} and cost about ${proof.totals.cost_usd.toFixed(2)} — once per building, not once
+        per call.
       </p>
     </>,
     <>
@@ -655,24 +700,27 @@ function Landscape() {
 
 function Built() {
   const t = proof.totals;
+  const fast = proof.fast_run || { pending: true };
+  const fastModelText = !fast.pending && fast.time_to_model_s ? `${Math.round(fast.time_to_model_s)} s` : '~35 s';
+  const dispatchText = !fast.pending && fast.dispatch_call_s ? `${fast.dispatch_call_s.toFixed(1)} s` : '~5 s';
+  const stitchText = !fast.pending && fast.stitch_ms != null ? `${Math.round(fast.stitch_ms)} ms` : '4 ms';
+
   return (
     <div className="chapter" id={CHAPTERS[3].id}>
-      <ChapterHead c={CHAPTERS[3]} kicker="Agents read and check the plans before the call. Plain code routes during it." />
+      <ChapterHead c={CHAPTERS[3]} kicker="Agents read, check and investigate before the call. Plain code routes during it." />
 
       <Scene className="split">
         <div className="text">
-          <h2>Before the call: plans in, model out.</h2>
+          <h2>Two tiers: agents before the call, fast path at dispatch.</h2>
           <ol className="flow">
-            <li><b>Plans in.</b> Four sheets of Marlowe House.</li>
-            <li><b>Four sheet readers, in parallel.</b> Each reads one sheet, redraws its reading and compares it to the sheet.</li>
-            <li><b>Stair stitcher.</b> Joins the floors and connects each stair.</li>
-            <li><b>Checker.</b> Rule checks plus a look at the sheets. It can send an error back to the reader that made it; what the drawings leave open, it flags for a person.</li>
-            <li><b>The model.</b> What the demo loads.</li>
+            <li><b>Before the call (Managed Agents):</b> four parallel sheet readers build each floor, plain code stitches the floors together ({stitchText}), a checker flags open questions (and can send errors back for a fix), and parallel <b>investigator agents</b> (one per flag) attach cited cross-sheet evidence without ever clearing the unverified status.</li>
+            <li><b>At dispatch (mapped building):</b> the saved model loads in about 1 s, one small call maps the caller’s report ({dispatchText}), and deterministic code routes locally.</li>
+            <li><b>Unmapped building (fast pass):</b> parallel plain-call readers plus the local stitcher produce a navigable model in {fastModelText}, while the checker and investigators run off the critical path in the background.</li>
           </ol>
           <div className="kpi-strip">
             <div className="kpi-box">
               <strong>{fmtTime(proof.wall_seconds)}</strong>
-              <span>Wall time</span>
+              <span>Agent run wall time</span>
             </div>
             <div className="kpi-box">
               <strong>~${t.cost_usd.toFixed(2)}</strong>
@@ -685,15 +733,14 @@ function Built() {
           </div>
           <p className="fig-note">
             * Cost is estimated from token counts at Gemini 4 Hydrogen list price; sandbox compute was free during the
-            preview.
-          </p>
-          <p>
-            Managed Agents has no built-in fan-out, so our own orchestrator starts the four readers at once and waits
-            for all of them. Agent tasks take minutes, which is fine for work done before any call.
+            preview. We do not claim agents are more accurate than plain calls on Marlowe House — agents earn their
+            keep by running sandbox render checks and cross-sheet investigations before any call.
           </p>
         </div>
         <div className="figure">
-          <div className="mono small fig-head">Latest run · time and estimated cost per agent</div>
+          <div className="mono small fig-head">Two-tier flow · background verification</div>
+          <TwoTierFigure proof={proof} />
+          <div className="mono small fig-head" style={{ marginTop: 18 }}>Latest Managed Agents run · time and estimated cost per agent</div>
           <PipelineFigure proof={proof} />
         </div>
       </Scene>

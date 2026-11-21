@@ -444,3 +444,56 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
     font-size: 10px;
   }
 }
+
+/* Investigator example card (Chapter 2 step 3) */
+.investigator-card {
+  margin-top: 12px;
+  border: 1.5px dashed var(--amber);
+  background: var(--amber-wash);
+  padding: 10px 12px;
+}
+
+.inv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.inv-status {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.inv-body {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.inv-evidence {
+  margin: 0 0 6px;
+  padding-left: 16px;
+  font-size: 12.5px;
+  color: #4b3509;
+}
+
+.inv-foot {
+  margin: 0;
+  color: var(--graphite);
+}
+
+.fig-twotier {
+  width: 100%;
+  height: auto;
+  display: block;
+}

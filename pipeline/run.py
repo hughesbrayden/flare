@@ -1,27 +1,50 @@
 """Track B pipeline entry point.
 
-  python run.py one-agent [--mock]   one Managed Agent reads A-4 (smoke test)
-  python run.py full      [--mock]   4 readers -> stitcher -> checker loop -> scorer
-  python run.py all       [--mock]   one-agent test, then the full pipeline only if it passed
-  python run.py score <model.json>   run local invariants + scorer on any D5 model JSON
+  python run.py one-agent    [--mock]   one Managed Agent reads A-4 (smoke test)
+  python run.py full         [--mock]   4 Managed Agent readers -> local stitch -> agent checker -> scorer
+  python run.py all          [--mock]   one-agent test, then the full agent pipeline if it passed
+  python run.py fast         [--mock]   fast mode (~35 s): 4 plain Hydrogen calls -> local stitch -> off-critical-path checker + dispatch call
+  python run.py dispatch     [--mock]   single at-dispatch report-mapping call against eval/model.json (~5 s)
+  python run.py investigate  [--mock]   run parallel Investigator agents on drafted flags (calls pipeline.investigate)
+  python run.py score <model.json>      run local invariants + scorer on any D5 model JSON
 
-Live runs need GEMINI_API_KEY in the environment or in .env next to this file.
+Live runs read GEMINI_API_KEY from the environment, local .env, or a file named by FLARE_ENV_FILE (keep it outside the repo).
 Mock output goes to eval/mock/, live output to eval/.
 """
 import argparse
 import json
+import os
 import sys
 
-from pipeline import config, invariants, orchestrator, scorer
+from pipeline import config, fast_mode, invariants, orchestrator, scorer
 from pipeline.agent_client import LiveClient, MockClient
+
+
+def _print_summary(res):
+    acc = res.get("accuracy", {}).get("summary")
+    extra = ""
+    if "time_to_model_s" in res:
+        extra = f" model={res['time_to_model_s']}s checker={res.get('time_to_checker_s')}s"
+        if res.get("dispatch_call"):
+            extra += f" dispatch={res['dispatch_call'].get('seconds')}s"
+    print(
+        f"status={res['status']}{extra} cost~${res['totals']['cost_usd']} "
+        f"tokens={res['totals']['total_tokens']} catches={len(res.get('checker_catches', []))}"
+    )
+    if acc:
+        for k, (b, f) in acc.items():
+            print(f"  {k:24s} before {b}  after {f}")
+        print(f"  trap holds               before {res['accuracy']['trap_holds'][0]}  after {res['accuracy']['trap_holds'][1]}")
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("what", choices=["one-agent", "full", "all", "score"])
-    ap.add_argument("model_file", nargs="?", help="path to D5 model JSON (for 'score')")
+    ap.add_argument("what", choices=["one-agent", "full", "all", "fast", "dispatch", "investigate", "score"])
+    ap.add_argument("model_file", nargs="?", help="path to D5 model JSON (for 'score' or 'dispatch')")
     ap.add_argument("--mock", action="store_true", help="use canned fake agent replies (no API calls)")
+    ap.add_argument("--text", default=fast_mode.DEFAULT_DISPATCH_TEXT, help="dispatch text for 'dispatch' or 'fast'")
     a = ap.parse_args()
+
     if a.what == "score":
         if not a.model_file:
             ap.error("score requires a path to a D5 model JSON file")
@@ -34,15 +57,35 @@ def main():
         }
         print(json.dumps(out, indent=2))
         return 0
+
     if a.mock:
         client, out = MockClient(), config.MOCK_EVAL_DIR
     else:
         try:
             client = LiveClient()
         except RuntimeError as e:
-            print(f"Cannot start live run: {e}. Put GEMINI_API_KEY=... in .env (see REPORT.md).")
+            print(f"Cannot start live run: {e}. Set GEMINI_API_KEY, or point FLARE_ENV_FILE at a .env file outside the repo.")
             return 2
         out = config.EVAL_DIR
+
+    if a.what == "fast":
+        res = fast_mode.fast_pipeline(client, out, dispatch_text=a.text)
+        _print_summary(res)
+        return 0 if res["status"] == "completed" else 1
+
+    if a.what == "dispatch":
+        model_path = a.model_file or os.path.join(config.EVAL_DIR, "model.json")
+        with open(model_path, encoding="utf-8") as f:
+            data = json.load(f)
+        layout = data.get("layout", data)
+        res = fast_mode.dispatch_call(client, layout, text=a.text)
+        print(json.dumps(res, indent=2))
+        return 0 if res.get("status") in ("completed", "idle") and res.get("result") else 1
+
+    if a.what == "investigate":
+        from pipeline import investigate
+        return investigate.main(["--mock"] if a.mock else [])
+
     if a.what in ("one-agent", "all"):
         rec = orchestrator.one_agent_test(client, out)
         if not rec["ok"]:
@@ -50,16 +93,12 @@ def main():
             for e in rec["errors"]:
                 print("  -", e)
             return 1
+
     if a.what in ("full", "all"):
         res = orchestrator.full_pipeline(client, out)
-        acc = res.get("accuracy", {}).get("summary")
-        print(f"status={res['status']} cost~${res['totals']['cost_usd']} tokens={res['totals']['total_tokens']} "
-              f"catches={len(res.get('checker_catches', []))}")
-        if acc:
-            for k, (b, f) in acc.items():
-                print(f"  {k:24s} before {b}  after {f}")
-            print(f"  trap holds               before {res['accuracy']['trap_holds'][0]}  after {res['accuracy']['trap_holds'][1]}")
+        _print_summary(res)
         return 0 if res["status"] == "completed" else 1
+
     return 0
 
 

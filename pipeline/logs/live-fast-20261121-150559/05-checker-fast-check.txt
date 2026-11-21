@@ -1,0 +1,57 @@
+{
+  "findings": [
+    {
+      "check": "room-bbox-mismatch",
+      "severity": "error",
+      "owner": "reader:A-2",
+      "element_ids": [
+        "f2-apt-2d",
+        "f3-apt-3d",
+        "f5-apt-5d"
+      ],
+      "related_ids": [
+        "f2-ne-hall",
+        "f3-ne-hall",
+        "f5-ne-hall"
+      ],
+      "message": "On sheet A-2, apartment 2D (representing 2D, 3D, and 5D) extends east to the exterior wall at x=24.0 m underneath N.E. HALL, but the model truncates f2-apt-2d, f3-apt-3d, and f5-apt-5d at x=21.5 m.",
+      "suggested_fix": "Update bbox_m for f2-apt-2d, f3-apt-3d, and f5-apt-5d from [14.0, 0.0, 21.5, 6.0] to [14.0, 0.0, 24.0, 6.0].",
+      "evidence": {
+        "sheet": "A-2",
+        "region_norm": [
+          0.48,
+          0.47,
+          0.78,
+          0.75
+        ]
+      },
+      "source": "visual"
+    },
+    {
+      "check": "callout-arrow-contradiction",
+      "severity": "ambiguity",
+      "owner": "reader:A-4",
+      "element_ids": [
+        "stair-a",
+        "door-f4-stair-a"
+      ],
+      "related_ids": [
+        "f4-apt-4a",
+        "f4-east-lobby"
+      ],
+      "message": "On sheet A-4, the callout 'STAIR A (W) ->' inside unit 4A pairs a '(W)' (west) label with an arrow '->' pointing east toward EAST LOBBY and STAIR A.",
+      "suggested_fix": "Mark as drafted_awaiting_review; confirm with the architect whether '(W)' refers to Stair A being the west scissor stair or is a mislabeled directional note.",
+      "evidence": {
+        "sheet": "A-4",
+        "region_norm": [
+          0.23,
+          0.34,
+          0.32,
+          0.39
+        ]
+      },
+      "source": "visual"
+    }
+  ],
+  "summary": "Found one bbox truncation error on A-2 apartments 2D/3D/5D and one contradictory 'STAIR A (W) ->' callout on A-4."
+}

@@ -31,12 +31,17 @@ def now_iso():
 @dataclass
 class AgentTask:
     name: str                 # e.g. "reader:A-4"
-    role: str                 # reader | stitcher | checker
+    role: str                 # reader | stitcher | checker | dispatch | investigator
     prompt: str
     images: list = field(default_factory=list)    # [(label, png_bytes)]
     sources: list = field(default_factory=list)   # [(target_path, text_content)]
     previous: tuple = None    # (interaction_id, environment_id) to continue a conversation
     meta: dict = field(default_factory=dict)      # used by the mock only
+    mode: str = "agent"       # "agent" (Managed Agent sandbox) | "model" (plain Interactions call)
+    model: str = None         # override model for mode="model"
+    thinking_level: str = None
+    image_resolution: str = None
+    response_format: dict = None
 
 
 @dataclass
@@ -66,13 +71,19 @@ def load_api_key():
     key = os.environ.get("GEMINI_API_KEY")
     if key:
         return key.strip()
-    path = os.path.join(config.PIPELINE_ROOT, ".env")
-    if os.path.exists(path):
-        with open(path, encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith("GEMINI_API_KEY="):
-                    return line.split("=", 1)[1].strip().strip('"').strip("'")
+    candidates = [
+        os.path.join(config.PIPELINE_ROOT, ".env"),
+        config.EXTERNAL_DOTENV_PATH,
+    ]
+    for path in candidates:
+        if path and os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("GEMINI_API_KEY="):
+                        val = line.split("=", 1)[1].strip().strip('"').strip("'")
+                        if val:
+                            return val
     return None
 
 
@@ -102,36 +113,60 @@ class LiveClient:
         parts = [{"type": "text", "text": task.prompt}]
         for label, png in task.images:
             parts.append({"type": "text", "text": f"Image: sheet {label}"})
-            parts.append({"type": "image", "data": base64.b64encode(png).decode("ascii"), "mime_type": "image/png"})
+            img = {"type": "image", "data": base64.b64encode(png).decode("ascii"), "mime_type": "image/png"}
+            if task.image_resolution:
+                img["resolution"] = task.image_resolution
+            parts.append(img)
         return parts
 
     def run(self, task, log=print):
         res = AgentResult(name=task.name, status="starting", started=now_iso())
         t0 = time.time()
         try:
-            kwargs = dict(agent=config.AGENT_NAME, input=self._input(task), background=True,
-                          agent_config={"type": "antigravity", "max_total_tokens": config.TOKEN_CAP[task.role]})
-            if task.previous:
-                kwargs["previous_interaction_id"] = task.previous[0]
-                kwargs["environment"] = task.previous[1]
+            if task.mode == "model":
+                kwargs = dict(model=task.model or config.FAST_MODEL, input=self._input(task))
+                if task.thinking_level:
+                    kwargs["generation_config"] = {"thinking_level": task.thinking_level}
+                if task.response_format:
+                    kwargs["response_format"] = task.response_format
+                if task.previous:
+                    kwargs["previous_interaction_id"] = task.previous[0]
+                try:
+                    inter = self.client.interactions.create(**kwargs)
+                except Exception:
+                    # Fallback if response_format without full schema is rejected on a model call
+                    if "response_format" in kwargs and "schema" not in (kwargs["response_format"] or {}):
+                        kwargs.pop("response_format", None)
+                        inter = self.client.interactions.create(**kwargs)
+                    else:
+                        raise
+                res.interaction_id = getattr(inter, "id", None)
+                status = getattr(inter, "status", None) or "completed"
             else:
-                kwargs["environment"] = {"type": "remote", "sources": [
-                    {"type": "inline", "target": t, "content": c} for t, c in task.sources]}
-            inter = self.client.interactions.create(**kwargs)
-            res.interaction_id = getattr(inter, "id", None)
-            res.environment_id = getattr(inter, "environment_id", None)
-            log(f"[{task.name}] launched interaction {res.interaction_id}")
-            status = getattr(inter, "status", None)
-            while status not in TERMINAL_OK | TERMINAL_BAD:
-                if time.time() - t0 > config.TASK_TIMEOUT_SECONDS:
-                    try:
-                        self.client.interactions.cancel(id=res.interaction_id)
-                    except Exception:
-                        pass
-                    raise TimeoutError(f"timed out after {config.TASK_TIMEOUT_SECONDS}s (last status {status})")
-                time.sleep(config.POLL_SECONDS)
-                inter = self.client.interactions.get(res.interaction_id)
+                kwargs = dict(agent=config.AGENT_NAME, input=self._input(task), background=True,
+                              agent_config={"type": "antigravity",
+                                            "max_total_tokens": config.TOKEN_CAP.get(task.role, 1_500_000)})
+                if task.previous:
+                    kwargs["previous_interaction_id"] = task.previous[0]
+                    kwargs["environment"] = task.previous[1]
+                else:
+                    kwargs["environment"] = {"type": "remote", "sources": [
+                        {"type": "inline", "target": t, "content": c} for t, c in task.sources]}
+                inter = self.client.interactions.create(**kwargs)
+                res.interaction_id = getattr(inter, "id", None)
+                res.environment_id = getattr(inter, "environment_id", None)
+                log(f"[{task.name}] launched interaction {res.interaction_id}")
                 status = getattr(inter, "status", None)
+                while status not in TERMINAL_OK | TERMINAL_BAD:
+                    if time.time() - t0 > config.TASK_TIMEOUT_SECONDS:
+                        try:
+                            self.client.interactions.cancel(id=res.interaction_id)
+                        except Exception:
+                            pass
+                        raise TimeoutError(f"timed out after {config.TASK_TIMEOUT_SECONDS}s (last status {status})")
+                    time.sleep(config.POLL_SECONDS)
+                    inter = self.client.interactions.get(res.interaction_id)
+                    status = getattr(inter, "status", None)
             res.status = status
             res.environment_id = getattr(inter, "environment_id", None) or res.environment_id
             res.text = getattr(inter, "output_text", None) or _text_from_steps(inter)
@@ -198,7 +233,17 @@ class MockClient:
         res = AgentResult(name=task.name, status="in_progress", started=now_iso())
         t0 = time.time()
         time.sleep(delay)
-        res.text = self.agents.respond(task)
+        if task.role == "dispatch":
+            import json as _json
+            res.text = _json.dumps({
+                "target_space_id": "f4-apt-4c",
+                "reports": [
+                    {"space_id": "f4-apt-4c", "kind": "smoke", "text": "smoke showing from apartment 4C"},
+                    {"space_id": "f4-east-lobby", "kind": "smoke", "text": "heavy smoke in the fourth floor east lobby"},
+                ],
+            })
+        else:
+            res.text = self.agents.respond(task)
         res.status = "completed"
         res.interaction_id = f"mock-interaction-{n:03d}"
         res.environment_id = task.previous[1] if task.previous else f"mock-env-{n:03d}"

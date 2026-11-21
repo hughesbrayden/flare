@@ -334,3 +334,94 @@ export function PipelineFigure({ proof }) {
     </svg>
   );
 }
+
+/* ---------- Chapter 4: Two-tier speed & background-verification diagram ---------- */
+export function TwoTierFigure({ proof }) {
+  const fast = proof.fast_run || {};
+  const fastLabel = !fast.pending && fast.time_to_model_s ? `${Math.round(fast.time_to_model_s)} s` : '~35 s*';
+  const dispatchLabel = !fast.pending && fast.dispatch_call_s ? `${fast.dispatch_call_s.toFixed(1)} s` : '~5 s*';
+  const stitchLabel = !fast.pending && fast.stitch_ms ? `${Math.round(fast.stitch_ms)} ms` : '4 ms';
+  const inv = proof.investigations || {};
+  const invCount = !inv.pending && inv.count ? `${inv.count} flags` : `${proof.checker_flags.length} flags`;
+
+  return (
+    <svg
+      className="fig fig-pipe fig-twotier"
+      viewBox="0 0 680 288"
+      role="img"
+      aria-label="Two-tier architecture: before the call Managed Agents build, check and investigate; at dispatch the saved model loads in about 1 second and maps a report in about 5 seconds; unmapped buildings use a fast pass with checker and investigators running in the background"
+    >
+      <defs>
+        <marker id="arr2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L8 4 L0 8 Z" fill="#1c2a48" />
+        </marker>
+        <marker id="arr2-g" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L8 4 L0 8 Z" fill="#5d5a55" />
+        </marker>
+      </defs>
+
+      {/* Row 1: Before the call (Managed Agents) */}
+      <text x="0" y="16" className="col-head">TIER 1 · BEFORE THE CALL (MANAGED AGENTS · MINUTES)</text>
+      <rect x="0" y="26" width="118" height="44" className="agent" />
+      <text x="10" y="45" className="box-title">4 Readers</text>
+      <text x="10" y="60" className="box-sub">parallel sandboxes</text>
+      <line x1="118" y1="48" x2="136" y2="48" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="138" y="26" width="112" height="44" className="sheet" />
+      <text x="148" y="45" className="box-title">Stitch</text>
+      <text x="148" y="60" className="box-sub">plain code · {stitchLabel}</text>
+      <line x1="250" y1="48" x2="268" y2="48" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="270" y="26" width="96" height="44" className="agent" />
+      <text x="280" y="45" className="box-title">Checker</text>
+      <text x="280" y="60" className="box-sub">{invCount} flagged</text>
+      <line x1="366" y1="48" x2="384" y2="48" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="386" y="26" width="174" height="44" className="flags" />
+      <text x="396" y="45" className="box-title">Investigators (parallel)</text>
+      <text x="396" y="60" className="box-sub amber">cite sheets · keep drafted</text>
+      <line x1="560" y1="48" x2="578" y2="48" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="580" y="26" width="96" height="44" className="model" />
+      <text x="628" y="45" textAnchor="middle" className="box-title light">Saved</text>
+      <text x="628" y="60" textAnchor="middle" className="box-sub light">model</text>
+
+      {/* Row 2: At dispatch (mapped building) */}
+      <text x="0" y="104" className="col-head">TIER 2A · AT DISPATCH — MAPPED BUILDING (SECONDS)</text>
+      <rect x="0" y="114" width="146" height="42" className="model" />
+      <text x="10" y="132" className="box-title light">Load saved model</text>
+      <text x="10" y="147" className="box-sub light">~1 s</text>
+      <line x1="146" y1="135" x2="166" y2="135" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="168" y="114" width="188" height="42" className="sheet" />
+      <text x="178" y="132" className="box-title">Map caller report</text>
+      <text x="178" y="147" className="box-sub mono">{dispatchLabel} · one plain call</text>
+      <line x1="356" y1="135" x2="376" y2="135" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="378" y="114" width="298" height="42" className="agent" />
+      <text x="388" y="132" className="box-title">Deterministic routing in browser</text>
+      <text x="388" y="147" className="box-sub">instant · chokepoints, what-ifs, undo</text>
+
+      {/* Row 3: Unmapped building (fast pass + background verification) */}
+      <text x="0" y="190" className="col-head">TIER 2B · UNMAPPED BUILDING — FAST PASS + BACKGROUND VERIFICATION</text>
+      <rect x="0" y="200" width="204" height="42" className="sheet" />
+      <text x="10" y="218" className="box-title">Plain-call readers + stitch</text>
+      <text x="10" y="233" className="box-sub mono">{fastLabel} to navigable model</text>
+      <line x1="204" y1="221" x2="224" y2="221" className="flow" markerEnd="url(#arr2)" />
+
+      <rect x="226" y="200" width="154" height="42" className="model" />
+      <text x="236" y="218" className="box-title light">Crew routes live</text>
+      <text x="236" y="233" className="box-sub light">no wait for checker</text>
+
+      {/* Background verification branch */}
+      <path d="M 204 232 C 224 266, 386 266, 406 232" className="flow back" markerEnd="url(#arr2-g)" />
+      <rect x="408" y="200" width="268" height="42" className="flags" />
+      <text x="418" y="218" className="box-title">Checker + investigators (background)</text>
+      <text x="418" y="233" className="box-sub amber">flags &amp; citations arrive asynchronously</text>
+
+      {fast.pending && (
+        <text x="0" y="276" className="box-sub">* Target timing from benchmark; awaiting final live fast_run.json sync.</text>
+      )}
+    </svg>
+  );
+}

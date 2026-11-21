@@ -1,5 +1,14 @@
 # Pipeline report
 
+## Fast mode & at-dispatch benchmark (Nov 21, 20:05–20:07 UTC): `eval/fast_run.json`, `eval/fast_model.json`
+- **`python run.py fast`:** 4 parallel plain `interactions.create` calls (`gemini-4-hydrogen`, `thinking_level: "low"`, `resolution: "ultra_high"`, JSON output) → local deterministic stitcher (`pipeline/stitch.py`, `5.6 ms` with invariants) → off-critical-path visual checker (`thinking_level: "medium"`) → at-dispatch report-mapping call (`thinking_level: "low"`, structured output).
+- **Time to model on screen:** **`32.4 s`** (`A-301`: `7.9 s`, `A-2`: `29.2 s`, `A-1`: `30.8 s`, `A-4`: `32.4 s`, local stitch + invariants: `5.6 ms`, 0 bad-JSON retries).
+- **Time to off-critical-path visual checker flags:** **`69.6 s`** (`37.2 s` checker call; caught the `STAIR A (W) ->` callout ambiguity on `['stair-a', 'door-f4-stair-a']` without over-flagging `f4-east-lobby`).
+- **At-dispatch report mapping call:** **`3.4 s`** (`$0.0045`; mapped *"smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby"* → `target_space_id: "f4-apt-4c"` + both smoke reports accurately).
+- **Accuracy (before & after checker):** **`1.000`** across every metric (`spaces_f1: 1.0`, `openings_correct_rate: 1.0`, `connections_f1: 1.0`, `stops_rate: 1.0`, `trap_holds: true`, `stair_c_f4_door_status: "drafted_awaiting_review"`).
+- **Total fast-run cost:** **`$0.2841`** (`68,056` tokens). `eval/run.json` was not overwritten.
+- **Plain-code stitcher in both modes:** `pipeline/stitch.py` now replaces the `113.5 s` agent stitcher in `run.py all` / `run.py full` as well, preserving multi-floor `drafted_awaiting_review` / `review_note` flags and normalizing `source_ref.callout`.
+
 ## Latest live run (Nov 21, 18:42–18:50 UTC): `eval/run.json`
 - 6 agents: 4 sheet readers in parallel, then the stair stitcher, then the checker.
 - **Time and cost:** 455.5 s wall time, 2.33M tokens, about **$1.72** (estimate from token counts at list price).
@@ -66,3 +75,9 @@ python -m venv .venv && .venv\Scripts\pip install -r requirements.txt
 - **Stop invented send-backs:** have code compare checker errors against the readers' existing "unclear" notes, or require the checker to cite where on the sheet it saw something before an error is sent back.
 - **Score extra rooms:** count elements that aren't in the answer key.
 - **Disk space:** C: dropped to about 8 MB during the run, then recovered.
+
+## Investigator agents: `eval/investigations.json`, logs in `logs/live-investigate-*`
+- `python -m pipeline.investigate` (or `--mock`): one Managed Agent per flag (6 flags: 6 checker ambiguities covering all 8 drafted elements), all in parallel, all 4 sheets attached and mounted. Prompts carry only the flag text and element location, never the checker's suggested fix.
+- Live: 6/6 valid replies, **75.7 s wall** (64–76 s per agent), 615K tokens, about **$0.55**.
+- Note 7 door: probable meaning "Stair C doors are fire doors", cited from A-1, A-2 and A-301, with A-4's own notes shown skipping 7; confidence medium. The 5 doorless/unlabeled rooms: no direct evidence, confidence low, verify on site.
+- Y5 is enforced in code: replies that set any status are rejected, `model.json` is never written, and every `layout_status` is checked unchanged after the run.

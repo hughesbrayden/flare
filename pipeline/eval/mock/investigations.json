@@ -1,0 +1,463 @@
+{
+ "mock": true,
+ "mode": "mock",
+ "agent": "antigravity-preview-09-2026",
+ "started": "2026-11-21T20:08:26+00:00",
+ "ended": "2026-11-21T20:08:26+00:00",
+ "wall_seconds": 0.1,
+ "flags": 6,
+ "valid_replies": 6,
+ "rule": "Y5: evidence attaches; layout_status is never changed",
+ "status_guard": {
+  "elements_checked": 107,
+  "layout_status_changed": 0,
+  "model_json_modified": false
+ },
+ "inputs": {
+  "model": "eval\\model.json",
+  "run": "eval\\run.json"
+ },
+ "prompt_policy": "flag text + element location only; checker suggested_fix and review conclusions never sent",
+ "results": [
+  {
+   "flag_id": "flag-01-door-f4-stair-c",
+   "element_ids": [
+    "door-f4-stair-c"
+   ],
+   "flag_text": "On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8).",
+   "flag_source": "checker",
+   "check": "missing_referenced_note",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "door-f4-stair-c",
+    "question": "MOCK: what does door-f4-stair-c mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.7245,
+       0.3108,
+       0.7605,
+       0.3662
+      ],
+      "quote": "F.D. - SEE NOTE 7"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-001"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "door-f4-stair-c": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "door-f4-stair-c": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-02-f1-mech",
+   "element_ids": [
+    "f1-mech"
+   ],
+   "flag_text": "On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-mech",
+    "question": "MOCK: what does f1-mech mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.36,
+       0.3385,
+       0.48,
+       0.5231
+      ],
+      "quote": "MECH."
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-002"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "f1-mech": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-mech": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-03-f1-unlabeled-north",
+   "element_ids": [
+    "f1-unlabeled-north"
+   ],
+   "flag_text": "On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening.",
+   "flag_source": "checker",
+   "check": "unlabeled_enclosed_space",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-unlabeled-north",
+    "question": "MOCK: what does f1-unlabeled-north mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.24,
+       0.1077,
+       0.6,
+       0.2
+      ],
+      "quote": "MOCK feature"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-003"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "f1-unlabeled-north": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-unlabeled-north": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-04-f1-unlabeled-south",
+   "element_ids": [
+    "f1-unlabeled-south"
+   ],
+   "flag_text": "On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening.",
+   "flag_source": "checker",
+   "check": "unlabeled_enclosed_space",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f1-unlabeled-south",
+    "question": "MOCK: what does f1-unlabeled-south mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-1",
+      "region_norm": [
+       0.36,
+       0.5231,
+       0.48,
+       0.7538
+      ],
+      "quote": "MOCK feature"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-004"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "f1-unlabeled-south": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f1-unlabeled-south": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-05-f2-refuse",
+   "element_ids": [
+    "f2-refuse",
+    "f3-refuse",
+    "f5-refuse"
+   ],
+   "flag_text": "On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f2-refuse",
+    "question": "MOCK: what does f2-refuse mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-2",
+      "region_norm": [
+       0.42,
+       0.5231,
+       0.48,
+       0.6385
+      ],
+      "quote": "REFUSE"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-005"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "f2-refuse": "drafted_awaiting_review",
+    "f3-refuse": "drafted_awaiting_review",
+    "f5-refuse": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f2-refuse": "drafted_awaiting_review",
+    "f3-refuse": "drafted_awaiting_review",
+    "f5-refuse": "drafted_awaiting_review"
+   }
+  },
+  {
+   "flag_id": "flag-06-f4-refuse",
+   "element_ids": [
+    "f4-refuse"
+   ],
+   "flag_text": "On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "flag_source": "checker",
+   "check": "enclosed_space_no_door",
+   "valid": true,
+   "errors": [],
+   "reply": {
+    "element_id": "f4-refuse",
+    "question": "MOCK: what does f4-refuse mean?",
+    "probable_meaning": "MOCK: no investigation was run; canned reply.",
+    "evidence": [
+     {
+      "sheet": "A-4",
+      "region_norm": [
+       0.42,
+       0.5231,
+       0.48,
+       0.6385
+      ],
+      "quote": "REFUSE"
+     }
+    ],
+    "confidence": "low",
+    "keep_status": "drafted_awaiting_review"
+   },
+   "agent_seconds": 0.1,
+   "turns": 1,
+   "interaction_ids": [
+    "mock-investigation-006"
+   ],
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "layout_status_before": {
+    "f4-refuse": "drafted_awaiting_review"
+   },
+   "layout_status_after": {
+    "f4-refuse": "drafted_awaiting_review"
+   }
+  }
+ ],
+ "totals": {
+  "total_tokens": 318000,
+  "total_input_tokens": 300000,
+  "total_output_tokens": 12000,
+  "total_cached_tokens": 120000,
+  "total_thought_tokens": 6000,
+  "cost_usd": 0.414
+ },
+ "turns": [
+  {
+   "agent": "investigator:door-f4-stair-c",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-001",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  },
+  {
+   "agent": "investigator:f1-mech",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-002",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  },
+  {
+   "agent": "investigator:f1-unlabeled-north",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-003",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  },
+  {
+   "agent": "investigator:f1-unlabeled-south",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-004",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  },
+  {
+   "agent": "investigator:f2-refuse",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-005",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  },
+  {
+   "agent": "investigator:f4-refuse",
+   "step": "investigate",
+   "start": "2026-11-21T20:08:26+00:00",
+   "end": "2026-11-21T20:08:26+00:00",
+   "seconds": 0.05,
+   "status": "completed",
+   "interaction_id": "mock-investigation-006",
+   "usage": {
+    "total_input_tokens": 50000,
+    "total_cached_tokens": 20000,
+    "total_output_tokens": 2000,
+    "total_thought_tokens": 1000,
+    "total_tool_use_tokens": 0,
+    "total_tokens": 53000
+   },
+   "cost_usd": 0.069,
+   "error": null
+  }
+ ],
+ "pricing": {
+  "basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+  "price_per_million": {
+   "input": 1.5,
+   "cached_input": 0.075,
+   "output": 7.5
+  }
+ },
+ "log_dir": "logs\\mock-investigate-20261121-150826",
+ "mock_notice": "MOCK RUN: canned replies; timings, tokens and costs are simulated."
+}

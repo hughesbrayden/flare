@@ -13,6 +13,8 @@ PROMPTS_DIR = os.path.join(PIPELINE_ROOT, "prompts")
 EVAL_DIR = os.path.join(PIPELINE_ROOT, "eval")
 MOCK_EVAL_DIR = os.path.join(EVAL_DIR, "mock")
 LOG_DIR = os.path.join(PIPELINE_ROOT, "logs")
+# Optional key file kept outside the repo: set FLARE_ENV_FILE to its path.
+EXTERNAL_DOTENV_PATH = os.environ.get("FLARE_ENV_FILE", "")
 
 SHEET_IDS = ["A-1", "A-2", "A-4", "A-301"]
 SHEET_FLOORS = {"A-1": [1], "A-2": [2, 3, 5], "A-4": [4], "A-301": []}
@@ -21,12 +23,18 @@ SHEET_FLOORS = {"A-1": [1], "A-2": [2, 3, 5], "A-4": [4], "A-301": []}
 AGENT_NAME = os.environ.get("TRACKB_AGENT", "antigravity-preview-09-2026")
 API_VERSION = "v1beta"
 
+# Fast-path plain-call settings (Interactions API, no sandbox).
+FAST_MODEL = os.environ.get("TRACKB_FAST_MODEL", "gemini-4-hydrogen")
+FAST_READER_THINKING = os.environ.get("TRACKB_FAST_READER_THINKING", "low")
+FAST_CHECKER_THINKING = os.environ.get("TRACKB_FAST_CHECKER_THINKING", "medium")
+FAST_IMAGE_RESOLUTION = os.environ.get("TRACKB_FAST_RESOLUTION", "ultra_high")
+
 # Per-task token caps (agent_config.max_total_tokens; best effort per the docs).
-TOKEN_CAP = {"reader": 1_500_000, "stitcher": 1_200_000, "checker": 1_500_000}
+TOKEN_CAP = {"reader": 1_500_000, "stitcher": 1_200_000, "checker": 1_500_000, "investigator": 1_000_000}
 # Stop launching new tasks once the estimated spend passes this.
 MAX_RUN_COST_USD = float(os.environ.get("TRACKB_MAX_COST_USD", "30"))
 
-POLL_SECONDS = 8
+POLL_SECONDS = 2
 TASK_TIMEOUT_SECONDS = 40 * 60
 MAX_FIX_PASSES = 2          # reader render-and-compare self-fix passes (instructed in prompt)
 MAX_CHECK_ROUNDS = 2        # checker -> owner send-back rounds

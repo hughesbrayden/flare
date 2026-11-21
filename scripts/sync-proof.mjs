@@ -1,5 +1,8 @@
 // Builds src/data/proof.json (what the site's proof panel shows) from the
-// pipeline's real output, eval/run.json. Only the fields the page needs are kept.
+// pipeline's real outputs:
+//   - eval/run.json            (Managed Agents run)
+//   - eval/fast_run.json       (fast pass + dispatch call timing, optional until W1 lands)
+//   - eval/investigations.json (parallel investigator agents, optional until W2 lands)
 // Usage: node scripts/sync-proof.mjs [path/to/run.json]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -9,8 +12,8 @@ const here = dirname(fileURLToPath(import.meta.url));
 const app = resolve(here, '..');
 const candidates = [
   process.argv[2],
-  resolve(app, '../pipeline/eval/run.json'),
   resolve(app, 'pipeline/eval/run.json'),
+  resolve(app, '../pipeline/eval/run.json'),
 ].filter(Boolean);
 const src = candidates.find((p) => existsSync(p));
 if (!src) {
@@ -18,6 +21,7 @@ if (!src) {
   process.exit(0);
 }
 
+const evalDir = dirname(src);
 const run = JSON.parse(readFileSync(src, 'utf8'));
 const t0 = Date.parse(run.started);
 const sec = (iso) => Math.round(((Date.parse(iso) - t0) / 1000) * 10) / 10;
@@ -40,6 +44,71 @@ const pick = (a) => ({
   stair_c_f4_door_status: a.stair_c_f4_door_status,
   overall: a.overall,
 });
+
+// Read fast_run.json if present (W1)
+const fastPath = resolve(evalDir, 'fast_run.json');
+let fastRun = {
+  pending: true,
+  source: null,
+  time_to_model_s: null,
+  time_to_checker_s: null,
+  dispatch_call_s: null,
+  stitch_ms: null,
+  cost_usd: null,
+};
+if (existsSync(fastPath)) {
+  const f = JSON.parse(readFileSync(fastPath, 'utf8'));
+  fastRun = {
+    pending: false,
+    source: 'pipeline/eval/fast_run.json',
+    mode: f.mode ?? 'live',
+    time_to_model_s: f.time_to_model_s ?? f.model_seconds ?? f.wall_seconds ?? f.fast?.time_to_model_s ?? null,
+    time_to_checker_s: f.time_to_checker_s ?? f.checker_seconds ?? f.fast?.time_to_checker_s ?? null,
+    dispatch_call_s: f.dispatch_call_s ?? f.dispatch_seconds ?? f.dispatch_call?.seconds ?? f.dispatch?.seconds ?? null,
+    stitch_ms: f.stitch_and_invariants_ms ?? f.stitch_ms ?? f.fast?.stitch_ms ?? null,
+    cost_usd: f.cost_usd ?? f.totals?.cost_usd ?? f.fast?.cost_usd ?? null,
+  };
+}
+
+// Read investigations.json if present (W2)
+const invPath = resolve(evalDir, 'investigations.json');
+let investigations = {
+  pending: true,
+  source: null,
+  count: null,
+  wall_seconds: null,
+  cost_usd: null,
+  note7: null,
+};
+if (existsSync(invPath)) {
+  const inv = JSON.parse(readFileSync(invPath, 'utf8'));
+  const list = inv.investigations ?? inv.results ?? inv.items ?? (Array.isArray(inv) ? inv : []);
+  const note7Entry =
+    list.find((x) => x.element_id === 'door-f4-stair-c' || x.reply?.element_id === 'door-f4-stair-c' || x.element_ids?.includes('door-f4-stair-c')) ??
+    list.find((x) => String(x.reply?.question ?? x.question ?? '').toLowerCase().includes('note 7')) ??
+    null;
+  const note7Reply = note7Entry?.reply ?? note7Entry;
+  const totalCost = inv.cost_usd ?? inv.totals?.cost_usd ?? list.reduce((acc, x) => acc + (x.cost_usd ?? 0), 0);
+  investigations = {
+    pending: false,
+    source: 'pipeline/eval/investigations.json',
+    count: list.length,
+    wall_seconds: inv.wall_seconds ?? inv.totals?.wall_seconds ?? null,
+    cost_usd: Math.round(totalCost * 10000) / 10000,
+    note7: note7Reply
+      ? {
+          element_id: note7Reply.element_id ?? 'door-f4-stair-c',
+          question: note7Reply.question ?? null,
+          probable_meaning: note7Reply.probable_meaning ?? null,
+          evidence: note7Reply.evidence ?? [],
+          confidence: note7Reply.confidence ?? null,
+          keep_status: note7Reply.keep_status ?? 'drafted_awaiting_review',
+          seconds: note7Entry?.agent_seconds ?? note7Reply.seconds ?? null,
+          cost_usd: note7Entry?.cost_usd ?? note7Reply.cost_usd ?? null,
+        }
+      : null,
+  };
+}
 
 const proof = {
   source: 'pipeline eval/run.json (latest live run)',
@@ -81,7 +150,13 @@ const proof = {
   final_invariant_findings: run.final_invariant_findings.length,
   accuracy: { before_checker: pick(run.accuracy.before_checker), after_checker: pick(run.accuracy.after_checker) },
   totals: run.totals,
+  fast_run: fastRun,
+  investigations,
 };
 
 writeFileSync(resolve(app, 'src/data/proof.json'), JSON.stringify(proof, null, 1) + '\n');
-console.log('Wrote src/data/proof.json from', src);
+console.log(
+  'Wrote src/data/proof.json from',
+  src,
+  `(fast_run: ${fastRun.pending ? 'pending' : 'synced'}, investigations: ${investigations.pending ? 'pending' : 'synced'})`,
+);

@@ -1,0 +1,14 @@
+2026-11-21T20:02:57+00:00 Investigators (live): 6 flags, agent antigravity-preview-09-2026, all launched in parallel
+2026-11-21T20:03:03+00:00 [investigator:f1-mech] launched interaction v1_Chc5dmdCYV9iYU9aZkN4ZElQdnVUV21BTRIXOXZnQmFfYmFPWmZDeGRJUHZ1VFdtQU0
+2026-11-21T20:03:03+00:00 [investigator:door-f4-stair-c] launched interaction v1_Chc5dmdCYV9XRFBPMmw1Tm9QbElHMm1RMBIXOXZnQmFfV0RQTzJsNU5vUGxJRzJtUTA
+2026-11-21T20:03:03+00:00 [investigator:f1-unlabeled-south] launched interaction v1_Chc5X2dCYS1fWUJiQ1F5dE1Qbi1TZGtBURIXOV9nQmEtX1lCYkNReXRNUG4tU2RrQVE
+2026-11-21T20:03:03+00:00 [investigator:f4-refuse] launched interaction v1_Chc5X2dCYTc2VUNiMmp1TVlQNk1XeGtBRRIXOV9nQmE3NlVDYjJqdU1ZUDZNV3hrQUU
+2026-11-21T20:03:03+00:00 [investigator:f1-unlabeled-north] launched interaction v1_Chc5X2dCYTZfRURZSE9pTE1QMXZuSzJBTRIXOV9nQmE2X0VEWUhPaUxNUDF2bksyQU0
+2026-11-21T20:03:03+00:00 [investigator:f2-refuse] launched interaction v1_Chc5X2dCYTUtY0NwZUUxc2dQZ1lydC1RMBIXOV9nQmE1LWNDcGVFMXNnUGdZcnQtUTA
+2026-11-21T20:04:01+00:00 [investigator:f1-mech] completed in 64.5s, tokens=95189, est $0.0848
+2026-11-21T20:04:06+00:00 [investigator:f2-refuse] completed in 69.0s, tokens=99061, est $0.0907
+2026-11-21T20:04:10+00:00 [investigator:door-f4-stair-c] completed in 72.7s, tokens=96838, est $0.0874
+2026-11-21T20:04:10+00:00 [investigator:f1-unlabeled-south] completed in 73.4s, tokens=97473, est $0.0939
+2026-11-21T20:04:11+00:00 [investigator:f4-refuse] completed in 74.6s, tokens=109273, est $0.0939
+2026-11-21T20:04:13+00:00 [investigator:f1-unlabeled-north] completed in 75.7s, tokens=116966, est $0.0972
+2026-11-21T20:04:13+00:00 Done in 75.7s: 6/6 valid, ~$0.5479; wrote C:\Users\Brayden\OneDrive\Documents\AI Workspace\dry-run\first-look\pipeline\eval\investigations.json

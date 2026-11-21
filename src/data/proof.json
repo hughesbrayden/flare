@@ -268,5 +268,93 @@
   "total_cached_tokens": 1817416,
   "total_thought_tokens": 55982,
   "cost_usd": 1.7217
+ },
+ "fast_run": {
+  "pending": false,
+  "source": "pipeline/eval/fast_run.json",
+  "mode": "fast-live",
+  "time_to_model_s": 32.4,
+  "time_to_checker_s": 69.6,
+  "dispatch_call_s": 3.4,
+  "stitch_ms": 5.61,
+  "cost_usd": 0.2841
+ },
+ "investigations": {
+  "pending": false,
+  "source": "pipeline/eval/investigations.json",
+  "count": 6,
+  "wall_seconds": 75.7,
+  "cost_usd": 0.5479,
+  "note7": {
+   "element_id": "door-f4-stair-c",
+   "question": "What does 'F.D. - SEE NOTE 7' mean for Stair C's fourth-floor door when sheet A-4 omits Note 7 from its General Notes?",
+   "probable_meaning": "'F.D.' most probably stands for Fire Door and Note 7 most probably means 'STAIR C DOORS ARE FIRE DOORS,' as printed on sheets A-1, A-2, and A-301 and likely omitted from A-4 by drafting error; however, a note on other sheets does not prove it applies to A-4, so on-site inspection is needed to confirm that door-f4-stair-c is a fire-rated door and to verify its fire-rating label and self-closing hardware.",
+   "evidence": [
+    {
+     "sheet": "A-4",
+     "region_norm": [
+      0.7245,
+      0.3108,
+      0.7605,
+      0.3662
+     ],
+     "quote": "Door swing symbol between Stair C and N.E. HALL with leader line terminating at the door"
+    },
+    {
+     "sheet": "A-4",
+     "region_norm": [
+      0.69,
+      0.1,
+      0.79,
+      0.45
+     ],
+     "quote": "F.D. - SEE NOTE 7 (leader line pointing through boxed C down to Stair C door at N.E. HALL)"
+    },
+    {
+     "sheet": "A-4",
+     "region_norm": [
+      0.81,
+      0.03,
+      0.99,
+      0.52
+     ],
+     "quote": "FOURTH FLOOR PLAN / GENERAL NOTES: lists 1-6 and 8 (omits Note 7); 1. ALL CORRIDOR DOORS SELF-CLOSING, 1-1/2 HR RATED."
+    },
+    {
+     "sheet": "A-1",
+     "region_norm": [
+      0.81,
+      0.03,
+      0.99,
+      0.52
+     ],
+     "quote": "FIRST FLOOR PLAN / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+    },
+    {
+     "sheet": "A-2",
+     "region_norm": [
+      0.81,
+      0.03,
+      0.99,
+      0.52
+     ],
+     "quote": "TYPICAL FLOOR PLAN (FLOORS 2, 3, 5) / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+    },
+    {
+     "sheet": "A-301",
+     "region_norm": [
+      0.81,
+      0.03,
+      0.99,
+      0.52
+     ],
+     "quote": "STAIR SECTION / GENERAL NOTES: 7. STAIR C DOORS ARE FIRE DOORS."
+    }
+   ],
+   "confidence": "medium",
+   "keep_status": "drafted_awaiting_review",
+   "seconds": 72.7,
+   "cost_usd": 0.0874
+  }
  }
 }
