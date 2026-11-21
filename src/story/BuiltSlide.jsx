@@ -134,13 +134,13 @@ export default function BuiltSlide() {
           </p>
           <i className="bt-conn" aria-hidden="true" />
           <ul className="bt-outs">
-            <li className="open">
+            <li className="o-open">
               <b>Open</b> <span className="muted">clear route</span>
             </li>
-            <li className="flag">
+            <li className="o-flag">
               <b>Flagged</b> <span className="muted">unverified report, warns but stays open</span>
             </li>
-            <li className="closed">
+            <li className="o-closed">
               <b>Closed</b> <span className="muted">what-if or verified blocked</span>
             </li>
           </ul>

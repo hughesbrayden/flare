@@ -59,9 +59,9 @@
 .bt-outs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--u); }
 .bt-outs li { display: flex; align-items: baseline; gap: var(--u); }
 .bt-outs li::before { content: ''; flex: none; width: 9px; height: 9px; border-radius: 50%; align-self: center; }
-.bt-outs li.open::before { background: var(--red); }
-.bt-outs li.flag::before { background: var(--amber); }
-.bt-outs li.closed::before { background: var(--gray); }
+.bt-outs li.o-open::before { background: var(--red); }
+.bt-outs li.o-flag::before { background: var(--amber); }
+.bt-outs li.o-closed::before { background: var(--gray); }
 .bt-outs b { font-weight: 600; color: var(--ink); min-width: 56px; }
 
 @media (max-width: 1100px) {
