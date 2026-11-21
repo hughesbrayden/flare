@@ -309,12 +309,12 @@ function CompareTable() {
   );
 }
 
-const GRID_COLS = ['Auto-built from 2D plans, no site walk', 'Navigable in 3D', 'Ready en route', 'Live “what-if” rerouting'];
+const GRID_COLS = ['No site walk needed', '3D floor-to-floor view', 'Finds routes and choke points', 'Reroutes when a path is blocked'];
 const GRID_ROWS = [
-  { name: 'Paper or PDF pre-plans', cells: ['no', 'no', 'part', 'no'] },
-  { name: 'Pre-plan software', cells: ['part', 'no', 'yes', 'no'] },
-  { name: '3D scan / BIM pre-plans', cells: ['no', 'yes', 'part', 'no'] },
-  { name: 'Flare', ours: true, cells: ['yes', 'yes', 'yes', 'yes'] },
+  { name: 'Dispatch map pins (every call)', cells: ['yes', 'no', 'no', 'no'] },
+  { name: '2D pre-plans (PDFs and apps)', cells: ['part', 'no', 'no', 'no'] },
+  { name: '3D scan walkthroughs (LiDAR / BIM)', cells: ['no', 'yes', 'no', 'no'] },
+  { name: 'Flare (on top of existing 2D plans)', ours: true, cells: ['yes', 'yes', 'yes', 'yes'] },
 ];
 const MARK = { yes: '✓', part: '~', no: '✕' };
 const MARK_LABEL = { yes: 'Yes', part: 'Partly', no: 'No' };
@@ -386,11 +386,11 @@ const SLIDES = [
       layout: 'single-wide',
       noKicker: true,
       centerEvidence: true,
-      title: 'Existing tools show static plans. None adapt routes as the call unfolds.',
+      title: 'Existing tools display static spaces. Flare works out how to get through them.',
       body: null,
       visual: () => <CompareGrid />,
       evidence: [
-        { v: '1 → 9', t: 'house converted to 9 apartments, where a firefighter died disoriented in 2025, prompting federal calls to share layout changes with crews', ids: ['E8'] },
+        { v: '9 units', t: 'inside one converted house, where a firefighter died disoriented in 2025, prompting federal calls to share layout changes with crews', ids: ['E8'] },
         { v: '81', t: 'firefighters in a randomized study rated 3D views above 2D plans alone for showing how to navigate (perception ratings)', ids: ['E4'] },
       ],
     },
