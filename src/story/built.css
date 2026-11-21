@@ -81,3 +81,7 @@
   .bt-rc, .bt-inputs { grid-template-columns: minmax(0, 1fr); }
   .bt-sheet { width: 100%; }
 }
+/* clear down arrows between inputs → code → outcomes */
+.bt-conn { position: relative; width: 2px; height: calc(var(--u) * 3); background: var(--ink); margin: 4px 0 10px 6px; }
+.bt-conn::after { content: ''; position: absolute; left: -5px; bottom: -8px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid var(--ink); }
+.bt-conn { margin: 6px auto 14px; align-self: center; }
