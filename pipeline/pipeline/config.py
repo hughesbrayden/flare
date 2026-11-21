@@ -2,7 +2,7 @@
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PIPELINE_ROOT = os.path.dirname(HERE)                      # builds/claude/pipeline
+PIPELINE_ROOT = os.path.dirname(HERE)                      # pipeline/
 REPO_ROOT = os.path.dirname(PIPELINE_ROOT)                 # repo root (pipeline/ sits next to data/)
 DATA_DIR = os.path.join(REPO_ROOT, "data", "marlowe")
 SHEETS_DIR = os.path.join(DATA_DIR, "sheets")

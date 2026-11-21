@@ -5,7 +5,7 @@ import { model, elementOf } from './geometry.js';
 import { narrate, routeSummary, flagText, placeName } from './narrate.js';
 import { ElevatorExcludedIcon, FireDoorIcon, ReportPinIcon, StairIcon } from './NfpaSymbols.jsx';
 
-const SHEET_FILE = (id) => `./sheets/${id}.png`;
+const SHEET_FILE = (id) => `${import.meta.env.BASE_URL}sheets/${id}.png`;
 // Where the general-notes list sits on every sheet (same title block on all sheets).
 const NOTES_REGION = [0.815, 0.185, 0.99, 0.475];
 
@@ -44,7 +44,7 @@ function makeCondition(state, kind, target_id, source, extra = {}) {
   };
 }
 
-export default function App() {
+export default function App({ embedded = false, onNavigate }) {
   const [history, setHistory] = useState([INITIAL]);
   const [exploded, setExploded] = useState(true);
   const [sortBy, setSortBy] = useState('default');
@@ -220,10 +220,26 @@ export default function App() {
   const reportForVerify = lanes.reports[0];
 
   return (
-    <div className="app">
+    <div className={`app${embedded ? ' embedded' : ''}`}>
       <header className="titlebar">
         <div className="brand">
-          <strong>FLARE</strong> <span>Marlowe House · 142–144 Marlowe St · fictional test building</span>
+          {embedded ? (
+            <strong>FLARE</strong>
+          ) : (
+            <a
+              className="brand-link"
+              href="/"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('/');
+                }
+              }}
+            >
+              <strong>FLARE</strong>
+            </a>
+          )}{' '}
+          <span>Marlowe House · 142–144 Marlowe St · fictional test building</span>
         </div>
         <div className="tools">
           <label className="toggle">
@@ -235,6 +251,33 @@ export default function App() {
           <button className="btn ghost" onClick={reset}>
             Reset
           </button>
+          {embedded ? (
+            <a
+              className="btn ghost"
+              href="/demo"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('/demo');
+                }
+              }}
+            >
+              Full screen
+            </a>
+          ) : (
+            <a
+              className="btn ghost"
+              href="/"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('/');
+                }
+              }}
+            >
+              Story
+            </a>
+          )}
         </div>
       </header>
 
@@ -291,6 +334,7 @@ export default function App() {
             onSelect={setSelected}
             onPin={() => setVerifyOpen(true)}
             unclearIds={unclearIds}
+            embedded={embedded}
           />
           <div className="legend">
             <div><i className="sw ink" /> documented route</div>

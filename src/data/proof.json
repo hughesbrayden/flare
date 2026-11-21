@@ -1,0 +1,272 @@
+{
+ "source": "pipeline eval/run.json (latest live run)",
+ "mode": "live",
+ "mock": false,
+ "agent": "antigravity-preview-09-2026",
+ "started": "2026-11-21T18:42:46+00:00",
+ "ended": "2026-11-21T18:50:21+00:00",
+ "wall_seconds": 455.5,
+ "pricing_basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+ "lanes": [
+  {
+   "agent": "reader:A-301",
+   "role": "reader",
+   "step": "read",
+   "start_s": 0,
+   "end_s": 103,
+   "seconds": 103.4,
+   "tokens": 207675,
+   "cost_usd": 0.1583,
+   "status": "completed"
+  },
+  {
+   "agent": "reader:A-1",
+   "role": "reader",
+   "step": "read",
+   "start_s": 0,
+   "end_s": 195,
+   "seconds": 195.1,
+   "tokens": 385928,
+   "cost_usd": 0.3338,
+   "status": "completed"
+  },
+  {
+   "agent": "reader:A-4",
+   "role": "reader",
+   "step": "read",
+   "start_s": 0,
+   "end_s": 211,
+   "seconds": 211.3,
+   "tokens": 354127,
+   "cost_usd": 0.3228,
+   "status": "completed"
+  },
+  {
+   "agent": "reader:A-2",
+   "role": "reader",
+   "step": "read",
+   "start_s": 0,
+   "end_s": 228,
+   "seconds": 228.6,
+   "tokens": 473618,
+   "cost_usd": 0.3676,
+   "status": "completed"
+  },
+  {
+   "agent": "stitcher",
+   "role": "stitcher",
+   "step": "stitch",
+   "start_s": 229,
+   "end_s": 342,
+   "seconds": 113.5,
+   "tokens": 272002,
+   "cost_usd": 0.2924,
+   "status": "completed"
+  },
+  {
+   "agent": "checker",
+   "role": "checker",
+   "step": "check-r1",
+   "start_s": 342,
+   "end_s": 455,
+   "seconds": 113.2,
+   "tokens": 634662,
+   "cost_usd": 0.2468,
+   "status": "completed"
+  }
+ ],
+ "readers": {
+  "A-1": {
+   "render_match": [
+    0.9446,
+    0.9482
+   ],
+   "passes": 2,
+   "counts": {
+    "spaces": 11,
+    "openings": 9,
+    "verticals": 4,
+    "entrances": 3
+   }
+  },
+  "A-2": {
+   "render_match": [
+    0.9331,
+    0.9777
+   ],
+   "passes": 2,
+   "counts": {
+    "spaces": 9,
+    "openings": 11,
+    "verticals": 4,
+    "entrances": 0
+   }
+  },
+  "A-4": {
+   "render_match": [
+    0.9148,
+    0.9429
+   ],
+   "passes": 2,
+   "counts": {
+    "spaces": 9,
+    "openings": 11,
+    "verticals": 4,
+    "entrances": 0
+   }
+  },
+  "A-301": {
+   "render_match": [
+    0.9571
+   ],
+   "passes": 1,
+   "counts": {
+    "spaces": 0,
+    "openings": 0,
+    "verticals": 0,
+    "entrances": 0
+   }
+  }
+ },
+ "checker_rounds": [
+  {
+   "round": 1,
+   "agent_findings": 6,
+   "local_only_findings": 0,
+   "errors": 0,
+   "new_ambiguities": 6,
+   "summary": "0 deterministic errors and 0 visual model errors; 6 drawing ambiguities (already marked drafted_awaiting_review) require human review."
+  }
+ ],
+ "checker_flags": [
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "missing_referenced_note",
+   "owner": "reader:A-4",
+   "element_ids": [
+    "door-f4-stair-c"
+   ],
+   "message": "On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8).",
+   "sheet": "A-4"
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "enclosed_space_no_door",
+   "owner": "reader:A-1",
+   "element_ids": [
+    "f1-mech"
+   ],
+   "message": "On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "sheet": "A-1"
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "unlabeled_enclosed_space",
+   "owner": "reader:A-1",
+   "element_ids": [
+    "f1-unlabeled-north"
+   ],
+   "message": "On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening.",
+   "sheet": "A-1"
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "unlabeled_enclosed_space",
+   "owner": "reader:A-1",
+   "element_ids": [
+    "f1-unlabeled-south"
+   ],
+   "message": "On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening.",
+   "sheet": "A-1"
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "enclosed_space_no_door",
+   "owner": "reader:A-2",
+   "element_ids": [
+    "f2-refuse",
+    "f3-refuse",
+    "f5-refuse"
+   ],
+   "message": "On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "sheet": "A-2"
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "action": "kept as drafted_awaiting_review",
+   "check": "enclosed_space_no_door",
+   "owner": "reader:A-4",
+   "element_ids": [
+    "f4-refuse"
+   ],
+   "message": "On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+   "sheet": "A-4"
+  }
+ ],
+ "final_invariant_findings": 0,
+ "accuracy": {
+  "before_checker": {
+   "spaces_true": 45,
+   "spaces_matched": 45,
+   "spaces_extra": [
+    "f1-unlabeled-north",
+    "f1-unlabeled-south"
+   ],
+   "spaces_recall": 1,
+   "spaces_precision": 0.957,
+   "openings_true": 53,
+   "openings_correct": 53,
+   "openings_correct_rate": 1,
+   "connections_true": 53,
+   "connections_correct": 53,
+   "connections_f1": 1,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1,
+   "trap_holds": true,
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 0.996
+  },
+  "after_checker": {
+   "spaces_true": 45,
+   "spaces_matched": 45,
+   "spaces_extra": [
+    "f1-unlabeled-north",
+    "f1-unlabeled-south"
+   ],
+   "spaces_recall": 1,
+   "spaces_precision": 0.957,
+   "openings_true": 53,
+   "openings_correct": 53,
+   "openings_correct_rate": 1,
+   "connections_true": 53,
+   "connections_correct": 53,
+   "connections_f1": 1,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1,
+   "trap_holds": true,
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 0.996
+  }
+ },
+ "totals": {
+  "total_tokens": 2328012,
+  "total_input_tokens": 2191424,
+  "total_output_tokens": 80606,
+  "total_cached_tokens": 1817416,
+  "total_thought_tokens": 55982,
+  "cost_usd": 1.7217
+ }
+}

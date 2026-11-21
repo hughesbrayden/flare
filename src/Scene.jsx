@@ -265,8 +265,23 @@ function ConditionMarks({ conditionsView, floorGap, onPin }) {
   });
 }
 
+// Let one-finger vertical swipes scroll the page when the scene is embedded on a touch screen.
+function TouchScroll({ on }) {
+  const { gl } = useThree();
+  useEffect(() => {
+    if (!on) return undefined;
+    const t = setTimeout(() => {
+      gl.domElement.style.touchAction = 'pan-y';
+    }, 0);
+    return () => clearTimeout(t);
+  }, [on, gl]);
+  return null;
+}
+
 function CameraRig({ focus, exploded }) {
-  const { camera, controls } = useThree();
+  const { camera, controls, size } = useThree();
+  // Narrow screens (phones) see the same framing, scaled to fit.
+  const fit = Math.min(1, size.width / 760);
 
   useEffect(() => {
     if (!controls) return;
@@ -290,12 +305,12 @@ function CameraRig({ focus, exploded }) {
       },
     });
     gsap.to(camera, {
-      zoom: focus.zoom,
+      zoom: focus.zoom * fit,
       duration: 0.7,
       ease: 'power2.inOut',
       onUpdate: () => camera.updateProjectionMatrix(),
     });
-  }, [focus, exploded, camera, controls]);
+  }, [focus, exploded, camera, controls, fit]);
 
   return null;
 }
@@ -310,7 +325,11 @@ export default function Scene({
   onSelect,
   onPin,
   unclearIds,
+  embedded = false,
 }) {
+  // Inside the story page, the wheel scrolls the page and one-finger drags on touch screens
+  // scroll too; taps still select. Full-screen /demo keeps zoom and rotate.
+  const coarse = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches;
   // Smooth GSAP floor-stack explode/collapse
   const gapProxy = useRef({ value: exploded ? EXPLODED_GAP : FLOOR_GAP });
   const [floorGap, setFloorGap] = useState(exploded ? EXPLODED_GAP : FLOOR_GAP);
@@ -346,9 +365,25 @@ export default function Scene({
       onPointerMissed={() => onSelect?.(null)}
       style={{ background: 'transparent' }}
     >
-      <OrthographicCamera makeDefault position={[40, 34, 40]} zoom={18} near={-500} far={500} />
-      <OrbitControls makeDefault enableDamping={false} minZoom={8} maxZoom={120} maxPolarAngle={Math.PI / 2.2} />
+      <OrthographicCamera
+        makeDefault
+        position={[40, 34, 40]}
+        zoom={18 * Math.min(1, (typeof window !== 'undefined' ? window.innerWidth : 1000) / 760)}
+        near={-500}
+        far={500}
+      />
+      <OrbitControls
+        makeDefault
+        enableDamping={false}
+        enableZoom={!embedded}
+        enableRotate={!(embedded && coarse)}
+        enablePan={!embedded}
+        minZoom={8}
+        maxZoom={120}
+        maxPolarAngle={Math.PI / 2.2}
+      />
       <CameraRig focus={focus} exploded={exploded} />
+      <TouchScroll on={embedded && coarse} />
 
       {/* floor plates */}
       {L.floors.map((f) => {

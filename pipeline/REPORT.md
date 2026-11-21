@@ -55,7 +55,7 @@ The earlier live run (`logs/live-full-20261121-131051`) is described below. It's
 
 ## How to run
 ```
-cd builds/claude/pipeline
+cd pipeline
 python -m venv .venv && .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python run.py one-agent      # live single-reader test
 .venv\Scripts\python run.py full           # live 6-task pipeline

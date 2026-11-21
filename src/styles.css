@@ -153,7 +153,14 @@ button { font: inherit; cursor: pointer; }
 
 .foot { font-size: 11px; color: var(--graphite); padding: 5px 16px; border-top: 1px solid var(--graphite-light); background: rgba(243, 238, 226, 0.94); }
 
+.brand-link { text-decoration: none; color: var(--ink); }
+.titlebar a.btn { text-decoration: none; font-size: 13px; }
+
 @media (max-width: 900px) {
+  .titlebar { flex-wrap: wrap; }
+  .brand span { display: block; margin: 2px 0 0; }
+  .tools { flex-wrap: wrap; }
+  .app { height: auto; min-height: 100%; }
   .stage { grid-template-columns: 1fr; grid-template-rows: 55vh auto; }
   .panel { border-left: none; border-top: 2px solid var(--ink); }
   .lanes { grid-template-columns: 1fr; }
