@@ -1,4 +1,4 @@
-// Every statistic on the site comes from this list (verified evidence, E1-E13).
+// Every statistic on the site comes from this list (verified evidence, E1-E16).
 // `short` is the inline citation; `full` and `url` appear in the sources list.
 export const SOURCES = {
   E1: {
@@ -14,7 +14,7 @@ export const SOURCES = {
   },
   E3: {
     short: 'FDNY Firefighting Procedures, 2025',
-    full: 'FDNY Firefighting Procedures, High Rise Fireproof Multiple Dwellings (2025), in the probationary firefighter manual.',
+    full: 'FDNY Firefighting Procedures, High Rise Fireproof (2025) and Non-Fireproof (2022) Multiple Dwellings, in the Probationary Firefighters Manual, Vol. II.',
     url: 'https://www.nyc.gov/assets/fdny/downloads/pdf/join/probationary-firefighter-v2.pdf',
   },
   E4: {
@@ -45,16 +45,26 @@ export const SOURCES = {
   E9: {
     short: 'Firehouse, 2016 (preliminary data)',
     full: 'Firehouse, “The Mayday Project” (2016). Early, preliminary data reported in the trade press.',
-    url: 'https://www.firehouse.com/home/article/12156553/the-mayday-project',
+    url: 'https://www.firehouse.com/safety-health/article/12156553/the-mayday-project',
   },
   E10: {
     short: 'USFA, 2017–2019 data',
     full: 'U.S. Fire Administration, Civilian Fire Fatalities in Residential Buildings (2017–2019).',
     url: 'https://www.usfa.fema.gov/statistics/reports/who-fire-impacts/civilian-fire-fatalities-residential-buildings-v21i3.html',
   },
+  E16: {
+    short: 'Firefighting in Canada, 2018',
+    full: 'Abu Alkheir, Mouftah & Martin, “NFPA 1620 in the smart mobile age,” Firefighting in Canada (Apr 19, 2018). Survey of 74 respondents from fire departments in 84 cities, Jan–Feb 2017; 64% fire chiefs; sponsored by APX Data (a co-author’s company).',
+    url: 'https://www.firefightingincanada.com/nfpa-1620-in-the-smart-mobile-age-25833/',
+  },
+  E15: {
+    short: 'NFPA, 2024 data',
+    full: 'NFPA, Fire Loss in the United States During 2024: an estimated 1.38 million fires caused 3,920 civilian deaths; home fires caused 75% of civilian fire deaths and injuries.',
+    url: 'https://www.nfpa.org/education-and-research/research/nfpa-research/fire-statistical-reports/fire-loss-in-the-united-states',
+  },
   E11: {
-    short: 'NFPA / USFA, 2021 data',
-    full: 'NFPA, Fire Loss in the United States During 2021; U.S. Fire Administration.',
+    short: 'USFA, 2017–2019 data',
+    full: 'U.S. Fire Administration, One- and Two-Family Residential Building Fires (2017–2019), Topical Fire Report Vol. 21, Issue 6 (July 2021), based on NFPA fire loss data.',
     url: 'https://www.usfa.fema.gov/downloads/pdf/statistics/v21i6.pdf',
   },
   E12: {
@@ -69,4 +79,4 @@ export const SOURCES = {
   },
 };
 
-export const SOURCE_ORDER = ['E10', 'E7', 'E6', 'E1', 'E2', 'E3', 'E8', 'E9', 'E11', 'E12', 'E5', 'E4', 'E13'];
+export const SOURCE_ORDER = ['E15', 'E10', 'E7', 'E6', 'E1', 'E2', 'E3', 'E8', 'E9', 'E11', 'E12', 'E5', 'E4', 'E13'];

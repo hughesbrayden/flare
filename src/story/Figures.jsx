@@ -206,7 +206,7 @@ export function SanbornMap() {
     <svg className="fig fig-map" viewBox="0 0 724 508" role="img" aria-label="Illustrative figure-ground map: a row of commercial buildings drawn solid as pre-planned; the surrounding homes drawn as outlines with no plan">
       <defs>
         <pattern id="map-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="4" stroke="#1c2a48" strokeWidth="1.4" />
+          <line x1="0" y1="0" x2="0" y2="4" stroke="#111111" strokeWidth="1.4" />
         </pattern>
       </defs>
       {MAP.map((b, i) => (
@@ -422,6 +422,83 @@ export function TwoTierFigure({ proof }) {
       {fast.pending && (
         <text x="0" y="276" className="box-sub">* Target timing from benchmark; awaiting final live fast_run.json sync.</text>
       )}
+    </svg>
+  );
+}
+
+/* ---------- Chapter 1: one pin on 4C, smoke rising through the shared stair (illustration) ---------- */
+export function PinSectionFigure() {
+  const X0 = 70;
+  const X1 = 510;
+  const FH = 58; // floor height
+  const top = 50;
+  const yOf = (floor) => top + (5 - floor) * FH; // top edge of a floor band
+  const SX0 = 236; // shared stair shaft
+  const SX1 = 286;
+  return (
+    <svg
+      className="fig fig-section"
+      viewBox="0 0 560 380"
+      role="img"
+      aria-label="Illustration: a cross-section of a five-story building with one red pin on apartment 4C, and gray smoke rising from floor 4 through the shared stair to the floors above and below"
+    >
+      <defs>
+        <linearGradient id="smoke-up" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor="#9a9a9a" stopOpacity="0.12" />
+          <stop offset="0.55" stopColor="#9a9a9a" stopOpacity="0.45" />
+          <stop offset="1" stopColor="#9a9a9a" stopOpacity="0.7" />
+        </linearGradient>
+      </defs>
+      {/* floors */}
+      {[1, 2, 3, 4, 5].map((f) => (
+        <g key={f}>
+          <rect x={X0} y={yOf(f)} width={X1 - X0} height={FH} className="floor" />
+          <text x={X0 - 12} y={yOf(f) + FH / 2 + 4} textAnchor="end" className="fno">
+            F{f}
+          </text>
+        </g>
+      ))}
+      {/* apartments as thin partitions */}
+      {[1, 2, 3, 4, 5].map((f) =>
+        [140, 196, 360, 430].map((x) => <line key={`${f}-${x}`} x1={x} y1={yOf(f) + 8} x2={x} y2={yOf(f) + FH} className="part" />),
+      )}
+      {/* smoke: the floor-4 hall, then up and down the shared stair, then the halls it opens onto */}
+      <g className="smoke">
+        <rect className="s1" x={SX1} y={yOf(4) + 30} width={74} height={28} fill="#9a9a9a" fillOpacity="0.5" />
+        <rect className="s2" x={SX0} y={yOf(5)} width={SX1 - SX0} height={FH * 2} fill="url(#smoke-up)" />
+        <rect className="s3" x={SX0} y={yOf(3)} width={SX1 - SX0} height={FH * 3} fill="#9a9a9a" fillOpacity="0.18" />
+        <rect className="s4" x={SX1} y={yOf(5) + 30} width={74} height={28} fill="#9a9a9a" fillOpacity="0.4" />
+        <rect className="s4" x={196} y={yOf(5) + 30} width={SX0 - 196} height={28} fill="#9a9a9a" fillOpacity="0.32" />
+      </g>
+      {/* shared stair shaft */}
+      <rect x={SX0} y={yOf(5)} width={SX1 - SX0} height={FH * 5} className="shaft" />
+      {[1, 2, 3, 4, 5].map((f) => (
+        <path key={f} d={`M${SX0 + 6} ${yOf(f) + FH - 4} L${SX1 - 6} ${yOf(f) + 10}`} className="run" />
+      ))}
+      {/* 4C */}
+      <rect x={360} y={yOf(4) + 8} width={70} height={FH - 8} className="unit" />
+      <text x={395} y={yOf(4) + 44} textAnchor="middle" className="u-lbl">
+        4C
+      </text>
+      {/* the pin */}
+      <g className="pin" transform={`translate(395 ${yOf(4) + 14})`}>
+        <path d="M0 0 C -11 -14, -11 -30, 0 -30 C 11 -30, 11 -14, 0 0 Z" />
+        <circle cx="0" cy="-20" r="4" fill="#fff" />
+      </g>
+      <text x={438} y={yOf(4) + 26} className="cap red">
+        the call
+      </text>
+      {/* labels */}
+      <text x={(SX0 + SX1) / 2} y={top - 10} textAnchor="middle" className="cap">
+        SHARED STAIR
+      </text>
+      <line x1={X0 - 20} y1={yOf(1) + FH} x2={X1 + 20} y2={yOf(1) + FH} className="ground" />
+      <text x={X1} y={yOf(1) + FH + 20} textAnchor="end" className="cap">
+        Illustration, not a simulation
+      </text>
+      <text x={X0} y={yOf(1) + FH + 20} className="cap gray">
+        gray: smoke in the shared stair and halls
+      </text>
     </svg>
   );
 }

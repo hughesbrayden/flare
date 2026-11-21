@@ -65,8 +65,13 @@ if (existsSync(fastPath)) {
     time_to_model_s: f.time_to_model_s ?? f.model_seconds ?? f.wall_seconds ?? f.fast?.time_to_model_s ?? null,
     time_to_checker_s: f.time_to_checker_s ?? f.checker_seconds ?? f.fast?.time_to_checker_s ?? null,
     dispatch_call_s: f.dispatch_call_s ?? f.dispatch_seconds ?? f.dispatch_call?.seconds ?? f.dispatch?.seconds ?? null,
+    dispatch_text: f.dispatch_call?.text ?? null,
+    dispatch_reports: (f.dispatch_call?.result?.reports ?? []).map((r) => ({ space_id: r.space_id, kind: r.kind, text: r.text })),
     stitch_ms: f.stitch_and_invariants_ms ?? f.stitch_ms ?? f.fast?.stitch_ms ?? null,
     cost_usd: f.cost_usd ?? f.totals?.cost_usd ?? f.fast?.cost_usd ?? null,
+    lanes: Object.entries(f.per_agent ?? {})
+      .filter(([k]) => k.startsWith('reader:'))
+      .map(([agent, v]) => ({ agent, seconds: v.seconds })),
   };
 }
 

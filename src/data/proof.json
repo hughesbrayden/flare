@@ -276,8 +276,39 @@
   "time_to_model_s": 32.4,
   "time_to_checker_s": 69.6,
   "dispatch_call_s": 3.4,
+  "dispatch_text": "Engine 7 respond 144 Marlowe St, smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby.",
+  "dispatch_reports": [
+   {
+    "space_id": "f4-apt-4c",
+    "kind": "smoke",
+    "text": "smoke showing from apartment 4C"
+   },
+   {
+    "space_id": "f4-east-lobby",
+    "kind": "smoke",
+    "text": "heavy smoke in the fourth floor east lobby"
+   }
+  ],
   "stitch_ms": 5.61,
-  "cost_usd": 0.2841
+  "cost_usd": 0.2841,
+  "lanes": [
+   {
+    "agent": "reader:A-301",
+    "seconds": 7.9
+   },
+   {
+    "agent": "reader:A-2",
+    "seconds": 29.2
+   },
+   {
+    "agent": "reader:A-1",
+    "seconds": 30.8
+   },
+   {
+    "agent": "reader:A-4",
+    "seconds": 32.4
+   }
+  ]
  },
  "investigations": {
   "pending": false,

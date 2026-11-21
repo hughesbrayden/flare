@@ -106,7 +106,7 @@ export default function IsoBuilding({ stage = 1 }) {
     >
       <defs>
         <pattern id="iso-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="5" stroke="#5d5a55" strokeWidth="0.8" />
+          <line x1="0" y1="0" x2="0" y2="5" stroke="#9a9a9a" strokeWidth="0.8" />
         </pattern>
       </defs>
 
@@ -125,7 +125,7 @@ export default function IsoBuilding({ stage = 1 }) {
                 key={s.id}
                 points={rect(s.bbox_m)}
                 className={`room ${s.id === TARGET ? 'target' : ''} ${s.type === 'apartment' ? 'apt' : ''} ${
-                  s.id === 'f4-east-lobby' && stage >= 3 ? 'shared' : ''
+                  s.id === 'f4-east-lobby' && stage >= 3 ? (stage >= 4 ? 'shared closed' : 'shared') : ''
                 }`}
               />
             ))}
@@ -173,7 +173,7 @@ export default function IsoBuilding({ stage = 1 }) {
         <Label at={p(22.75, 12, zOf(5) + 3)} text="STAIR C" sub="rear" />
       </g>
       <g className="labels" data-on={stage >= 3}>
-        <Label at={p(lx, ly, zOf(4) + 1)} text="EAST LOBBY" sub="both front stairs open here" tone="shared" anchor="end" dy={-4} />
+        <Label at={p(lx, ly, zOf(4) + 1)} text="EAST LOBBY" sub={stage >= 4 ? 'what if: unavailable' : 'both front stairs open here'} tone="shared" anchor="end" dy={-4} />
       </g>
       <g className="labels" data-on={stage >= 4}>
         <Label at={p(18, 7, zOf(3) + 0.6)} text="floor-3 crossover" tone="muted" anchor="start" dy={18} />

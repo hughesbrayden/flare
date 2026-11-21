@@ -30,7 +30,7 @@ export function EntranceIcon({ size = 16, color = 'currentColor' }) {
   );
 }
 
-export function ReportPinIcon({ size = 16, color = '#b45309' }) {
+export function ReportPinIcon({ size = 16, color = '#8a5a00' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <circle cx="10" cy="9" r="6" stroke={color} strokeWidth="1.6" strokeDasharray="3 2" />

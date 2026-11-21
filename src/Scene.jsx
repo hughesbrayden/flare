@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrthographicCamera, OrbitControls, Edges, Line, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
@@ -17,14 +17,16 @@ import {
 } from './geometry.js';
 import { ElevatorExcludedIcon, EntranceIcon, ReportPinIcon, StairIcon } from './NfpaSymbols.jsx';
 
-// Drafting-table palette. Color only where it means something; red pencil reserved for checker corrections.
-export const INK = '#1c2a48';
-export const GRAPHITE = '#5d5a55';
-export const GRAPHITE_LIGHT = '#a8a39a';
-export const PAPER = '#f3eee2';
-export const PAPER_DARK = '#e6dfcd';
-export const AMBER = '#c98a12';
-export const ASSUME = '#4f6b8a';
+// Option B palette: white paper, ink edges, signal red for routes, ochre for unverified, gray for closed.
+export const INK = '#111111';
+export const GRAPHITE = '#6b6b6b';
+export const GRAPHITE_LIGHT = '#c4c4c4';
+export const PAPER = '#ffffff';
+export const PAPER_DARK = '#f2f2ef';
+export const AMBER = '#D98E04';
+export const ASSUME = '#3a3a3a';
+export const RED = '#C8102E';
+export const CLOSED = '#9a9a9a';
 
 const TARGET = 'f4-apt-4c';
 const L = model.layout;
@@ -36,7 +38,7 @@ function Space({ space, floorGap, emphasis, onSelect }) {
   const h = 0.12;
   const [cx, cy, cz] = toScene((x0 + x1) / 2, (y0 + y1) / 2, space.floor, floorGap, h / 2);
   const isTarget = space.id === TARGET;
-  const fill = isTarget ? '#c9c2b0' : space.type === 'apartment' ? PAPER_DARK : PAPER;
+  const fill = isTarget ? '#f6d5da' : space.type === 'apartment' ? PAPER_DARK : PAPER;
   return (
     <mesh
       position={[cx, cy, cz]}
@@ -47,12 +49,12 @@ function Space({ space, floorGap, emphasis, onSelect }) {
     >
       <boxGeometry args={[w - 0.04, h, d - 0.04]} />
       <meshBasicMaterial color={fill} transparent opacity={emphasis ? 0.92 : 0.45} depthWrite={emphasis} />
-      <Edges color={isTarget ? INK : emphasis ? GRAPHITE : GRAPHITE_LIGHT} />
+      <Edges color={isTarget ? RED : emphasis ? INK : GRAPHITE_LIGHT} />
     </mesh>
   );
 }
 
-function Shaft({ v, floorGap, onSelect }) {
+function Shaft({ v, floorGap, onSelect, minimal, showTag = true }) {
   const stops = [...v.stops].sort((a, b) => a.floor - b.floor);
   const b = stops[0].bbox_m;
   const bottom = floorY(stops[0].floor, floorGap);
@@ -62,7 +64,7 @@ function Shaft({ v, floorGap, onSelect }) {
   const isElevator = v.kind === 'elevator';
 
   // Combine STAIR A and STAIR B into one crisp scissor-core label centered over their shared shaft
-  const showLabel = v.id !== 'stair-b';
+  const showLabel = showTag && v.id !== 'stair-b' && !(minimal && isElevator);
   const labelX = v.id === 'stair-a' ? b[2] : (b[0] + b[2]) / 2;
   const labelPos = toScene(labelX, (b[1] + b[3]) / 2, stops[stops.length - 1].floor, floorGap, 1.5);
 
@@ -77,7 +79,7 @@ function Shaft({ v, floorGap, onSelect }) {
       >
         <boxGeometry args={[b[2] - b[0] - 0.15, h, b[3] - b[1] - 0.15]} />
         <meshBasicMaterial
-          color={isElevator ? '#ece8de' : '#ddd5c2'}
+          color={isElevator ? '#f4f4f4' : '#ececea'}
           transparent
           opacity={isElevator ? 0.25 : 0.4}
           depthWrite={false}
@@ -234,7 +236,7 @@ function ConditionMarks({ conditionsView, floorGap, onPin }) {
                 return (
                   <button key={c.condition_id} className="tag tag-report" onClick={() => onPin?.(c)}>
                     <span className="tag-row">
-                      <ReportPinIcon size={12} color="#b45309" /> “{c.source?.verbatim}”
+                      <ReportPinIcon size={12} color="#8a5a00" /> “{c.source?.verbatim}”
                     </span>
                     <span>
                       {c.source?.actor}, {c.time} · unverified · tap to verify
@@ -281,7 +283,7 @@ function TouchScroll({ on }) {
 function CameraRig({ focus, exploded }) {
   const { camera, controls, size } = useThree();
   // Narrow screens (phones) see the same framing, scaled to fit.
-  const fit = Math.min(1, size.width / 760);
+  const fit = Math.min(1, size.width / 760, size.height / 620);
 
   useEffect(() => {
     if (!controls) return;
@@ -315,6 +317,67 @@ function CameraRig({ focus, exploded }) {
   return null;
 }
 
+// Build-up (story slide): each floor rises a few units and fades in, edges a beat after the slab.
+// `buildAt` is a performance.now() timestamp for floor 1; -Infinity = already built. Runs in the render loop, so it's
+// driven by elapsed time and costs no React renders.
+const BUILD = { DUR: 850, STAGGER: 340, RISE: 2.4 };
+export const buildEndMs = (n = 6) => (n - 1) * BUILD.STAGGER + BUILD.DUR;
+const easeOutExpo = (k) => (k >= 1 ? 1 : 1 - 2 ** (-10 * k));
+function BuildGroup({ index, buildAt, children }) {
+  const ref = useRef(null);
+  useFrame(() => {
+    const g = ref.current;
+    if (!g) return;
+    const k = buildAt === -Infinity ? 1 : Math.max(0, Math.min(1, (performance.now() - buildAt - index * BUILD.STAGGER) / BUILD.DUR));
+    if (g.userData.k === k) return;
+    g.userData.k = k;
+    const e = easeOutExpo(k);
+    const edge = easeOutExpo(Math.max(0, Math.min(1, (k - 0.3) / 0.7)));
+    g.position.y = -(1 - e) * BUILD.RISE;
+    g.visible = k > 0;
+    g.traverse((o) => {
+      const m = o.material;
+      if (!m || Array.isArray(m)) return;
+      if (m.userData.base == null) m.userData.base = m.opacity ?? 1;
+      if (!m.transparent) {
+        m.transparent = true;
+        m.needsUpdate = true;
+      }
+      m.opacity = m.userData.base * (m.isLineMaterial || o.isLineSegments ? edge : e);
+    });
+  });
+  return <group ref={ref}>{children}</group>;
+}
+
+// The first `fraction` of a polyline by length (null when nothing is left to draw).
+function slicePolyline(pts, fraction) {
+  if (fraction >= 1) return pts;
+  if (!(fraction > 0)) return null;
+  const seg = [];
+  let total = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1], pts[i][2] - pts[i - 1][2]);
+    seg.push(d);
+    total += d;
+  }
+  let left = total * fraction;
+  const out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    const d = seg[i - 1];
+    if (left >= d) {
+      out.push(pts[i]);
+      left -= d;
+    } else {
+      const k = d > 0 ? left / d : 0;
+      const a = pts[i - 1];
+      const b = pts[i];
+      out.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]);
+      break;
+    }
+  }
+  return out.length >= 2 ? out : null;
+}
+
 export default function Scene({
   result,
   baseline,
@@ -326,6 +389,15 @@ export default function Scene({
   onPin,
   unclearIds,
   embedded = false,
+  minimal = false,
+  routeAnim = null, // { routes: [{ r, progress 0..1 }] } draws only these, each cut to its progress (story slide)
+  showClosed = true, // gray dashes for routes closed by a condition
+  showFlags = true, // ochre for unclear drawings and unconfirmed entrances
+  buildAt = -Infinity, // story slide: null = empty, a timestamp = building up, -Infinity = built
+  labelsOn = true, // story slide: labels fade in after the geometry
+  showStairTags = true,
+  entranceIds = null, // which entrances to draw (null = all)
+  emphasize = [], // [{ id, label }] outlined in red with a small label (story slide)
 }) {
   // Inside the story page, the wheel scrolls the page and one-finger drags on touch screens
   // scroll too; taps still select. Full-screen /demo keeps zoom and rotate.
@@ -356,6 +428,11 @@ export default function Scene({
     () => greyed.map((r) => ({ r, pts: routePolyline(r, TARGET, floorGap) })),
     [greyed, floorGap],
   );
+  const animLines = routeAnim
+    ? routeAnim.routes
+        .map(({ r, progress }) => ({ r, pts: slicePolyline(routePolyline(r, TARGET, floorGap), progress) }))
+        .filter((l) => l.pts)
+    : null;
   const emphasisFloor = (f) => f === 4 || f === 1;
   const target = anchorOf(TARGET);
 
@@ -385,58 +462,64 @@ export default function Scene({
       <CameraRig focus={focus} exploded={exploded} />
       <TouchScroll on={embedded && coarse} />
 
-      {/* floor plates */}
-      {L.floors.map((f) => {
-        const y = floorY(f.floor, floorGap);
-        return (
-          <group key={f.floor}>
-            <mesh position={[0, y - 0.03, 0]}>
-              <boxGeometry args={[W + 0.6, 0.04, D + 0.6]} />
-              <meshBasicMaterial
-                color={PAPER}
-                transparent
-                opacity={emphasisFloor(f.floor) ? 0.52 : 0.22}
-                depthWrite={false}
-              />
-              <Edges color={GRAPHITE_LIGHT} />
-            </mesh>
-            <Html position={[-W / 2 - 2.2, y, D / 2]} center zIndexRange={[5, 0]}>
-              <div className={`floor-tag ${f.floor === 4 ? 'is-target' : ''}`}>F{f.floor}</div>
-            </Html>
-          </group>
-        );
-      })}
-
-      {L.spaces.map((s) => (
-        <Space key={s.id} space={s} floorGap={floorGap} emphasis={emphasisFloor(s.floor)} onSelect={onSelect} />
-      ))}
-      {L.verticals.map((v) => (
-        <Shaft key={v.id} v={v} floorGap={floorGap} onSelect={onSelect} />
-      ))}
-
-      {/* doors: small graphite ticks; tap to inspect */}
-      {L.openings
-        .filter((o) => o.kind !== 'elevator_door' && o.kind !== 'open_passage')
-        .map((o) => {
-          const p = toScene(o.pos_m[0], o.pos_m[1], o.floor, floorGap, 0.15);
+      {/* floors: plate, rooms and doors per floor, so the story slide can raise them one by one */}
+      {buildAt !== null &&
+        L.floors.map((f) => {
+          const y = floorY(f.floor, floorGap);
           return (
-            <mesh
-              key={o.id}
-              position={p}
-              onClick={(e) => {
-                e.stopPropagation();
-                onSelect?.(o.id);
-              }}
-            >
-              <boxGeometry args={[0.55, 0.3, 0.55]} />
-              <meshBasicMaterial color={selected === o.id ? INK : PAPER} />
-              <Edges color={GRAPHITE} />
-            </mesh>
+            <BuildGroup key={f.floor} index={f.floor - 1} buildAt={buildAt}>
+              <mesh position={[0, y - 0.03, 0]}>
+                <boxGeometry args={[W + 0.6, 0.04, D + 0.6]} />
+                <meshBasicMaterial
+                  color={PAPER}
+                  transparent
+                  opacity={emphasisFloor(f.floor) ? 0.52 : 0.22}
+                  depthWrite={false}
+                />
+                <Edges color={GRAPHITE_LIGHT} />
+              </mesh>
+              {labelsOn && (!minimal || f.floor === 4) && (
+                <Html position={[-W / 2 - 2.2, y, D / 2]} center zIndexRange={[5, 0]}>
+                  <div className={`floor-tag ${f.floor === 4 ? 'is-target' : ''}`}>F{f.floor}</div>
+                </Html>
+              )}
+              {L.spaces
+                .filter((sp) => sp.floor === f.floor)
+                .map((sp) => (
+                  <Space key={sp.id} space={sp} floorGap={floorGap} emphasis={emphasisFloor(sp.floor)} onSelect={onSelect} />
+                ))}
+              {L.openings
+                .filter((o) => o.floor === f.floor && o.kind !== 'elevator_door' && o.kind !== 'open_passage')
+                .map((o) => {
+                  const p = toScene(o.pos_m[0], o.pos_m[1], o.floor, floorGap, 0.15);
+                  return (
+                    <mesh
+                      key={o.id}
+                      position={p}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelect?.(o.id);
+                      }}
+                    >
+                      <boxGeometry args={[0.55, 0.3, 0.55]} />
+                      <meshBasicMaterial color={selected === o.id ? INK : PAPER} />
+                      <Edges color={GRAPHITE} />
+                    </mesh>
+                  );
+                })}
+            </BuildGroup>
           );
         })}
+      {buildAt !== null && (
+        <BuildGroup index={5} buildAt={buildAt}>
+          {L.verticals.map((v) => (
+            <Shaft key={v.id} v={v} floorGap={floorGap} onSelect={onSelect} minimal={minimal} showTag={showStairTags && labelsOn} />
+          ))}
+        </BuildGroup>
+      )}
 
       {/* unclear drawings: dashed amber */}
-      {unclearIds.map((id) => (
+      {showFlags && buildAt !== null && unclearIds.map((id) => (
         <Rect
           key={id}
           anchor={anchorOf(id)}
@@ -450,52 +533,75 @@ export default function Scene({
       ))}
 
       {/* entrances */}
-      {L.entrances.map((e) => {
+      {buildAt !== null && (
+      <BuildGroup index={0} buildAt={buildAt}>
+      {L.entrances.filter((e) => !entranceIds || entranceIds.includes(e.id)).map((e) => {
         const p = toScene(e.pos_m[0], e.pos_m[1] + (e.pos_m[1] === 0 ? -1.4 : 1.4), 1, floorGap, 0.2);
+        const flagged = !e.access_confirmed && showFlags;
         return (
           <group key={e.id}>
             <mesh position={p} rotation={[0, Math.PI / 4, 0]}>
               <coneGeometry args={[0.6, 0.6, 4]} />
               <meshBasicMaterial color={e.access_confirmed ? INK : PAPER} />
-              <Edges color={e.access_confirmed ? INK : AMBER} />
+              <Edges color={flagged ? AMBER : INK} />
             </mesh>
+            {labelsOn && (
             <Html position={[p[0], p[1] - 0.9, p[2]]} center zIndexRange={[10, 0]}>
-              <div className={`tag ${e.access_confirmed ? 'tag-entrance' : 'tag-unconfirmed'}`}>
+              <div className={`tag ${flagged ? 'tag-unconfirmed' : 'tag-entrance'}`}>
                 <span className="tag-row">
                   <EntranceIcon size={11} /> {e.id === 'ent-alley' ? 'REAR ALLEY GATE' : e.label.split(' (')[0].toUpperCase()}
                 </span>
-                {!e.access_confirmed && <span>access unconfirmed</span>}
+                {flagged && <span>access unconfirmed</span>}
               </div>
             </Html>
+            )}
           </group>
         );
       })}
+      </BuildGroup>
+      )}
 
       {/* the reported unit */}
-      <Html position={toScene(target.x, target.y + 1.5, 4, floorGap, 0.6)} center zIndexRange={[15, 0]}>
-        <div className="tag tag-target">4C · DISPATCH</div>
-      </Html>
+      {buildAt !== null && labelsOn && (
+        <Html position={toScene(target.x, target.y + 1.5, 4, floorGap, 0.6)} center zIndexRange={[15, 0]}>
+          <div className="tag tag-target">4C · DISPATCH</div>
+        </Html>
+      )}
+      {emphasize.map(({ id, label }) => {
+        const a = anchorOf(id);
+        if (!a || buildAt === null) return null;
+        return (
+          <group key={`em-${id}`}>
+            <Rect anchor={a} floorGap={floorGap} color={RED} lineWidth={1.6} pad={0.12} lift={0.3} />
+            {labelsOn && (
+              <Html position={toScene(a.x - a.w / 2, a.y + a.d / 2 + 0.6, a.floor, floorGap, 0.4)} center zIndexRange={[12, 0]}>
+                <div className="tag tag-emph">{label}</div>
+              </Html>
+            )}
+          </group>
+        );
+      })}
       {selected && anchorOf(selected) && (
         <Rect anchor={anchorOf(selected)} floorGap={floorGap} color={INK} lineWidth={1.8} pad={0.15} lift={0.35} />
       )}
 
       {/* routes: dashed grey = closed by a condition, heavy ink = documented and open */}
-      {greyLines.map(({ r, pts }) => (
+      {showClosed && !animLines && greyLines.map(({ r, pts }) => (
         <Line
           key={`g-${r.nodes.join('>')}`}
           points={pts}
-          color={GRAPHITE_LIGHT}
-          lineWidth={2.4}
+          color={CLOSED}
+          lineWidth={3}
           dashed
-          dashSize={0.35}
-          gapSize={0.25}
+          dashSize={0.45}
+          gapSize={0.3}
         />
       ))}
-      {routeLines.map(({ r, pts }) => (
+      {(animLines ?? routeLines).map(({ r, pts }) => (
         <Line
           key={r.nodes.join('>')}
           points={pts}
-          color={INK}
+          color={RED}
           lineWidth={r.open_questions === 0 ? 4.6 : 3.2}
           transparent
           opacity={r.rank <= 3 ? 1 : 0.78}

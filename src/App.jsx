@@ -299,7 +299,7 @@ export default function App({ embedded = false, onNavigate }) {
           {lanes.reports.length === 0 && lanes.verified.length === 0 && <span className="empty">none yet</span>}
           {lanes.reports.map((r) => (
             <button key={r.condition_id} className="chip report" onClick={() => setVerifyOpen(true)}>
-              <ReportPinIcon size={12} color="#b45309" /> “{r.source.verbatim}” · {r.source.actor}, {r.timestamp} (unverified)
+              <ReportPinIcon size={12} color="#8a5a00" /> “{r.source.verbatim}” · {r.source.actor}, {r.timestamp} (unverified)
             </button>
           ))}
           {lanes.verified.map((v) => (
