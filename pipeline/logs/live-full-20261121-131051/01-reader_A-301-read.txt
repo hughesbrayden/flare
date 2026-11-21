@@ -1,0 +1,58 @@
+Sheet **A-301** (Stair Section for Marlowe House) has been decoded, read into [slice.json](file:///workspace/out/slice.json), and verified via render-and-compare ([compare_pass1.png](file:///workspace/out/compare_pass1.png), F1 = 0.9297 on Pass 1).
+- Scale bar: 300 px = 5 m (60 px/m), with 180 px (3.0 m) floor-to-floor height across floors 1–5.
+- **Stair A & Stair B** share one scissor shaft serving floors 1–5: on FL 1, Stair A discharges via `EXIT PASSAGE -> 142` and Stair B via `STAIR HALL -> 144`; on FL 2–5, both open to `EAST LOBBY`.
+- **Stair C (Rear Service)** serves floors 1–5 in its own shaft: on FL 1 it discharges via `REAR VESTIBULE -> ALLEY GATE` (keyed by mgmt per Note 8); on FL 2–5 it opens to `N.E. SERVICE HALL` (fire doors per Note 7).
+
+```json
+{
+  "sheet": "A-301",
+  "layout": {
+    "floors": [],
+    "spaces": [],
+    "openings": [],
+    "verticals": [],
+    "entrances": []
+  },
+  "section": [
+    {
+      "vertical": "stair-a",
+      "label": "STAIR A / STAIR B - SCISSOR (ONE SHAFT)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "A -> EXIT PASSAGE -> 142",
+        "2-5": "A & B DOORS -> EAST LOBBY"
+      },
+      "shares_shaft_with": "stair-b",
+      "notes": "Scissor stair sharing one shaft with Stair B (Note 2: STAIRS A AND B ARE SCISSOR STAIRS. SEE A-301.). Note 1: ALL CORRIDOR DOORS SELF-CLOSING, 1-1/2 HR RATED."
+    },
+    {
+      "vertical": "stair-b",
+      "label": "STAIR A / STAIR B - SCISSOR (ONE SHAFT)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "B -> STAIR HALL -> 144",
+        "2-5": "A & B DOORS -> EAST LOBBY"
+      },
+      "shares_shaft_with": "stair-a",
+      "notes": "Scissor stair sharing one shaft with Stair A (Note 2: STAIRS A AND B ARE SCISSOR STAIRS. SEE A-301.). Note 1: ALL CORRIDOR DOORS SELF-CLOSING, 1-1/2 HR RATED."
+    },
+    {
+      "vertical": "stair-c",
+      "label": "STAIR C (REAR SERVICE)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "-> REAR VESTIBULE -> ALLEY GATE",
+        "2-5": "-> N.E. SERVICE HALL"
+      },
+      "shares_shaft_with": null,
+      "notes": "Note 7: STAIR C DOORS ARE FIRE DOORS. Note 8: REAR SERVICE STAIR C SERVES FLOORS 1-5. ALLEY GATE KEYED BY MGMT."
+    }
+  ],
+  "render_match": {
+    "pass_scores": [0.9297],
+    "passes": 1,
+    "method": "Redrew section floor lines, stair shafts, scissor/single stair diagonals, and floor/opening labels from section JSON at 60 px/m (3.0 m/floor = 180 px/floor) and computed pixel F1 against sheet section linework within a 3 px tolerance."
+  },
+  "unclear": []
+}
+```

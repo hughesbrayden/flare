@@ -1,0 +1,4 @@
+MOCK reader reply. Render-and-compare done.
+```json
+{"sheet": "A-301", "layout": {"floors": [], "spaces": [], "openings": [], "verticals": [], "entrances": []}, "section": [{"vertical": "stair-a", "floors": [1, 2, 3, 4, 5], "opens_to": {"1": "EXIT PASSAGE -> 142", "2-5": "EAST LOBBY"}}, {"vertical": "stair-b", "floors": [1, 2, 3, 4, 5], "opens_to": {"1": "STAIR HALL -> 144", "2-5": "EAST LOBBY"}}, {"vertical": "stair-c", "floors": [1, 2, 3, 4, 5], "opens_to": {"1": "REAR VESTIBULE -> ALLEY GATE", "2-5": "N.E. SERVICE HALL"}}], "render_match": {"pass_scores": [0.9], "passes": 1, "method": "MOCK section redraw"}, "unclear": [{"element_id": "stair-a", "note": "A and B are scissor stairs in one shaft (note 2)."}]}
+```

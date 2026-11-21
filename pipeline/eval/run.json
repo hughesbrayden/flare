@@ -1,0 +1,1091 @@
+{
+ "mock": false,
+ "mode": "live",
+ "agent": "antigravity-preview-09-2026",
+ "started": "2026-11-21T18:42:46+00:00",
+ "status": "completed",
+ "pricing": {
+  "basis": "estimate from token usage x Gemini 4 Hydrogen list price (USD per 1M tokens); sandbox compute free in preview",
+  "price_per_million": {
+   "input": 1.5,
+   "cached_input": 0.075,
+   "output": 7.5
+  }
+ },
+ "readers": {
+  "A-1": {
+   "render_match": {
+    "pass_scores": [
+     0.9446,
+     0.9482
+    ],
+    "passes": 2,
+    "method": "F1 overlap of 6px rendered space/shaft outlines against eroded/dilated sheet wall mask within 3px tolerance, plus per-opening wall-gap check"
+   },
+   "unclear": [
+    {
+     "element_id": "f1-mech",
+     "note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan."
+    },
+    {
+     "element_id": "f1-unlabeled-north",
+     "note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan."
+    },
+    {
+     "element_id": "f1-unlabeled-south",
+     "note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan."
+    }
+   ],
+   "counts": {
+    "spaces": 11,
+    "openings": 9,
+    "verticals": 4,
+    "entrances": 3
+   }
+  },
+  "A-2": {
+   "render_match": {
+    "pass_scores": [
+     0.9331,
+     0.9777
+    ],
+    "passes": 2,
+    "method": "Pixel-to-meter transform (60 px/m, SW origin (120, 980)) wall-pixel F1 with 3px dilation plus per-opening gap/swing check."
+   },
+   "unclear": [
+    {
+     "element_id": "f2-refuse",
+     "note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+    }
+   ],
+   "counts": {
+    "spaces": 9,
+    "openings": 11,
+    "verticals": 4,
+    "entrances": 0
+   }
+  },
+  "A-4": {
+   "render_match": {
+    "pass_scores": [
+     0.9148,
+     0.9429
+    ],
+    "passes": 2,
+    "method": "7px wall-outline rasterization (with 0.9 m opening gap subtraction in pass 2) compared against thick sheet walls within 4px tolerance via F1 score, plus 50x50px per-opening gap/swing verification."
+   },
+   "unclear": [
+    {
+     "element_id": "f4-refuse",
+     "note": "REFUSE room is drawn enclosed by solid walls on all four sides with no door opening shown on sheet A-4."
+    },
+    {
+     "element_id": "door-f4-stair-c",
+     "note": "Callout 'F.D. - SEE NOTE 7' points to Stair C door, but General Notes skips Note 7 (lists notes 1-6 and 8)."
+    }
+   ],
+   "counts": {
+    "spaces": 9,
+    "openings": 11,
+    "verticals": 4,
+    "entrances": 0
+   }
+  },
+  "A-301": {
+   "render_match": {
+    "pass_scores": [
+     0.9571
+    ],
+    "passes": 1,
+    "method": "Redrew section floor lines, stair shafts (scissor X and single diagonal), and floor/opening labels from section JSON at sheet scale (60 px/m) and computed F1 on diagram linework (2px tolerance)."
+   },
+   "unclear": [],
+   "counts": {
+    "spaces": 0,
+    "openings": 0,
+    "verticals": 0,
+    "entrances": 0
+   }
+  }
+ },
+ "stitch_notes": [
+  "Expanded typical plan A-2 (floor 2) to floors 3 and 5 with renamed IDs (f3-/f5-, apt-3x/apt-5x, o3-/o5-, door-f3-/door-f5-) and apartment labels (3A-3D, 5A-5D), retaining source_ref.sheet = 'A-2'.",
+  "Merged stair-a, stair-b, stair-c, and elevator-e1 across floors 1-5; A-301 stair section confirms all three stairs serve floors 1-5 and match the plan openings on every floor (note: A-301 labels the upper-floor Stair C hall 'N.E. SERVICE HALL', matching 'N.E. HALL' on A-2/A-4).",
+  "Preserved all reader layout_status and review_note entries (f1-mech, f1-unlabeled-north, f1-unlabeled-south, f2/f3/f5-refuse, f4-refuse, and door-f4-stair-c noting missing Note 7 on A-4 despite Note 7 appearing on A-301)."
+ ],
+ "checker_rounds": [
+  {
+   "round": 1,
+   "agent_findings": 6,
+   "local_only_findings": 0,
+   "errors": 0,
+   "new_ambiguities": 6,
+   "summary": "0 deterministic errors and 0 visual model errors; 6 drawing ambiguities (already marked drafted_awaiting_review) require human review."
+  }
+ ],
+ "checker_catches": [
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "missing_referenced_note",
+    "severity": "ambiguity",
+    "owner": "reader:A-4",
+    "element_ids": [
+     "door-f4-stair-c"
+    ],
+    "related_ids": [
+     "stair-c",
+     "f4-ne-hall"
+    ],
+    "message": "On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8).",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human/architectural review to confirm whether Note 7 from A-1/A-2 ('STAIR C DOORS ARE FIRE DOORS.') applies.",
+    "evidence": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.705,
+      0.1077,
+      0.78,
+      0.3662
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "door-f4-stair-c",
+     "before": {
+      "id": "door-f4-stair-c",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-c",
+       "f4-ne-hall"
+      ],
+      "pos_m": [
+       22.75,
+       9.0
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.7245,
+        0.3108,
+        0.7605,
+        0.3662
+       ],
+       "callout": "F.D. - SEE NOTE 7"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Callout 'F.D. - SEE NOTE 7' points to Stair C door, but General Notes skips Note 7 (lists notes 1-6 and 8)."
+     },
+     "after": {
+      "id": "door-f4-stair-c",
+      "kind": "fire_door",
+      "floor": 4,
+      "connects": [
+       "stair-c",
+       "f4-ne-hall"
+      ],
+      "pos_m": [
+       22.75,
+       9.0
+      ],
+      "fire_rated": true,
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.7245,
+        0.3108,
+        0.7605,
+        0.3662
+       ],
+       "callout": "F.D. - SEE NOTE 7"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Callout 'F.D. - SEE NOTE 7' points to Stair C door, but General Notes skips Note 7 (lists notes 1-6 and 8). | On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8)."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "enclosed_space_no_door",
+    "severity": "ambiguity",
+    "owner": "reader:A-1",
+    "element_ids": [
+     "f1-mech"
+    ],
+    "related_ids": [],
+    "message": "On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access location.",
+    "evidence": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "f1-mech",
+     "before": {
+      "id": "f1-mech",
+      "type": "utility",
+      "label": "MECH.",
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       5.0,
+       14.0,
+       9.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.3385,
+        0.48,
+        0.5231
+       ],
+       "callout": "MECH."
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan."
+     },
+     "after": {
+      "id": "f1-mech",
+      "type": "utility",
+      "label": "MECH.",
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       5.0,
+       14.0,
+       9.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.3385,
+        0.48,
+        0.5231
+       ],
+       "callout": "MECH."
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan. | On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "unlabeled_enclosed_space",
+    "severity": "ambiguity",
+    "owner": "reader:A-1",
+    "element_ids": [
+     "f1-unlabeled-north"
+    ],
+    "related_ids": [],
+    "message": "On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening.",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to clarify space function and access.",
+    "evidence": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.24,
+      0.1077,
+      0.6,
+      0.2
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "f1-unlabeled-north",
+     "before": {
+      "id": "f1-unlabeled-north",
+      "type": "other",
+      "label": "UNLABELED NORTH ENCLOSURE",
+      "floor": 1,
+      "bbox_m": [
+       6.0,
+       12.0,
+       18.0,
+       14.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.24,
+        0.1077,
+        0.6,
+        0.2
+       ],
+       "callout": ""
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan."
+     },
+     "after": {
+      "id": "f1-unlabeled-north",
+      "type": "other",
+      "label": "UNLABELED NORTH ENCLOSURE",
+      "floor": 1,
+      "bbox_m": [
+       6.0,
+       12.0,
+       18.0,
+       14.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.24,
+        0.1077,
+        0.6,
+        0.2
+       ],
+       "callout": ""
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan. | On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "unlabeled_enclosed_space",
+    "severity": "ambiguity",
+    "owner": "reader:A-1",
+    "element_ids": [
+     "f1-unlabeled-south"
+    ],
+    "related_ids": [
+     "elevator-e1",
+     "f1-west-vestibule-142",
+     "f1-east-vestibule-144"
+    ],
+    "message": "On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening.",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to clarify space function and access.",
+    "evidence": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.5231,
+      0.48,
+      0.7538
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "f1-unlabeled-south",
+     "before": {
+      "id": "f1-unlabeled-south",
+      "type": "other",
+      "label": "UNLABELED SOUTH ENCLOSURE",
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       0.0,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.5231,
+        0.48,
+        0.7538
+       ],
+       "callout": ""
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan."
+     },
+     "after": {
+      "id": "f1-unlabeled-south",
+      "type": "other",
+      "label": "UNLABELED SOUTH ENCLOSURE",
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       0.0,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-1",
+       "region_norm": [
+        0.36,
+        0.5231,
+        0.48,
+        0.7538
+       ],
+       "callout": ""
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan. | On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "enclosed_space_no_door",
+    "severity": "ambiguity",
+    "owner": "reader:A-2",
+    "element_ids": [
+     "f2-refuse",
+     "f3-refuse",
+     "f5-refuse"
+    ],
+    "related_ids": [],
+    "message": "On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access door location.",
+    "evidence": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "f2-refuse",
+     "before": {
+      "id": "f2-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 2,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+     },
+     "after": {
+      "id": "f2-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 2,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2. | On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    },
+    {
+     "element_id": "f3-refuse",
+     "before": {
+      "id": "f3-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 3,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+     },
+     "after": {
+      "id": "f3-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 3,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2. | On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    },
+    {
+     "element_id": "f5-refuse",
+     "before": {
+      "id": "f5-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 5,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+     },
+     "after": {
+      "id": "f5-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 5,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-2",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2. | On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "severity": "ambiguity",
+   "finding": {
+    "check": "enclosed_space_no_door",
+    "severity": "ambiguity",
+    "owner": "reader:A-4",
+    "element_ids": [
+     "f4-refuse"
+    ],
+    "related_ids": [],
+    "message": "On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+    "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access door location.",
+    "evidence": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ]
+    },
+    "source": "visual"
+   },
+   "action": "kept as drafted_awaiting_review",
+   "diff": [
+    {
+     "element_id": "f4-refuse",
+     "before": {
+      "id": "f4-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 4,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is drawn enclosed by solid walls on all four sides with no door opening shown on sheet A-4."
+     },
+     "after": {
+      "id": "f4-refuse",
+      "type": "utility",
+      "label": "REFUSE",
+      "floor": 4,
+      "bbox_m": [
+       12.0,
+       2.5,
+       14.0,
+       5.0
+      ],
+      "source_ref": {
+       "sheet": "A-4",
+       "region_norm": [
+        0.42,
+        0.5231,
+        0.48,
+        0.6385
+       ],
+       "callout": "REFUSE"
+      },
+      "layout_status": "drafted_awaiting_review",
+      "review_note": "REFUSE room is drawn enclosed by solid walls on all four sides with no door opening shown on sheet A-4. | On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening."
+     },
+     "changed_fields": [
+      "review_note"
+     ]
+    }
+   ]
+  }
+ ],
+ "final_invariant_findings": [],
+ "accuracy": {
+  "before_checker": {
+   "spaces_matched": 45,
+   "spaces_true": 45,
+   "spaces_recall": 1.0,
+   "spaces_precision": 0.957,
+   "spaces_f1": 0.978,
+   "spaces_missing": [],
+   "spaces_extra": [
+    "f1-unlabeled-north",
+    "f1-unlabeled-south"
+   ],
+   "openings_true": 53,
+   "openings_found": 53,
+   "openings_correct": 53,
+   "openings_found_rate": 1.0,
+   "openings_correct_rate": 1.0,
+   "openings_wrong": [],
+   "connections_true": 53,
+   "connections_pred": 53,
+   "connections_correct": 53,
+   "connections_recall": 1.0,
+   "connections_precision": 1.0,
+   "connections_f1": 1.0,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1.0,
+   "stop_errors": [],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-east-lobby",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": true,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": true
+   },
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 0.996
+  },
+  "after_checker": {
+   "spaces_matched": 45,
+   "spaces_true": 45,
+   "spaces_recall": 1.0,
+   "spaces_precision": 0.957,
+   "spaces_f1": 0.978,
+   "spaces_missing": [],
+   "spaces_extra": [
+    "f1-unlabeled-north",
+    "f1-unlabeled-south"
+   ],
+   "openings_true": 53,
+   "openings_found": 53,
+   "openings_correct": 53,
+   "openings_found_rate": 1.0,
+   "openings_correct_rate": 1.0,
+   "openings_wrong": [],
+   "connections_true": 53,
+   "connections_pred": 53,
+   "connections_correct": 53,
+   "connections_recall": 1.0,
+   "connections_precision": 1.0,
+   "connections_f1": 1.0,
+   "stops_true": 20,
+   "stops_correct": 20,
+   "stops_rate": 1.0,
+   "stop_errors": [],
+   "trap": {
+    "stair_a_f4_opens_to": "f4-east-lobby",
+    "stair_b_f4_opens_to": "f4-east-lobby",
+    "stair_c_f4_opens_to": "f4-ne-hall",
+    "both_front_stairs_into_east_lobby": true,
+    "front_entrances_reach_4c": {
+     "142": true,
+     "144": true
+    },
+    "rear_alley_bypass_via_stair_c": true,
+    "no_documented_route_without_lobby_and_stair_c_f4_door": true,
+    "holds": true
+   },
+   "stair_c_f4_door_status": "drafted_awaiting_review",
+   "overall": 0.996
+  },
+  "summary": {
+   "spaces_recall": [
+    1.0,
+    1.0
+   ],
+   "spaces_precision": [
+    0.957,
+    0.957
+   ],
+   "spaces_f1": [
+    0.978,
+    0.978
+   ],
+   "openings_found_rate": [
+    1.0,
+    1.0
+   ],
+   "openings_correct_rate": [
+    1.0,
+    1.0
+   ],
+   "connections_recall": [
+    1.0,
+    1.0
+   ],
+   "connections_precision": [
+    1.0,
+    1.0
+   ],
+   "connections_f1": [
+    1.0,
+    1.0
+   ],
+   "stops_rate": [
+    1.0,
+    1.0
+   ],
+   "overall": [
+    0.996,
+    0.996
+   ]
+  },
+  "trap_holds": [
+   true,
+   true
+  ]
+ },
+ "final_model_path": "eval\\model.json",
+ "ended": "2026-11-21T18:50:21+00:00",
+ "wall_seconds": 455.5,
+ "timeline": [
+  {
+   "agent": "reader:A-301",
+   "role": "reader",
+   "step": "read",
+   "start": "2026-11-21T18:42:46+00:00",
+   "end": "2026-11-21T18:44:29+00:00",
+   "seconds": 103.4,
+   "status": "completed",
+   "interaction_id": "v1_ChdLZVlCYTd6ZkotSzJ4ZElQNF8zRWtBRRIXS2VZQmE3emZKLUsyeGRJUDRfM0VrQUU",
+   "environment_id": "214ed28050760c7764d07031482839c1",
+   "usage": {
+    "total_cached_tokens": 158502,
+    "total_input_tokens": 195563,
+    "total_output_tokens": 6298,
+    "total_thought_tokens": 5814,
+    "total_tokens": 207675,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.1583,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-1",
+   "role": "reader",
+   "step": "read",
+   "start": "2026-11-21T18:42:46+00:00",
+   "end": "2026-11-21T18:46:01+00:00",
+   "seconds": 195.1,
+   "status": "completed",
+   "interaction_id": "v1_ChZLZVlCYTdURUgtRzR4ZElQbk5qQ0dBEhZLZVlCYTdURUgtRzR4ZElQbk5qQ0dB",
+   "environment_id": "a27ef0f3622ec21ff9efbde71078258b",
+   "usage": {
+    "total_cached_tokens": 296966,
+    "total_input_tokens": 356245,
+    "total_output_tokens": 17477,
+    "total_thought_tokens": 12206,
+    "total_tokens": 385928,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.3338,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-4",
+   "role": "reader",
+   "step": "read",
+   "start": "2026-11-21T18:42:46+00:00",
+   "end": "2026-11-21T18:46:17+00:00",
+   "seconds": 211.3,
+   "status": "completed",
+   "interaction_id": "v1_ChdLZVlCYTgzREk2emxpTE1QalBIaXlBdxIXS2VZQmE4M0RJNnpsaUxNUGpQSGl5QXc",
+   "environment_id": "7363a523d578e3991651b098f2e56473",
+   "usage": {
+    "total_cached_tokens": 269131,
+    "total_input_tokens": 324942,
+    "total_output_tokens": 17386,
+    "total_thought_tokens": 11799,
+    "total_tokens": 354127,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.3228,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "reader:A-2",
+   "role": "reader",
+   "step": "read",
+   "start": "2026-11-21T18:42:46+00:00",
+   "end": "2026-11-21T18:46:34+00:00",
+   "seconds": 228.6,
+   "status": "completed",
+   "interaction_id": "v1_ChdLZVlCYTZ2aUliZWw1Tm9QemVpRjhRdxIXS2VZQmE2dmlJYmVsNU5vUHplaUY4UXc",
+   "environment_id": "a946f3d5b46344fe86fa4caea9ebc779",
+   "usage": {
+    "total_cached_tokens": 371979,
+    "total_input_tokens": 442411,
+    "total_output_tokens": 15962,
+    "total_thought_tokens": 15245,
+    "total_tokens": 473618,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.3676,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "stitcher",
+   "role": "stitcher",
+   "step": "stitch",
+   "start": "2026-11-21T18:46:35+00:00",
+   "end": "2026-11-21T18:48:28+00:00",
+   "seconds": 113.5,
+   "status": "completed",
+   "interaction_id": "v1_ChdEdWNCYTdxU0ctMmw1Tm9QbElHMm1RMBIXRHVjQmE3cVNHLTJsNU5vUGxJRzJtUTA",
+   "environment_id": "2e5c90cb2d801ee7d9935f9cd668d8e0",
+   "usage": {
+    "total_cached_tokens": 179875,
+    "total_input_tokens": 248543,
+    "total_output_tokens": 19038,
+    "total_thought_tokens": 4421,
+    "total_tokens": 272002,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.2924,
+   "error": null,
+   "mock": false
+  },
+  {
+   "agent": "checker",
+   "role": "checker",
+   "step": "check-r1",
+   "start": "2026-11-21T18:48:28+00:00",
+   "end": "2026-11-21T18:50:21+00:00",
+   "seconds": 113.2,
+   "status": "completed",
+   "interaction_id": "v1_ChdnT2NCYS1XeEVwNjV3YlVQdHFQeHVRdxIXZ09jQmEtV3hFcDY1d2JVUHRxUHh1UXc",
+   "environment_id": "efc64c6da209f97ceaa7e580d2c51844",
+   "usage": {
+    "total_cached_tokens": 540963,
+    "total_input_tokens": 623720,
+    "total_output_tokens": 4445,
+    "total_thought_tokens": 6497,
+    "total_tokens": 634662,
+    "total_tool_use_tokens": 0
+   },
+   "cost_usd": 0.2468,
+   "error": null,
+   "mock": false
+  }
+ ],
+ "per_agent": {
+  "reader:A-301": {
+   "turns": 1,
+   "total_tokens": 207675,
+   "cost_usd": 0.1583,
+   "seconds": 103.4
+  },
+  "reader:A-1": {
+   "turns": 1,
+   "total_tokens": 385928,
+   "cost_usd": 0.3338,
+   "seconds": 195.1
+  },
+  "reader:A-4": {
+   "turns": 1,
+   "total_tokens": 354127,
+   "cost_usd": 0.3228,
+   "seconds": 211.3
+  },
+  "reader:A-2": {
+   "turns": 1,
+   "total_tokens": 473618,
+   "cost_usd": 0.3676,
+   "seconds": 228.6
+  },
+  "stitcher": {
+   "turns": 1,
+   "total_tokens": 272002,
+   "cost_usd": 0.2924,
+   "seconds": 113.5
+  },
+  "checker": {
+   "turns": 1,
+   "total_tokens": 634662,
+   "cost_usd": 0.2468,
+   "seconds": 113.2
+  }
+ },
+ "totals": {
+  "total_tokens": 2328012,
+  "total_input_tokens": 2191424,
+  "total_output_tokens": 80606,
+  "total_cached_tokens": 1817416,
+  "total_thought_tokens": 55982,
+  "cost_usd": 1.7217
+ },
+ "one_agent_test": {
+  "mode": "live",
+  "agent": "antigravity-preview-09-2026",
+  "sheet": "A-4",
+  "ok": true,
+  "wall_seconds": 205.5,
+  "totals": {
+   "total_tokens": 377973,
+   "total_input_tokens": 348605,
+   "total_output_tokens": 17376,
+   "total_cached_tokens": 289160,
+   "total_thought_tokens": 11992,
+   "cost_usd": 0.3311
+  },
+  "accuracy_floor4": {
+   "spaces_recall": 1.0,
+   "openings_found_rate": 1.0,
+   "openings_correct_rate": 1.0,
+   "connections_recall": 1.0,
+   "stops_rate": 1.0,
+   "openings_wrong": [],
+   "stop_errors": []
+  },
+  "render_match": {
+   "pass_scores": [
+    0.7782,
+    0.9273
+   ],
+   "passes": 2,
+   "method": "F1 overlap of 6px centered space/shaft wall outlines (with 54px opening gaps punched out) against 4x4-eroded sheet wall pixels with 2px dilation tolerance, plus per-opening gap/swing checks."
+  }
+ }
+}

@@ -1,0 +1,16 @@
+2026-11-21T18:53:23+00:00 Stage 1: 4 sheet readers in parallel
+2026-11-21T18:53:23+00:00 [reader:A-301] MOCK completed in 0.5s
+2026-11-21T18:53:24+00:00 [reader:A-4] MOCK completed in 0.7s
+2026-11-21T18:53:24+00:00 [reader:A-1] MOCK completed in 1.1s
+2026-11-21T18:53:24+00:00 [reader:A-2] MOCK completed in 1.1s
+2026-11-21T18:53:24+00:00 Stage 2: stair stitcher
+2026-11-21T18:53:25+00:00 [stitcher] MOCK completed in 0.7s
+2026-11-21T18:53:25+00:00 Stage 3: checker round 1
+2026-11-21T18:53:26+00:00 [checker] MOCK completed in 1.0s
+2026-11-21T18:53:26+00:00 Checker round 1: 1 errors -> ['reader:A-4']
+2026-11-21T18:53:27+00:00 [reader:A-4] MOCK completed in 0.7s
+2026-11-21T18:53:27+00:00 [stitcher] MOCK completed in 0.4s
+2026-11-21T18:53:27+00:00 Stage 3: checker round 2
+2026-11-21T18:53:28+00:00 [checker] MOCK completed in 1.1s
+2026-11-21T18:53:28+00:00 Checker round 2: no errors
+2026-11-21T18:53:28+00:00 Pipeline completed; wrote C:\Users\Brayden\AppData\Local\Temp\tmpdbj86250\run.json

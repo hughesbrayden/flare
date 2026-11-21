@@ -1,0 +1,444 @@
+Sheet A-1 (First Floor Plan of Marlowe House) was decoded to `/workspace/input/A-1.png` (2000×1300 px) with a 60.0 px/m scale and origin at the SW building corner (120, 980 px).
+The 24.0 m × 14.0 m footprint contains 11 spaces (including 3 enclosed/unlabeled spaces flagged for review), 9 openings, 4 vertical stops (Stairs A, B, C and Elevator E1), and 3 entrances.
+Render-and-compare F1 scores against sheet walls were 0.9446 (pass 1) and 0.9482 (pass 2, after adding the wall at x=10.0, y=0.0..2.5), with all 12 openings/entrances verified on wall gaps.
+
+```json
+{
+  "sheet": "A-1",
+  "layout": {
+    "floors": [
+      {
+        "floor": 1,
+        "label": "Floor 1",
+        "elevation_m": 0.0,
+        "height_m": 3.0,
+        "sheet_id": "A-1"
+      }
+    ],
+    "spaces": [
+      {
+        "id": "f1-apt-1a",
+        "type": "apartment",
+        "label": "1A (SUPER)",
+        "floor": 1,
+        "bbox_m": [0.0, 5.0, 6.0, 14.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.06, 0.1077, 0.24, 0.5231],
+          "callout": "1A (SUPER)"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-exit-passageway",
+        "type": "hall",
+        "label": "EXIT PASSAGEWAY",
+        "floor": 1,
+        "bbox_m": [6.0, 5.0, 10.0, 12.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.24, 0.2, 0.36, 0.5231],
+          "callout": "EXIT PASSAGEWAY"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-mech",
+        "type": "utility",
+        "label": "MECH.",
+        "floor": 1,
+        "bbox_m": [10.0, 5.0, 14.0, 9.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.36, 0.3385, 0.48, 0.5231],
+          "callout": "MECH."
+        },
+        "layout_status": "drafted_awaiting_review",
+        "review_note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan."
+      },
+      {
+        "id": "f1-stair-hall",
+        "type": "hall",
+        "label": "STAIR HALL",
+        "floor": 1,
+        "bbox_m": [14.0, 5.0, 18.0, 12.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.48, 0.2, 0.6, 0.5231],
+          "callout": "STAIR HALL"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-boiler-rm",
+        "type": "utility",
+        "label": "BOILER RM.",
+        "floor": 1,
+        "bbox_m": [18.0, 5.0, 21.5, 14.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.6, 0.1077, 0.705, 0.5231],
+          "callout": "BOILER RM."
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-rear-service-vestibule",
+        "type": "lobby",
+        "label": "REAR SERVICE VESTIBULE",
+        "floor": 1,
+        "bbox_m": [21.5, 12.0, 24.0, 14.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.705, 0.1077, 0.78, 0.2],
+          "callout": "REAR SERVICE VESTIBULE"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-trash",
+        "type": "utility",
+        "label": "TRASH",
+        "floor": 1,
+        "bbox_m": [21.5, 5.0, 24.0, 9.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.705, 0.3385, 0.78, 0.5231],
+          "callout": "TRASH"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-west-vestibule-142",
+        "type": "lobby",
+        "label": "WEST VESTIBULE (142)",
+        "floor": 1,
+        "bbox_m": [0.0, 0.0, 10.0, 5.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.06, 0.5231, 0.36, 0.7538],
+          "callout": "WEST VESTIBULE (142)"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-east-vestibule-144",
+        "type": "lobby",
+        "label": "EAST VESTIBULE (144)",
+        "floor": 1,
+        "bbox_m": [14.0, 0.0, 24.0, 5.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.48, 0.5231, 0.78, 0.7538],
+          "callout": "EAST VESTIBULE (144)"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f1-unlabeled-north",
+        "type": "other",
+        "label": "UNLABELED NORTH ENCLOSURE",
+        "floor": 1,
+        "bbox_m": [6.0, 12.0, 18.0, 14.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.24, 0.1077, 0.6, 0.2],
+          "callout": ""
+        },
+        "layout_status": "drafted_awaiting_review",
+        "review_note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan."
+      },
+      {
+        "id": "f1-unlabeled-south",
+        "type": "other",
+        "label": "UNLABELED SOUTH ENCLOSURE",
+        "floor": 1,
+        "bbox_m": [10.0, 0.0, 14.0, 5.0],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.36, 0.5231, 0.48, 0.7538],
+          "callout": ""
+        },
+        "layout_status": "drafted_awaiting_review",
+        "review_note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan."
+      }
+    ],
+    "openings": [
+      {
+        "id": "o1-apt1a-exit",
+        "kind": "door",
+        "floor": 1,
+        "connects": ["f1-apt-1a", "f1-exit-passageway"],
+        "pos_m": [6.0, 9.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.225, 0.3154, 0.255, 0.3615],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f1-stair-a",
+        "kind": "fire_door",
+        "floor": 1,
+        "connects": ["stair-a", "f1-exit-passageway"],
+        "pos_m": [10.0, 10.5],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.345, 0.2462, 0.375, 0.2923],
+          "callout": "A"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f1-stair-b",
+        "kind": "fire_door",
+        "floor": 1,
+        "connects": ["stair-b", "f1-stair-hall"],
+        "pos_m": [14.0, 10.5],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.465, 0.2462, 0.495, 0.2923],
+          "callout": "B"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o1-boiler-stairhall",
+        "kind": "door",
+        "floor": 1,
+        "connects": ["f1-boiler-rm", "f1-stair-hall"],
+        "pos_m": [18.0, 7.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.585, 0.4077, 0.615, 0.4538],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f1-stair-c",
+        "kind": "fire_door",
+        "floor": 1,
+        "connects": ["stair-c", "f1-rear-service-vestibule"],
+        "pos_m": [22.75, 12.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.7275, 0.1769, 0.7575, 0.2231],
+          "callout": "C"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o1-trash-eastvest",
+        "kind": "door",
+        "floor": 1,
+        "connects": ["f1-trash", "f1-east-vestibule-144"],
+        "pos_m": [22.75, 5.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.7275, 0.5, 0.7575, 0.5462],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o1-exitpass-westvest",
+        "kind": "open_passage",
+        "floor": 1,
+        "connects": ["f1-exit-passageway", "f1-west-vestibule-142"],
+        "pos_m": [8.0, 5.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.285, 0.5, 0.315, 0.5462],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o1-stairhall-eastvest",
+        "kind": "open_passage",
+        "floor": 1,
+        "connects": ["f1-stair-hall", "f1-east-vestibule-144"],
+        "pos_m": [16.0, 5.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.525, 0.5, 0.555, 0.5462],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f1-elevator-e1",
+        "kind": "elevator_door",
+        "floor": 1,
+        "connects": ["elevator-e1", "f1-west-vestibule-142"],
+        "pos_m": [10.0, 3.75],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.345, 0.5577, 0.375, 0.6038],
+          "callout": "E1"
+        },
+        "layout_status": "verified_on_plan"
+      }
+    ],
+    "verticals": [
+      {
+        "id": "stair-a",
+        "kind": "stair",
+        "label": "STAIR A",
+        "floors_connected": [1],
+        "stops": [
+          {
+            "floor": 1,
+            "bbox_m": [10.0, 9.0, 12.0, 12.0],
+            "opening_id": "door-f1-stair-a",
+            "space_id": "f1-exit-passageway"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.36, 0.2, 0.42, 0.3385],
+          "callout": "A"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "stair-b",
+        "kind": "stair",
+        "label": "STAIR B",
+        "floors_connected": [1],
+        "stops": [
+          {
+            "floor": 1,
+            "bbox_m": [12.0, 9.0, 14.0, 12.0],
+            "opening_id": "door-f1-stair-b",
+            "space_id": "f1-stair-hall"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.42, 0.2, 0.48, 0.3385],
+          "callout": "B"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "stair-c",
+        "kind": "stair",
+        "label": "STAIR C",
+        "floors_connected": [1],
+        "stops": [
+          {
+            "floor": 1,
+            "bbox_m": [21.5, 9.0, 24.0, 12.0],
+            "opening_id": "door-f1-stair-c",
+            "space_id": "f1-rear-service-vestibule"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.705, 0.2, 0.78, 0.3385],
+          "callout": "C"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "elevator-e1",
+        "kind": "elevator",
+        "label": "ELEVATOR E1",
+        "floors_connected": [1],
+        "stops": [
+          {
+            "floor": 1,
+            "bbox_m": [10.0, 2.5, 12.0, 5.0],
+            "opening_id": "door-f1-elevator-e1",
+            "space_id": "f1-west-vestibule-142"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.36, 0.5231, 0.42, 0.6385],
+          "callout": "E1"
+        },
+        "layout_status": "verified_on_plan"
+      }
+    ],
+    "entrances": [
+      {
+        "id": "ent-142-marlowe-st",
+        "label": "142 MARLOWE ST",
+        "floor": 1,
+        "street_label": "MARLOWE ST",
+        "connects_to_space_id": "f1-west-vestibule-142",
+        "pos_m": [4.0, 0.0],
+        "access_confirmed": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.165, 0.7308, 0.195, 0.7769],
+          "callout": "142 MARLOWE ST"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "ent-144-marlowe-st",
+        "label": "144 MARLOWE ST",
+        "floor": 1,
+        "street_label": "MARLOWE ST",
+        "connects_to_space_id": "f1-east-vestibule-144",
+        "pos_m": [19.0, 0.0],
+        "access_confirmed": true,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.615, 0.7308, 0.645, 0.7769],
+          "callout": "144 MARLOWE ST"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "ent-rear-alley",
+        "label": "ALLEY GATE - KEYED",
+        "floor": 1,
+        "street_label": "NORTH SERVICE ALLEY",
+        "connects_to_space_id": "f1-rear-service-vestibule",
+        "pos_m": [22.75, 14.0],
+        "access_confirmed": false,
+        "source_ref": {
+          "sheet": "A-1",
+          "region_norm": [0.7275, 0.0846, 0.7575, 0.1308],
+          "callout": "ALLEY GATE - KEYED"
+        },
+        "layout_status": "verified_on_plan"
+      }
+    ]
+  },
+  "render_match": {
+    "pass_scores": [0.9446, 0.9482],
+    "passes": 2,
+    "method": "F1 overlap of 6px rendered space/shaft outlines against eroded/dilated sheet wall mask within 3px tolerance, plus per-opening wall-gap check"
+  },
+  "unclear": [
+    {
+      "element_id": "f1-mech",
+      "note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan."
+    },
+    {
+      "element_id": "f1-unlabeled-north",
+      "note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan."
+    },
+    {
+      "element_id": "f1-unlabeled-south",
+      "note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan."
+    }
+  ]
+}
+```

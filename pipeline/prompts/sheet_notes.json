@@ -1,0 +1,18 @@
+{
+  "A-1": {
+    "notes": "First floor plan (floor 1). Model floor 1 only. Include the street and alley entrances as `entrances` (floor 1): set `access_confirmed` to false when the sheet says access depends on a key, a gate or management, otherwise true. Each stair and elevator stop on this floor goes in `verticals` with one stop (floor 1).",
+    "extra_fields": ""
+  },
+  "A-2": {
+    "notes": "Typical floor plan that applies to floors 2, 3 and 5. Model it **once, as floor 2** (ids start with `f2-`, apartments `f2-apt-2a` and so on, labels as printed for floor 2 if numbered, else use 2A/2B/...). Another agent copies it to floors 3 and 5. Each stair and elevator stop goes in `verticals` with one stop (floor 2). No entrances on this sheet.",
+    "extra_fields": "\"applies_to_floors\": [2, 3, 5],"
+  },
+  "A-4": {
+    "notes": "Fourth floor plan (floor 4). Model floor 4 only. Each stair and elevator stop goes in `verticals` with one stop (floor 4). No entrances on this sheet.",
+    "extra_fields": ""
+  },
+  "A-301": {
+    "notes": "Stair section, not a plan: it shows which floors each stair serves and where each stair discharges or opens on each floor. There is no plan geometry here, so leave `layout` lists empty (`floors`, `spaces`, `openings`, `verticals`, `entrances` all `[]`) and put what you read in `section`. For render-and-compare, redraw the section (floor lines, shafts, labels) from your `section` JSON and compare it to the sheet.",
+    "extra_fields": "\"section\": [ { \"vertical\": \"stair-x\", \"label\": \"<as printed>\", \"floors\": [1, 2, ...], \"opens_to\": { \"<floor or floor range>\": \"<space name as printed>\" }, \"shares_shaft_with\": \"<vertical id or null>\", \"notes\": \"...\" } ],"
+  }
+}

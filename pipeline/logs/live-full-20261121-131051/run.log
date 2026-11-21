@@ -1,0 +1,33 @@
+2026-11-21T18:10:51+00:00 Stage 1: 4 sheet readers in parallel
+2026-11-21T18:10:56+00:00 [reader:A-4] launched interaction v1_ChdzTjRCYTVicUhLR2pvX1VQMjVQcmtBZxIXc040QmE1YnFIS0dqb19VUDI1UHJrQWc
+2026-11-21T18:10:56+00:00 [reader:A-301] launched interaction v1_ChdzTjRCYS15WUd0eWpvX1VQd2VPMThBZxIXc040QmEteVlHdHlqb19VUHdlTzE4QWc
+2026-11-21T18:10:56+00:00 [reader:A-1] launched interaction v1_ChdzTjRCYTZYaUZlLVB5dE1QbDd2YXlRWRIXc040QmE2WGlGZS1QeXRNUGw3dmF5UVk
+2026-11-21T18:10:56+00:00 [reader:A-2] launched interaction v1_ChdzTjRCYTl5cUlveTl4ZElQMmVlSXlBTRIXc040QmE5eXFJb3k5eGRJUDJlZUl5QU0
+2026-11-21T18:12:28+00:00 [reader:A-301] completed in 96.9s, tokens=183449, est $0.1382
+2026-11-21T18:13:19+00:00 [reader:A-4] completed in 147.7s, tokens=297855, est $0.2736
+2026-11-21T18:13:35+00:00 [reader:A-2] completed in 164.1s, tokens=403323, est $0.3128
+2026-11-21T18:14:25+00:00 [reader:A-1] completed in 213.5s, tokens=547712, est $0.4003
+2026-11-21T18:14:25+00:00 Stage 2: stair stitcher
+2026-11-21T18:14:28+00:00 [stitcher] launched interaction v1_ChdoTjhCYTkyV0V0eXR1TVlQZ18zUDZBVRIXaE44QmE5MldFdHl0dU1ZUGdfM1A2QVU
+2026-11-21T18:16:01+00:00 [stitcher] completed in 95.9s, tokens=155319, est $0.2377
+2026-11-21T18:16:01+00:00 Stage 3: checker round 1
+2026-11-21T18:16:04+00:00 [checker] launched interaction v1_Chc1TjhCYTZQSE81ZkN4ZElQdnVUV21BTRIXNU44QmE2UEhPNWZDeGRJUHZ1VFdtQU0
+2026-11-21T18:17:21+00:00 [checker] completed in 80.0s, tokens=215367, est $0.1895
+2026-11-21T18:17:21+00:00 Checker round 1: 2 errors -> ['reader:A-4']
+2026-11-21T18:17:22+00:00 [reader:A-4] launched interaction v1_ChdzTjRCYTVicUhLR2pvX1VQMjVQcmtBZxIXTXVBQmE5SEhJWXVReXRNUHZMZU13UVU
+2026-11-21T18:18:13+00:00 [reader:A-4] completed in 52.5s, tokens=230630, est $0.1334
+2026-11-21T18:18:14+00:00 [stitcher] launched interaction v1_ChdoTjhCYTkyV0V0eXR1TVlQZ18zUDZBVRIXWi1BQmE4SFRBcnpGeGRJUC11YjRnQU0
+2026-11-21T18:19:31+00:00 [stitcher] completed in 77.5s, tokens=179964, est $0.2761
+2026-11-21T18:19:31+00:00 Stage 3: checker round 2
+2026-11-21T18:19:32+00:00 [checker] launched interaction v1_Chc1TjhCYTZQSE81ZkN4ZElQdnVUV21BTRIXdE9BQmE2SHNKY3VIMXNnUHA0bmhrQTA
+2026-11-21T18:20:39+00:00 [checker] completed in 68.0s, tokens=193670, est $0.2711
+2026-11-21T18:20:39+00:00 Checker round 2: 1 errors -> ['reader:A-4']
+2026-11-21T18:20:40+00:00 [reader:A-4] launched interaction v1_ChdzTjRCYTVicUhLR2pvX1VQMjVQcmtBZxIXLU9BQmE5eWlKY3ZheXRNUHR0YVNzQUU
+2026-11-21T18:21:06+00:00 [reader:A-4] completed in 27.3s, tokens=109414, est $0.1158
+2026-11-21T18:21:07+00:00 [stitcher] launched interaction v1_ChdoTjhCYTkyV0V0eXR1TVlQZ18zUDZBVRIXRS1FQmE0aWtPTjJzdU1ZUDdJbnVzQWM
+2026-11-21T18:21:59+00:00 [stitcher] completed in 52.5s, tokens=227586, est $0.144
+2026-11-21T18:21:59+00:00 Stage 3: checker round 3
+2026-11-21T18:22:00+00:00 [checker] launched interaction v1_Chc1TjhCYTZQSE81ZkN4ZElQdnVUV21BTRIXU09FQmE5YW5Hcy1weGRJUGxOckp5UU0
+2026-11-21T18:22:59+00:00 [checker] completed in 60.4s, tokens=261561, est $0.1946
+2026-11-21T18:22:59+00:00 Checker round 3: 1 errors left after 2 send-back rounds
+2026-11-21T18:22:59+00:00 Pipeline completed; wrote C:\Users\Brayden\OneDrive\Documents\AI Workspace\dry-run\builds\claude\pipeline\eval\run.json

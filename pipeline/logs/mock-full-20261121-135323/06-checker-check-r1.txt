@@ -1,0 +1,4 @@
+MOCK checker.
+```json
+{"findings": [{"check": "callout_vs_geometry", "severity": "error", "owner": "reader:A-4", "element_ids": ["door-f4-stair-a"], "message": "Stair A floor-4 door is wired to the West Corridor because of the 'STAIR A (W) ->' callout, but the door swing on A-4 opens into the East Lobby.", "suggested_fix": "Connect stair-a on floor 4 to the East Lobby and mark the callout for review.", "evidence": {"sheet": "A-4", "region_norm": [0.36, 0.33, 0.42, 0.38]}}, {"check": "missing_referenced_note", "severity": "ambiguity", "owner": "reader:A-4", "element_ids": ["door-f4-stair-c"], "message": "Stair C floor-4 door is annotated 'F.D. - SEE NOTE 7'; note 7 is missing from A-4's general notes.", "suggested_fix": "Keep the door, mark drafted_awaiting_review, verify on arrival.", "evidence": {"sheet": "A-4", "region_norm": [0.7, 0.12, 0.78, 0.15]}}], "summary": "MOCK audit"}
+```

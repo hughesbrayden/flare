@@ -1,0 +1,21 @@
+Deterministic checks (`invariants.py`) passed with 0 findings.
+The `door-f4-elevator-e1` fire-rating fix was applied, but `door-f4-stair-c` is still marked `drafted_awaiting_review` with the false claim that General Note 7 is missing on sheet A-4.
+All four previously accepted ambiguities are excluded as requested.
+
+```json
+{
+  "findings": [
+    {
+      "check": "false_missing_note",
+      "severity": "error",
+      "owner": "reader:A-4",
+      "element_ids": ["door-f4-stair-c"],
+      "message": "door-f4-stair-c is still marked drafted_awaiting_review claiming Note 7 is missing from GENERAL NOTES on A-4, but Note 7 ('7. STAIR C DOORS ARE FIRE DOORS.') is clearly printed in GENERAL NOTES on A-4.",
+      "suggested_fix": "Set layout_status to 'verified_on_plan' and remove review_note on door-f4-stair-c.",
+      "evidence": { "sheet": "A-4", "region_norm": [0.71, 0.12, 0.96, 0.37] },
+      "source": "visual"
+    }
+  ],
+  "summary": "0 deterministic errors; 1 remaining reader:A-4 error (door-f4-stair-c still falsely flagged for missing Note 7)."
+}
+```

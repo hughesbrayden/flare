@@ -1,0 +1,76 @@
+Deterministic checks (`invariants.py`) passed with zero findings, and the model's geometry, connections, unit numbering, and entrance access flags match sheets A-1, A-2, A-4, and A-301.
+Six drawing ambiguities remain in the model (all already marked `drafted_awaiting_review`): on A-4, the Stair C door callout references Note 7 which is omitted from A-4's General Notes, and several enclosed rooms (`MECH.`, `REFUSE`, and two unlabeled Floor 1 enclosures) have no doors shown on plan.
+
+```json
+{
+  "findings": [
+    {
+      "check": "missing_referenced_note",
+      "severity": "ambiguity",
+      "owner": "reader:A-4",
+      "element_ids": ["door-f4-stair-c"],
+      "related_ids": ["stair-c", "f4-ne-hall"],
+      "message": "On sheet A-4, callout 'F.D. - SEE NOTE 7' points to Stair C's door, but sheet A-4's General Notes omits Note 7 (listing only notes 1-6 and 8).",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human/architectural review to confirm whether Note 7 from A-1/A-2 ('STAIR C DOORS ARE FIRE DOORS.') applies.",
+      "evidence": { "sheet": "A-4", "region_norm": [0.705, 0.1077, 0.78, 0.3662] },
+      "source": "visual"
+    },
+    {
+      "check": "enclosed_space_no_door",
+      "severity": "ambiguity",
+      "owner": "reader:A-1",
+      "element_ids": ["f1-mech"],
+      "related_ids": [],
+      "message": "On sheet A-1, the MECH. room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access location.",
+      "evidence": { "sheet": "A-1", "region_norm": [0.36, 0.3385, 0.48, 0.5231] },
+      "source": "visual"
+    },
+    {
+      "check": "unlabeled_enclosed_space",
+      "severity": "ambiguity",
+      "owner": "reader:A-1",
+      "element_ids": ["f1-unlabeled-north"],
+      "related_ids": [],
+      "message": "On sheet A-1, the enclosed space along the north wall behind Exit Passageway, Stairs A/B, and Stair Hall has no label and no door or access opening.",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to clarify space function and access.",
+      "evidence": { "sheet": "A-1", "region_norm": [0.24, 0.1077, 0.6, 0.2] },
+      "source": "visual"
+    },
+    {
+      "check": "unlabeled_enclosed_space",
+      "severity": "ambiguity",
+      "owner": "reader:A-1",
+      "element_ids": ["f1-unlabeled-south"],
+      "related_ids": ["elevator-e1", "f1-west-vestibule-142", "f1-east-vestibule-144"],
+      "message": "On sheet A-1, the enclosed area around Elevator E1 between West Vestibule (142) and East Vestibule (144) has no label and no door or access opening.",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to clarify space function and access.",
+      "evidence": { "sheet": "A-1", "region_norm": [0.36, 0.5231, 0.48, 0.7538] },
+      "source": "visual"
+    },
+    {
+      "check": "enclosed_space_no_door",
+      "severity": "ambiguity",
+      "owner": "reader:A-2",
+      "element_ids": ["f2-refuse", "f3-refuse", "f5-refuse"],
+      "related_ids": [],
+      "message": "On sheet A-2 (typical floors 2, 3, and 5), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access door location.",
+      "evidence": { "sheet": "A-2", "region_norm": [0.42, 0.5231, 0.48, 0.6385] },
+      "source": "visual"
+    },
+    {
+      "check": "enclosed_space_no_door",
+      "severity": "ambiguity",
+      "owner": "reader:A-4",
+      "element_ids": ["f4-refuse"],
+      "related_ids": [],
+      "message": "On sheet A-4 (floor 4), the REFUSE room is drawn enclosed by solid walls on all four sides with no door or access opening.",
+      "suggested_fix": "Keep marked drafted_awaiting_review; needs human review to confirm access door location.",
+      "evidence": { "sheet": "A-4", "region_norm": [0.42, 0.5231, 0.48, 0.6385] },
+      "source": "visual"
+    }
+  ],
+  "summary": "0 deterministic errors and 0 visual model errors; 6 drawing ambiguities (already marked drafted_awaiting_review) require human review."
+}
+```

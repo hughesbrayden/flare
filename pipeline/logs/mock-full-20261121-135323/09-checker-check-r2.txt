@@ -1,0 +1,4 @@
+MOCK checker.
+```json
+{"findings": [{"check": "missing_referenced_note", "severity": "ambiguity", "owner": "reader:A-4", "element_ids": ["door-f4-stair-c"], "message": "Stair C floor-4 door is annotated 'F.D. - SEE NOTE 7'; note 7 is missing from A-4's general notes.", "suggested_fix": "Keep the door, mark drafted_awaiting_review, verify on arrival.", "evidence": {"sheet": "A-4", "region_norm": [0.7, 0.12, 0.78, 0.15]}}], "summary": "MOCK audit"}
+```

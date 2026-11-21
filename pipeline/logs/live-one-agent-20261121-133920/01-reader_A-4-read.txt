@@ -1,0 +1,396 @@
+Decoded sheet A-4 (Fourth Floor Plan, 24.0 m × 14.0 m at 60 px/m, SW origin at px (120, 980)) into `/workspace/out/slice.json`.
+Modeled 9 spaces (4 apartments, 3 halls, 1 lobby, 1 refuse room), 4 vertical stops (Stairs A, B, C, Elevator E1), and 11 openings (9 doors, 2 open passages).
+Render-and-compare improved wall F1 from 0.7782 (pass 1, `/workspace/out/compare_pass1.png`) to 0.9273 (pass 2, `/workspace/out/compare_pass2.png`), with all 11 openings verified on wall gaps/door swings.
+Flagged `door-f4-stair-c` (callout `F.D. - SEE NOTE 7` references missing Note 7) and `f4-refuse` (enclosed with no door drawn) as `drafted_awaiting_review`.
+
+```json
+{
+  "sheet": "A-4",
+  "layout": {
+    "floors": [
+      {
+        "floor": 4,
+        "label": "Floor 4",
+        "elevation_m": 9.0,
+        "height_m": 3.0,
+        "sheet_id": "A-4"
+      }
+    ],
+    "spaces": [
+      {
+        "id": "f4-apt-4a",
+        "type": "apartment",
+        "label": "4A",
+        "floor": 4,
+        "bbox_m": [0.0, 8.0, 10.0, 14.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.06, 0.108, 0.36, 0.385],
+          "callout": "4A"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-apt-4b",
+        "type": "apartment",
+        "label": "4B",
+        "floor": 4,
+        "bbox_m": [0.0, 0.0, 10.0, 6.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.06, 0.477, 0.36, 0.754],
+          "callout": "4B"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-apt-4c",
+        "type": "apartment",
+        "label": "4C",
+        "floor": 4,
+        "bbox_m": [14.0, 8.0, 21.5, 14.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.48, 0.108, 0.705, 0.385],
+          "callout": "4C"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-apt-4d",
+        "type": "apartment",
+        "label": "4D",
+        "floor": 4,
+        "bbox_m": [14.0, 0.0, 24.0, 6.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.48, 0.477, 0.78, 0.754],
+          "callout": "4D"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-west-corridor",
+        "type": "hall",
+        "label": "WEST CORRIDOR",
+        "floor": 4,
+        "bbox_m": [0.0, 6.0, 10.0, 8.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.06, 0.385, 0.36, 0.477],
+          "callout": "WEST CORRIDOR"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-east-lobby",
+        "type": "lobby",
+        "label": "EAST LOBBY",
+        "floor": 4,
+        "bbox_m": [10.0, 5.0, 14.0, 9.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.36, 0.338, 0.48, 0.523],
+          "callout": "EAST LOBBY"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-east-corridor",
+        "type": "hall",
+        "label": "EAST CORRIDOR",
+        "floor": 4,
+        "bbox_m": [14.0, 6.0, 21.5, 8.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.48, 0.385, 0.705, 0.477],
+          "callout": "EAST CORRIDOR"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-ne-hall",
+        "type": "hall",
+        "label": "N.E. HALL",
+        "floor": 4,
+        "bbox_m": [21.5, 6.0, 24.0, 9.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.705, 0.338, 0.78, 0.477],
+          "callout": "N.E. HALL"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "f4-refuse",
+        "type": "utility",
+        "label": "REFUSE",
+        "floor": 4,
+        "bbox_m": [12.0, 2.5, 14.0, 5.0],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.42, 0.523, 0.48, 0.638],
+          "callout": "REFUSE"
+        },
+        "layout_status": "drafted_awaiting_review",
+        "review_note": "Refuse room is enclosed on all four sides with no door or opening drawn on sheet A-4."
+      }
+    ],
+    "openings": [
+      {
+        "id": "o4-4a-wcorr",
+        "kind": "door",
+        "floor": 4,
+        "connects": ["f4-apt-4a", "f4-west-corridor"],
+        "pos_m": [5.0, 8.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.195, 0.362, 0.225, 0.408],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-4b-wcorr",
+        "kind": "door",
+        "floor": 4,
+        "connects": ["f4-apt-4b", "f4-west-corridor"],
+        "pos_m": [5.0, 6.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.195, 0.454, 0.225, 0.5],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-wcorr-elobby",
+        "kind": "open_passage",
+        "floor": 4,
+        "connects": ["f4-west-corridor", "f4-east-lobby"],
+        "pos_m": [10.0, 7.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.345, 0.408, 0.375, 0.454],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-elobby-ecorr",
+        "kind": "open_passage",
+        "floor": 4,
+        "connects": ["f4-east-lobby", "f4-east-corridor"],
+        "pos_m": [14.0, 7.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.465, 0.408, 0.495, 0.454],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-4c-ecorr",
+        "kind": "door",
+        "floor": 4,
+        "connects": ["f4-apt-4c", "f4-east-corridor"],
+        "pos_m": [17.75, 8.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.578, 0.362, 0.608, 0.408],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-4d-ecorr",
+        "kind": "door",
+        "floor": 4,
+        "connects": ["f4-apt-4d", "f4-east-corridor"],
+        "pos_m": [19.0, 6.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.615, 0.454, 0.645, 0.5],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "o4-ecorr-nehall",
+        "kind": "door",
+        "floor": 4,
+        "connects": ["f4-east-corridor", "f4-ne-hall"],
+        "pos_m": [21.5, 7.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.69, 0.408, 0.72, 0.454],
+          "callout": ""
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f4-stair-a",
+        "kind": "fire_door",
+        "floor": 4,
+        "connects": ["stair-a", "f4-east-lobby"],
+        "pos_m": [11.0, 9.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.375, 0.315, 0.405, 0.362],
+          "callout": "A"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f4-stair-b",
+        "kind": "fire_door",
+        "floor": 4,
+        "connects": ["stair-b", "f4-east-lobby"],
+        "pos_m": [13.0, 9.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.435, 0.315, 0.465, 0.362],
+          "callout": "B"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "door-f4-stair-c",
+        "kind": "fire_door",
+        "floor": 4,
+        "connects": ["stair-c", "f4-ne-hall"],
+        "pos_m": [22.75, 9.0],
+        "fire_rated": true,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.728, 0.315, 0.757, 0.362],
+          "callout": "F.D. - SEE NOTE 7"
+        },
+        "layout_status": "drafted_awaiting_review",
+        "review_note": "Callout 'F.D. - SEE NOTE 7' points to this door, but Note 7 is missing from GENERAL NOTES (notes jump from 6 to 8)."
+      },
+      {
+        "id": "door-f4-elevator-e1",
+        "kind": "elevator_door",
+        "floor": 4,
+        "connects": ["elevator-e1", "f4-east-lobby"],
+        "pos_m": [11.0, 5.0],
+        "fire_rated": false,
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.375, 0.5, 0.405, 0.546],
+          "callout": "E1"
+        },
+        "layout_status": "verified_on_plan"
+      }
+    ],
+    "verticals": [
+      {
+        "id": "stair-a",
+        "kind": "stair",
+        "label": "STAIR A",
+        "floors_connected": [4],
+        "stops": [
+          {
+            "floor": 4,
+            "bbox_m": [10.0, 9.0, 12.0, 12.0],
+            "opening_id": "door-f4-stair-a",
+            "space_id": "f4-east-lobby"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.36, 0.2, 0.42, 0.338],
+          "callout": "A"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "stair-b",
+        "kind": "stair",
+        "label": "STAIR B",
+        "floors_connected": [4],
+        "stops": [
+          {
+            "floor": 4,
+            "bbox_m": [12.0, 9.0, 14.0, 12.0],
+            "opening_id": "door-f4-stair-b",
+            "space_id": "f4-east-lobby"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.42, 0.2, 0.48, 0.338],
+          "callout": "B"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "stair-c",
+        "kind": "stair",
+        "label": "STAIR C",
+        "floors_connected": [4],
+        "stops": [
+          {
+            "floor": 4,
+            "bbox_m": [21.5, 9.0, 24.0, 12.0],
+            "opening_id": "door-f4-stair-c",
+            "space_id": "f4-ne-hall"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.705, 0.2, 0.78, 0.338],
+          "callout": "C"
+        },
+        "layout_status": "verified_on_plan"
+      },
+      {
+        "id": "elevator-e1",
+        "kind": "elevator",
+        "label": "E1",
+        "floors_connected": [4],
+        "stops": [
+          {
+            "floor": 4,
+            "bbox_m": [10.0, 2.5, 12.0, 5.0],
+            "opening_id": "door-f4-elevator-e1",
+            "space_id": "f4-east-lobby"
+          }
+        ],
+        "source_ref": {
+          "sheet": "A-4",
+          "region_norm": [0.36, 0.523, 0.42, 0.638],
+          "callout": "E1"
+        },
+        "layout_status": "verified_on_plan"
+      }
+    ],
+    "entrances": []
+  },
+  "render_match": {
+    "pass_scores": [0.7782, 0.9273],
+    "passes": 2,
+    "method": "F1 overlap of 6px centered space/shaft wall outlines (with 54px opening gaps punched out) against 4x4-eroded sheet wall pixels with 2px dilation tolerance, plus per-opening gap/swing checks."
+  },
+  "unclear": [
+    {
+      "element_id": "door-f4-stair-c",
+      "note": "Callout 'F.D. - SEE NOTE 7' points to this door, but Note 7 is missing from GENERAL NOTES (notes jump from 6 to 8)."
+    },
+    {
+      "element_id": "f4-refuse",
+      "note": "Refuse room is enclosed on all four sides with no door or opening drawn on sheet A-4."
+    }
+  ]
+}
+```

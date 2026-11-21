@@ -1,0 +1,58 @@
+Decoded sheet A-301 (stair section for Marlowe House, 5 floors, scale 60 px/m) and wrote the model to [slice.json](file:///workspace/out/slice.json).
+Stairs A and B share a single scissor-stair shaft serving floors 1–5 (`EAST LOBBY` on floors 2–5; `EXIT PASSAGE -> 142` for A and `STAIR HALL -> 144` for B on floor 1).
+Stair C (rear service) serves floors 1–5 (`N.E. SERVICE HALL` on floors 2–5; `REAR VESTIBULE -> ALLEY GATE` on floor 1).
+Render-and-compare in [compare_pass1.png](file:///workspace/out/compare_pass1.png) achieved F1 = 0.9571 (1.0000 structural line precision) on pass 1 with no unclear items.
+
+```json
+{
+  "sheet": "A-301",
+  "layout": {
+    "floors": [],
+    "spaces": [],
+    "openings": [],
+    "verticals": [],
+    "entrances": []
+  },
+  "section": [
+    {
+      "vertical": "stair-a",
+      "label": "STAIR A / STAIR B - SCISSOR (ONE SHAFT)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "EXIT PASSAGE -> 142",
+        "2-5": "EAST LOBBY"
+      },
+      "shares_shaft_with": "stair-b",
+      "notes": "Scissor stair sharing shaft with Stair B (General Note 2). Floor 1 discharges west: 'A -> EXIT PASSAGE -> 142'. Floors 2-5 open east: 'A & B DOORS -> EAST LOBBY'."
+    },
+    {
+      "vertical": "stair-b",
+      "label": "STAIR A / STAIR B - SCISSOR (ONE SHAFT)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "STAIR HALL -> 144",
+        "2-5": "EAST LOBBY"
+      },
+      "shares_shaft_with": "stair-a",
+      "notes": "Scissor stair sharing shaft with Stair A (General Note 2). Floor 1 discharges east: 'B -> STAIR HALL -> 144'. Floors 2-5 open east: 'A & B DOORS -> EAST LOBBY'."
+    },
+    {
+      "vertical": "stair-c",
+      "label": "STAIR C (REAR SERVICE)",
+      "floors": [1, 2, 3, 4, 5],
+      "opens_to": {
+        "1": "REAR VESTIBULE -> ALLEY GATE",
+        "2-5": "N.E. SERVICE HALL"
+      },
+      "shares_shaft_with": null,
+      "notes": "Rear service stair serving floors 1-5 (General Note 8). Doors are fire doors (General Note 7). Floor 1 discharges below FL 1: '-> REAR VESTIBULE -> ALLEY GATE' (alley gate keyed by mgmt). Floors 2-5 open east: '-> N.E. SERVICE HALL'."
+    }
+  ],
+  "render_match": {
+    "pass_scores": [0.9571],
+    "passes": 1,
+    "method": "Redrew section floor lines, stair shafts (scissor X and single diagonal), and floor/opening labels from section JSON at sheet scale (60 px/m) and computed F1 on diagram linework (2px tolerance)."
+  },
+  "unclear": []
+}
+```

@@ -1,0 +1,2882 @@
+{
+ "schema_version": "1.0",
+ "building": {
+  "id": "marlowe-house",
+  "name": "Marlowe House",
+  "address": "142-144 Marlowe St",
+  "is_fictional": true,
+  "footprint_m": {
+   "w": 24.0,
+   "d": 14.0
+  }
+ },
+ "sheets": [
+  {
+   "id": "A-1",
+   "file": "sheets/A-1.png"
+  },
+  {
+   "id": "A-2",
+   "file": "sheets/A-2.png"
+  },
+  {
+   "id": "A-4",
+   "file": "sheets/A-4.png"
+  },
+  {
+   "id": "A-301",
+   "file": "sheets/A-301.png"
+  }
+ ],
+ "layout": {
+  "floors": [
+   {
+    "floor": 1,
+    "label": "Floor 1",
+    "elevation_m": 0.0,
+    "height_m": 3.0,
+    "sheet_id": "A-1"
+   },
+   {
+    "floor": 2,
+    "label": "Floor 2",
+    "elevation_m": 3.0,
+    "height_m": 3.0,
+    "sheet_id": "A-2"
+   },
+   {
+    "floor": 3,
+    "label": "Floor 3",
+    "elevation_m": 6.0,
+    "height_m": 3.0,
+    "sheet_id": "A-2"
+   },
+   {
+    "floor": 4,
+    "label": "Floor 4",
+    "elevation_m": 9.0,
+    "height_m": 3.0,
+    "sheet_id": "A-4"
+   },
+   {
+    "floor": 5,
+    "label": "Floor 5",
+    "elevation_m": 12.0,
+    "height_m": 3.0,
+    "sheet_id": "A-2"
+   }
+  ],
+  "spaces": [
+   {
+    "id": "f1-apt-1a",
+    "type": "apartment",
+    "label": "1A (SUPER)",
+    "floor": 1,
+    "bbox_m": [
+     0.0,
+     5.0,
+     6.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.06,
+      0.1077,
+      0.24,
+      0.5231
+     ],
+     "callout": "1A (SUPER)"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-exit-passageway",
+    "type": "hall",
+    "label": "EXIT PASSAGEWAY",
+    "floor": 1,
+    "bbox_m": [
+     6.0,
+     5.0,
+     10.0,
+     12.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.24,
+      0.2,
+      0.36,
+      0.5231
+     ],
+     "callout": "EXIT PASSAGEWAY"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-mech",
+    "type": "utility",
+    "label": "MECH.",
+    "floor": 1,
+    "bbox_m": [
+     10.0,
+     5.0,
+     14.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ],
+     "callout": "MECH."
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "MECH. room [10.0, 5.0, 14.0, 9.0] is completely enclosed with no door or access opening shown on plan."
+   },
+   {
+    "id": "f1-stair-hall",
+    "type": "hall",
+    "label": "STAIR HALL",
+    "floor": 1,
+    "bbox_m": [
+     14.0,
+     5.0,
+     18.0,
+     12.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.48,
+      0.2,
+      0.6,
+      0.5231
+     ],
+     "callout": "STAIR HALL"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-boiler-rm",
+    "type": "utility",
+    "label": "BOILER RM.",
+    "floor": 1,
+    "bbox_m": [
+     18.0,
+     5.0,
+     21.5,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.6,
+      0.1077,
+      0.705,
+      0.5231
+     ],
+     "callout": "BOILER RM."
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-rear-service-vestibule",
+    "type": "lobby",
+    "label": "REAR SERVICE VESTIBULE",
+    "floor": 1,
+    "bbox_m": [
+     21.5,
+     12.0,
+     24.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.705,
+      0.1077,
+      0.78,
+      0.2
+     ],
+     "callout": "REAR SERVICE VESTIBULE"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-trash",
+    "type": "utility",
+    "label": "TRASH",
+    "floor": 1,
+    "bbox_m": [
+     21.5,
+     5.0,
+     24.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.705,
+      0.3385,
+      0.78,
+      0.5231
+     ],
+     "callout": "TRASH"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-west-vestibule-142",
+    "type": "lobby",
+    "label": "WEST VESTIBULE (142)",
+    "floor": 1,
+    "bbox_m": [
+     0.0,
+     0.0,
+     10.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.06,
+      0.5231,
+      0.36,
+      0.7538
+     ],
+     "callout": "WEST VESTIBULE (142)"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-east-vestibule-144",
+    "type": "lobby",
+    "label": "EAST VESTIBULE (144)",
+    "floor": 1,
+    "bbox_m": [
+     14.0,
+     0.0,
+     24.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.48,
+      0.5231,
+      0.78,
+      0.7538
+     ],
+     "callout": "EAST VESTIBULE (144)"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f1-unlabeled-north",
+    "type": "other",
+    "label": "UNLABELED NORTH ENCLOSURE",
+    "floor": 1,
+    "bbox_m": [
+     6.0,
+     12.0,
+     18.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.24,
+      0.1077,
+      0.6,
+      0.2
+     ],
+     "callout": ""
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "Enclosed space [6.0, 12.0, 18.0, 14.0] along north wall has no label and no door or access opening shown on plan."
+   },
+   {
+    "id": "f1-unlabeled-south",
+    "type": "other",
+    "label": "UNLABELED SOUTH ENCLOSURE",
+    "floor": 1,
+    "bbox_m": [
+     10.0,
+     0.0,
+     14.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.5231,
+      0.48,
+      0.7538
+     ],
+     "callout": ""
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "Enclosed area [10.0, 0.0, 14.0, 5.0] (around Elevator E1) is separated from West Vestibule (142) by a solid wall at x=10.0 (y=0.0..2.5) and from East Vestibule (144) by a solid wall at x=14.0 (y=0.0..5.0), with no label and no door shown on plan."
+   },
+   {
+    "id": "f2-apt-2a",
+    "type": "apartment",
+    "label": "2A",
+    "floor": 2,
+    "bbox_m": [
+     0.0,
+     8.0,
+     10.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.1077,
+      0.36,
+      0.3846
+     ],
+     "callout": "2A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-apt-2b",
+    "type": "apartment",
+    "label": "2B",
+    "floor": 2,
+    "bbox_m": [
+     0.0,
+     0.0,
+     10.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.4769,
+      0.36,
+      0.7538
+     ],
+     "callout": "2B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-west-corridor",
+    "type": "hall",
+    "label": "WEST CORRIDOR",
+    "floor": 2,
+    "bbox_m": [
+     0.0,
+     6.0,
+     10.0,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.3846,
+      0.36,
+      0.4769
+     ],
+     "callout": "WEST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-east-lobby",
+    "type": "lobby",
+    "label": "EAST LOBBY",
+    "floor": 2,
+    "bbox_m": [
+     10.0,
+     5.0,
+     14.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ],
+     "callout": "EAST LOBBY"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-refuse",
+    "type": "utility",
+    "label": "REFUSE",
+    "floor": 2,
+    "bbox_m": [
+     12.0,
+     2.5,
+     14.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ],
+     "callout": "REFUSE"
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+   },
+   {
+    "id": "f2-apt-2c",
+    "type": "apartment",
+    "label": "2C",
+    "floor": 2,
+    "bbox_m": [
+     14.0,
+     8.0,
+     21.5,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.1077,
+      0.705,
+      0.3846
+     ],
+     "callout": "2C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-east-corridor",
+    "type": "hall",
+    "label": "EAST CORRIDOR",
+    "floor": 2,
+    "bbox_m": [
+     14.0,
+     6.0,
+     21.5,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.3846,
+      0.705,
+      0.4769
+     ],
+     "callout": "EAST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-apt-2d",
+    "type": "apartment",
+    "label": "2D",
+    "floor": 2,
+    "bbox_m": [
+     14.0,
+     0.0,
+     24.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.4769,
+      0.78,
+      0.7538
+     ],
+     "callout": "2D"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f2-ne-hall",
+    "type": "hall",
+    "label": "N.E. HALL",
+    "floor": 2,
+    "bbox_m": [
+     21.5,
+     6.0,
+     24.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.705,
+      0.3385,
+      0.78,
+      0.4769
+     ],
+     "callout": "N.E. HALL"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-apt-3a",
+    "type": "apartment",
+    "label": "3A",
+    "floor": 3,
+    "bbox_m": [
+     0.0,
+     8.0,
+     10.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.1077,
+      0.36,
+      0.3846
+     ],
+     "callout": "3A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-apt-3b",
+    "type": "apartment",
+    "label": "3B",
+    "floor": 3,
+    "bbox_m": [
+     0.0,
+     0.0,
+     10.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.4769,
+      0.36,
+      0.7538
+     ],
+     "callout": "3B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-west-corridor",
+    "type": "hall",
+    "label": "WEST CORRIDOR",
+    "floor": 3,
+    "bbox_m": [
+     0.0,
+     6.0,
+     10.0,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.3846,
+      0.36,
+      0.4769
+     ],
+     "callout": "WEST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-east-lobby",
+    "type": "lobby",
+    "label": "EAST LOBBY",
+    "floor": 3,
+    "bbox_m": [
+     10.0,
+     5.0,
+     14.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ],
+     "callout": "EAST LOBBY"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-refuse",
+    "type": "utility",
+    "label": "REFUSE",
+    "floor": 3,
+    "bbox_m": [
+     12.0,
+     2.5,
+     14.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ],
+     "callout": "REFUSE"
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+   },
+   {
+    "id": "f3-apt-3c",
+    "type": "apartment",
+    "label": "3C",
+    "floor": 3,
+    "bbox_m": [
+     14.0,
+     8.0,
+     21.5,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.1077,
+      0.705,
+      0.3846
+     ],
+     "callout": "3C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-east-corridor",
+    "type": "hall",
+    "label": "EAST CORRIDOR",
+    "floor": 3,
+    "bbox_m": [
+     14.0,
+     6.0,
+     21.5,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.3846,
+      0.705,
+      0.4769
+     ],
+     "callout": "EAST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-apt-3d",
+    "type": "apartment",
+    "label": "3D",
+    "floor": 3,
+    "bbox_m": [
+     14.0,
+     0.0,
+     24.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.4769,
+      0.78,
+      0.7538
+     ],
+     "callout": "3D"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f3-ne-hall",
+    "type": "hall",
+    "label": "N.E. HALL",
+    "floor": 3,
+    "bbox_m": [
+     21.5,
+     6.0,
+     24.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.705,
+      0.3385,
+      0.78,
+      0.4769
+     ],
+     "callout": "N.E. HALL"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-apt-4a",
+    "type": "apartment",
+    "label": "4A",
+    "floor": 4,
+    "bbox_m": [
+     0.0,
+     8.0,
+     10.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.06,
+      0.1077,
+      0.36,
+      0.3846
+     ],
+     "callout": "4A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-apt-4b",
+    "type": "apartment",
+    "label": "4B",
+    "floor": 4,
+    "bbox_m": [
+     0.0,
+     0.0,
+     10.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.06,
+      0.4769,
+      0.36,
+      0.7538
+     ],
+     "callout": "4B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-apt-4c",
+    "type": "apartment",
+    "label": "4C",
+    "floor": 4,
+    "bbox_m": [
+     14.0,
+     8.0,
+     21.5,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.48,
+      0.1077,
+      0.705,
+      0.3846
+     ],
+     "callout": "4C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-apt-4d",
+    "type": "apartment",
+    "label": "4D",
+    "floor": 4,
+    "bbox_m": [
+     14.0,
+     0.0,
+     24.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.48,
+      0.4769,
+      0.78,
+      0.7538
+     ],
+     "callout": "4D"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-west-corridor",
+    "type": "hall",
+    "label": "WEST CORRIDOR",
+    "floor": 4,
+    "bbox_m": [
+     0.0,
+     6.0,
+     10.0,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.06,
+      0.3846,
+      0.36,
+      0.4769
+     ],
+     "callout": "WEST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-east-lobby",
+    "type": "lobby",
+    "label": "EAST LOBBY",
+    "floor": 4,
+    "bbox_m": [
+     10.0,
+     5.0,
+     14.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ],
+     "callout": "EAST LOBBY"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-east-corridor",
+    "type": "hall",
+    "label": "EAST CORRIDOR",
+    "floor": 4,
+    "bbox_m": [
+     14.0,
+     6.0,
+     21.5,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.48,
+      0.3846,
+      0.705,
+      0.4769
+     ],
+     "callout": "EAST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-ne-hall",
+    "type": "hall",
+    "label": "N.E. HALL",
+    "floor": 4,
+    "bbox_m": [
+     21.5,
+     6.0,
+     24.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.705,
+      0.3385,
+      0.78,
+      0.4769
+     ],
+     "callout": "N.E. HALL"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f4-refuse",
+    "type": "utility",
+    "label": "REFUSE",
+    "floor": 4,
+    "bbox_m": [
+     12.0,
+     2.5,
+     14.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ],
+     "callout": "REFUSE"
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "REFUSE room is drawn enclosed by solid walls on all four sides with no door opening shown on sheet A-4."
+   },
+   {
+    "id": "f5-apt-5a",
+    "type": "apartment",
+    "label": "5A",
+    "floor": 5,
+    "bbox_m": [
+     0.0,
+     8.0,
+     10.0,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.1077,
+      0.36,
+      0.3846
+     ],
+     "callout": "5A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-apt-5b",
+    "type": "apartment",
+    "label": "5B",
+    "floor": 5,
+    "bbox_m": [
+     0.0,
+     0.0,
+     10.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.4769,
+      0.36,
+      0.7538
+     ],
+     "callout": "5B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-west-corridor",
+    "type": "hall",
+    "label": "WEST CORRIDOR",
+    "floor": 5,
+    "bbox_m": [
+     0.0,
+     6.0,
+     10.0,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.06,
+      0.3846,
+      0.36,
+      0.4769
+     ],
+     "callout": "WEST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-east-lobby",
+    "type": "lobby",
+    "label": "EAST LOBBY",
+    "floor": 5,
+    "bbox_m": [
+     10.0,
+     5.0,
+     14.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.36,
+      0.3385,
+      0.48,
+      0.5231
+     ],
+     "callout": "EAST LOBBY"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-refuse",
+    "type": "utility",
+    "label": "REFUSE",
+    "floor": 5,
+    "bbox_m": [
+     12.0,
+     2.5,
+     14.0,
+     5.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.42,
+      0.5231,
+      0.48,
+      0.6385
+     ],
+     "callout": "REFUSE"
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "REFUSE room is enclosed by solid walls on all four sides with no door or access opening shown on sheet A-2."
+   },
+   {
+    "id": "f5-apt-5c",
+    "type": "apartment",
+    "label": "5C",
+    "floor": 5,
+    "bbox_m": [
+     14.0,
+     8.0,
+     21.5,
+     14.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.1077,
+      0.705,
+      0.3846
+     ],
+     "callout": "5C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-east-corridor",
+    "type": "hall",
+    "label": "EAST CORRIDOR",
+    "floor": 5,
+    "bbox_m": [
+     14.0,
+     6.0,
+     21.5,
+     8.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.3846,
+      0.705,
+      0.4769
+     ],
+     "callout": "EAST CORRIDOR"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-apt-5d",
+    "type": "apartment",
+    "label": "5D",
+    "floor": 5,
+    "bbox_m": [
+     14.0,
+     0.0,
+     24.0,
+     6.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.48,
+      0.4769,
+      0.78,
+      0.7538
+     ],
+     "callout": "5D"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "f5-ne-hall",
+    "type": "hall",
+    "label": "N.E. HALL",
+    "floor": 5,
+    "bbox_m": [
+     21.5,
+     6.0,
+     24.0,
+     9.0
+    ],
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.705,
+      0.3385,
+      0.78,
+      0.4769
+     ],
+     "callout": "N.E. HALL"
+    },
+    "layout_status": "verified_on_plan"
+   }
+  ],
+  "openings": [
+   {
+    "id": "o1-apt1a-exit",
+    "kind": "door",
+    "floor": 1,
+    "connects": [
+     "f1-apt-1a",
+     "f1-exit-passageway"
+    ],
+    "pos_m": [
+     6.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.225,
+      0.3154,
+      0.255,
+      0.3615
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f1-stair-a",
+    "kind": "fire_door",
+    "floor": 1,
+    "connects": [
+     "stair-a",
+     "f1-exit-passageway"
+    ],
+    "pos_m": [
+     10.0,
+     10.5
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.345,
+      0.2462,
+      0.375,
+      0.2923
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f1-stair-b",
+    "kind": "fire_door",
+    "floor": 1,
+    "connects": [
+     "stair-b",
+     "f1-stair-hall"
+    ],
+    "pos_m": [
+     14.0,
+     10.5
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.465,
+      0.2462,
+      0.495,
+      0.2923
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o1-boiler-stairhall",
+    "kind": "door",
+    "floor": 1,
+    "connects": [
+     "f1-boiler-rm",
+     "f1-stair-hall"
+    ],
+    "pos_m": [
+     18.0,
+     7.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.585,
+      0.4077,
+      0.615,
+      0.4538
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f1-stair-c",
+    "kind": "fire_door",
+    "floor": 1,
+    "connects": [
+     "stair-c",
+     "f1-rear-service-vestibule"
+    ],
+    "pos_m": [
+     22.75,
+     12.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.7275,
+      0.1769,
+      0.7575,
+      0.2231
+     ],
+     "callout": "C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o1-trash-eastvest",
+    "kind": "door",
+    "floor": 1,
+    "connects": [
+     "f1-trash",
+     "f1-east-vestibule-144"
+    ],
+    "pos_m": [
+     22.75,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.7275,
+      0.5,
+      0.7575,
+      0.5462
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o1-exitpass-westvest",
+    "kind": "open_passage",
+    "floor": 1,
+    "connects": [
+     "f1-exit-passageway",
+     "f1-west-vestibule-142"
+    ],
+    "pos_m": [
+     8.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.285,
+      0.5,
+      0.315,
+      0.5462
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o1-stairhall-eastvest",
+    "kind": "open_passage",
+    "floor": 1,
+    "connects": [
+     "f1-stair-hall",
+     "f1-east-vestibule-144"
+    ],
+    "pos_m": [
+     16.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.525,
+      0.5,
+      0.555,
+      0.5462
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f1-elevator-e1",
+    "kind": "elevator_door",
+    "floor": 1,
+    "connects": [
+     "elevator-e1",
+     "f1-west-vestibule-142"
+    ],
+    "pos_m": [
+     10.0,
+     3.75
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.345,
+      0.5577,
+      0.375,
+      0.6038
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-2a-wcorr",
+    "kind": "door",
+    "floor": 2,
+    "connects": [
+     "f2-apt-2a",
+     "f2-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.3569,
+      0.228,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-2b-wcorr",
+    "kind": "door",
+    "floor": 2,
+    "connects": [
+     "f2-apt-2b",
+     "f2-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.4492,
+      0.228,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-wcorr-elobby",
+    "kind": "open_passage",
+    "floor": 2,
+    "connects": [
+     "f2-west-corridor",
+     "f2-east-lobby"
+    ],
+    "pos_m": [
+     10.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.342,
+      0.4031,
+      0.378,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-elobby-ecorr",
+    "kind": "open_passage",
+    "floor": 2,
+    "connects": [
+     "f2-east-lobby",
+     "f2-east-corridor"
+    ],
+    "pos_m": [
+     14.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.462,
+      0.4031,
+      0.498,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-2c-ecorr",
+    "kind": "door",
+    "floor": 2,
+    "connects": [
+     "f2-apt-2c",
+     "f2-east-corridor"
+    ],
+    "pos_m": [
+     17.75,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.5745,
+      0.3569,
+      0.6105,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-2d-ecorr",
+    "kind": "door",
+    "floor": 2,
+    "connects": [
+     "f2-apt-2d",
+     "f2-east-corridor"
+    ],
+    "pos_m": [
+     19.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.612,
+      0.4492,
+      0.648,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o2-ecorr-nehall",
+    "kind": "door",
+    "floor": 2,
+    "connects": [
+     "f2-east-corridor",
+     "f2-ne-hall"
+    ],
+    "pos_m": [
+     21.5,
+     7.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.687,
+      0.4031,
+      0.723,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f2-stair-a",
+    "kind": "fire_door",
+    "floor": 2,
+    "connects": [
+     "stair-a",
+     "f2-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.3108,
+      0.408,
+      0.3662
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f2-stair-b",
+    "kind": "fire_door",
+    "floor": 2,
+    "connects": [
+     "stair-b",
+     "f2-east-lobby"
+    ],
+    "pos_m": [
+     13.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.432,
+      0.3108,
+      0.468,
+      0.3662
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f2-stair-c",
+    "kind": "fire_door",
+    "floor": 2,
+    "connects": [
+     "stair-c",
+     "f2-ne-hall"
+    ],
+    "pos_m": [
+     22.75,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.7245,
+      0.3108,
+      0.7605,
+      0.3662
+     ],
+     "callout": "C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f2-elevator-e1",
+    "kind": "elevator_door",
+    "floor": 2,
+    "connects": [
+     "elevator-e1",
+     "f2-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.4954,
+      0.408,
+      0.5508
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-3a-wcorr",
+    "kind": "door",
+    "floor": 3,
+    "connects": [
+     "f3-apt-3a",
+     "f3-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.3569,
+      0.228,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-3b-wcorr",
+    "kind": "door",
+    "floor": 3,
+    "connects": [
+     "f3-apt-3b",
+     "f3-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.4492,
+      0.228,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-wcorr-elobby",
+    "kind": "open_passage",
+    "floor": 3,
+    "connects": [
+     "f3-west-corridor",
+     "f3-east-lobby"
+    ],
+    "pos_m": [
+     10.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.342,
+      0.4031,
+      0.378,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-elobby-ecorr",
+    "kind": "open_passage",
+    "floor": 3,
+    "connects": [
+     "f3-east-lobby",
+     "f3-east-corridor"
+    ],
+    "pos_m": [
+     14.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.462,
+      0.4031,
+      0.498,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-3c-ecorr",
+    "kind": "door",
+    "floor": 3,
+    "connects": [
+     "f3-apt-3c",
+     "f3-east-corridor"
+    ],
+    "pos_m": [
+     17.75,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.5745,
+      0.3569,
+      0.6105,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-3d-ecorr",
+    "kind": "door",
+    "floor": 3,
+    "connects": [
+     "f3-apt-3d",
+     "f3-east-corridor"
+    ],
+    "pos_m": [
+     19.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.612,
+      0.4492,
+      0.648,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o3-ecorr-nehall",
+    "kind": "door",
+    "floor": 3,
+    "connects": [
+     "f3-east-corridor",
+     "f3-ne-hall"
+    ],
+    "pos_m": [
+     21.5,
+     7.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.687,
+      0.4031,
+      0.723,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f3-stair-a",
+    "kind": "fire_door",
+    "floor": 3,
+    "connects": [
+     "stair-a",
+     "f3-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.3108,
+      0.408,
+      0.3662
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f3-stair-b",
+    "kind": "fire_door",
+    "floor": 3,
+    "connects": [
+     "stair-b",
+     "f3-east-lobby"
+    ],
+    "pos_m": [
+     13.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.432,
+      0.3108,
+      0.468,
+      0.3662
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f3-stair-c",
+    "kind": "fire_door",
+    "floor": 3,
+    "connects": [
+     "stair-c",
+     "f3-ne-hall"
+    ],
+    "pos_m": [
+     22.75,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.7245,
+      0.3108,
+      0.7605,
+      0.3662
+     ],
+     "callout": "C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f3-elevator-e1",
+    "kind": "elevator_door",
+    "floor": 3,
+    "connects": [
+     "elevator-e1",
+     "f3-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.4954,
+      0.408,
+      0.5508
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-4a-wcorr",
+    "kind": "door",
+    "floor": 4,
+    "connects": [
+     "f4-apt-4a",
+     "f4-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.192,
+      0.3569,
+      0.228,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-4b-wcorr",
+    "kind": "door",
+    "floor": 4,
+    "connects": [
+     "f4-apt-4b",
+     "f4-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.192,
+      0.4492,
+      0.228,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-4c-ecorr",
+    "kind": "door",
+    "floor": 4,
+    "connects": [
+     "f4-apt-4c",
+     "f4-east-corridor"
+    ],
+    "pos_m": [
+     17.75,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.5745,
+      0.3569,
+      0.6105,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-4d-ecorr",
+    "kind": "door",
+    "floor": 4,
+    "connects": [
+     "f4-apt-4d",
+     "f4-east-corridor"
+    ],
+    "pos_m": [
+     19.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.612,
+      0.4492,
+      0.648,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-wcorr-elobby",
+    "kind": "open_passage",
+    "floor": 4,
+    "connects": [
+     "f4-west-corridor",
+     "f4-east-lobby"
+    ],
+    "pos_m": [
+     10.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.342,
+      0.4031,
+      0.378,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-elobby-ecorr",
+    "kind": "open_passage",
+    "floor": 4,
+    "connects": [
+     "f4-east-lobby",
+     "f4-east-corridor"
+    ],
+    "pos_m": [
+     14.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.462,
+      0.4031,
+      0.498,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o4-ecorr-nehall",
+    "kind": "door",
+    "floor": 4,
+    "connects": [
+     "f4-east-corridor",
+     "f4-ne-hall"
+    ],
+    "pos_m": [
+     21.5,
+     7.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.687,
+      0.4031,
+      0.723,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f4-stair-a",
+    "kind": "fire_door",
+    "floor": 4,
+    "connects": [
+     "stair-a",
+     "f4-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.372,
+      0.3108,
+      0.408,
+      0.3662
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f4-stair-b",
+    "kind": "fire_door",
+    "floor": 4,
+    "connects": [
+     "stair-b",
+     "f4-east-lobby"
+    ],
+    "pos_m": [
+     13.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.432,
+      0.3108,
+      0.468,
+      0.3662
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f4-stair-c",
+    "kind": "fire_door",
+    "floor": 4,
+    "connects": [
+     "stair-c",
+     "f4-ne-hall"
+    ],
+    "pos_m": [
+     22.75,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.7245,
+      0.3108,
+      0.7605,
+      0.3662
+     ],
+     "callout": "F.D. - SEE NOTE 7"
+    },
+    "layout_status": "drafted_awaiting_review",
+    "review_note": "Callout 'F.D. - SEE NOTE 7' points to Stair C door, but General Notes skips Note 7 (lists notes 1-6 and 8)."
+   },
+   {
+    "id": "door-f4-elevator-e1",
+    "kind": "elevator_door",
+    "floor": 4,
+    "connects": [
+     "elevator-e1",
+     "f4-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-4",
+     "region_norm": [
+      0.372,
+      0.4954,
+      0.408,
+      0.5508
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-5a-wcorr",
+    "kind": "door",
+    "floor": 5,
+    "connects": [
+     "f5-apt-5a",
+     "f5-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.3569,
+      0.228,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-5b-wcorr",
+    "kind": "door",
+    "floor": 5,
+    "connects": [
+     "f5-apt-5b",
+     "f5-west-corridor"
+    ],
+    "pos_m": [
+     5.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.192,
+      0.4492,
+      0.228,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-wcorr-elobby",
+    "kind": "open_passage",
+    "floor": 5,
+    "connects": [
+     "f5-west-corridor",
+     "f5-east-lobby"
+    ],
+    "pos_m": [
+     10.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.342,
+      0.4031,
+      0.378,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-elobby-ecorr",
+    "kind": "open_passage",
+    "floor": 5,
+    "connects": [
+     "f5-east-lobby",
+     "f5-east-corridor"
+    ],
+    "pos_m": [
+     14.0,
+     7.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.462,
+      0.4031,
+      0.498,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-5c-ecorr",
+    "kind": "door",
+    "floor": 5,
+    "connects": [
+     "f5-apt-5c",
+     "f5-east-corridor"
+    ],
+    "pos_m": [
+     17.75,
+     8.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.5745,
+      0.3569,
+      0.6105,
+      0.4123
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-5d-ecorr",
+    "kind": "door",
+    "floor": 5,
+    "connects": [
+     "f5-apt-5d",
+     "f5-east-corridor"
+    ],
+    "pos_m": [
+     19.0,
+     6.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.612,
+      0.4492,
+      0.648,
+      0.5046
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "o5-ecorr-nehall",
+    "kind": "door",
+    "floor": 5,
+    "connects": [
+     "f5-east-corridor",
+     "f5-ne-hall"
+    ],
+    "pos_m": [
+     21.5,
+     7.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.687,
+      0.4031,
+      0.723,
+      0.4585
+     ],
+     "callout": ""
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f5-stair-a",
+    "kind": "fire_door",
+    "floor": 5,
+    "connects": [
+     "stair-a",
+     "f5-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.3108,
+      0.408,
+      0.3662
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f5-stair-b",
+    "kind": "fire_door",
+    "floor": 5,
+    "connects": [
+     "stair-b",
+     "f5-east-lobby"
+    ],
+    "pos_m": [
+     13.0,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.432,
+      0.3108,
+      0.468,
+      0.3662
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f5-stair-c",
+    "kind": "fire_door",
+    "floor": 5,
+    "connects": [
+     "stair-c",
+     "f5-ne-hall"
+    ],
+    "pos_m": [
+     22.75,
+     9.0
+    ],
+    "fire_rated": true,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.7245,
+      0.3108,
+      0.7605,
+      0.3662
+     ],
+     "callout": "C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "door-f5-elevator-e1",
+    "kind": "elevator_door",
+    "floor": 5,
+    "connects": [
+     "elevator-e1",
+     "f5-east-lobby"
+    ],
+    "pos_m": [
+     11.0,
+     5.0
+    ],
+    "fire_rated": false,
+    "source_ref": {
+     "sheet": "A-2",
+     "region_norm": [
+      0.372,
+      0.4954,
+      0.408,
+      0.5508
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   }
+  ],
+  "verticals": [
+   {
+    "id": "stair-a",
+    "kind": "stair",
+    "label": "STAIR A",
+    "floors_connected": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "stops": [
+     {
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       9.0,
+       12.0,
+       12.0
+      ],
+      "opening_id": "door-f1-stair-a",
+      "space_id": "f1-exit-passageway"
+     },
+     {
+      "floor": 2,
+      "bbox_m": [
+       10.0,
+       9.0,
+       12.0,
+       12.0
+      ],
+      "opening_id": "door-f2-stair-a",
+      "space_id": "f2-east-lobby"
+     },
+     {
+      "floor": 3,
+      "bbox_m": [
+       10.0,
+       9.0,
+       12.0,
+       12.0
+      ],
+      "opening_id": "door-f3-stair-a",
+      "space_id": "f3-east-lobby"
+     },
+     {
+      "floor": 4,
+      "bbox_m": [
+       10.0,
+       9.0,
+       12.0,
+       12.0
+      ],
+      "opening_id": "door-f4-stair-a",
+      "space_id": "f4-east-lobby"
+     },
+     {
+      "floor": 5,
+      "bbox_m": [
+       10.0,
+       9.0,
+       12.0,
+       12.0
+      ],
+      "opening_id": "door-f5-stair-a",
+      "space_id": "f5-east-lobby"
+     }
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.2,
+      0.42,
+      0.3385
+     ],
+     "callout": "A"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "stair-b",
+    "kind": "stair",
+    "label": "STAIR B",
+    "floors_connected": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "stops": [
+     {
+      "floor": 1,
+      "bbox_m": [
+       12.0,
+       9.0,
+       14.0,
+       12.0
+      ],
+      "opening_id": "door-f1-stair-b",
+      "space_id": "f1-stair-hall"
+     },
+     {
+      "floor": 2,
+      "bbox_m": [
+       12.0,
+       9.0,
+       14.0,
+       12.0
+      ],
+      "opening_id": "door-f2-stair-b",
+      "space_id": "f2-east-lobby"
+     },
+     {
+      "floor": 3,
+      "bbox_m": [
+       12.0,
+       9.0,
+       14.0,
+       12.0
+      ],
+      "opening_id": "door-f3-stair-b",
+      "space_id": "f3-east-lobby"
+     },
+     {
+      "floor": 4,
+      "bbox_m": [
+       12.0,
+       9.0,
+       14.0,
+       12.0
+      ],
+      "opening_id": "door-f4-stair-b",
+      "space_id": "f4-east-lobby"
+     },
+     {
+      "floor": 5,
+      "bbox_m": [
+       12.0,
+       9.0,
+       14.0,
+       12.0
+      ],
+      "opening_id": "door-f5-stair-b",
+      "space_id": "f5-east-lobby"
+     }
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.42,
+      0.2,
+      0.48,
+      0.3385
+     ],
+     "callout": "B"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "stair-c",
+    "kind": "stair",
+    "label": "STAIR C",
+    "floors_connected": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "stops": [
+     {
+      "floor": 1,
+      "bbox_m": [
+       21.5,
+       9.0,
+       24.0,
+       12.0
+      ],
+      "opening_id": "door-f1-stair-c",
+      "space_id": "f1-rear-service-vestibule"
+     },
+     {
+      "floor": 2,
+      "bbox_m": [
+       21.5,
+       9.0,
+       24.0,
+       12.0
+      ],
+      "opening_id": "door-f2-stair-c",
+      "space_id": "f2-ne-hall"
+     },
+     {
+      "floor": 3,
+      "bbox_m": [
+       21.5,
+       9.0,
+       24.0,
+       12.0
+      ],
+      "opening_id": "door-f3-stair-c",
+      "space_id": "f3-ne-hall"
+     },
+     {
+      "floor": 4,
+      "bbox_m": [
+       21.5,
+       9.0,
+       24.0,
+       12.0
+      ],
+      "opening_id": "door-f4-stair-c",
+      "space_id": "f4-ne-hall"
+     },
+     {
+      "floor": 5,
+      "bbox_m": [
+       21.5,
+       9.0,
+       24.0,
+       12.0
+      ],
+      "opening_id": "door-f5-stair-c",
+      "space_id": "f5-ne-hall"
+     }
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.705,
+      0.2,
+      0.78,
+      0.3385
+     ],
+     "callout": "C"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "elevator-e1",
+    "kind": "elevator",
+    "label": "ELEVATOR E1",
+    "floors_connected": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "stops": [
+     {
+      "floor": 1,
+      "bbox_m": [
+       10.0,
+       2.5,
+       12.0,
+       5.0
+      ],
+      "opening_id": "door-f1-elevator-e1",
+      "space_id": "f1-west-vestibule-142"
+     },
+     {
+      "floor": 2,
+      "bbox_m": [
+       10.0,
+       2.5,
+       12.0,
+       5.0
+      ],
+      "opening_id": "door-f2-elevator-e1",
+      "space_id": "f2-east-lobby"
+     },
+     {
+      "floor": 3,
+      "bbox_m": [
+       10.0,
+       2.5,
+       12.0,
+       5.0
+      ],
+      "opening_id": "door-f3-elevator-e1",
+      "space_id": "f3-east-lobby"
+     },
+     {
+      "floor": 4,
+      "bbox_m": [
+       10.0,
+       2.5,
+       12.0,
+       5.0
+      ],
+      "opening_id": "door-f4-elevator-e1",
+      "space_id": "f4-east-lobby"
+     },
+     {
+      "floor": 5,
+      "bbox_m": [
+       10.0,
+       2.5,
+       12.0,
+       5.0
+      ],
+      "opening_id": "door-f5-elevator-e1",
+      "space_id": "f5-east-lobby"
+     }
+    ],
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.36,
+      0.5231,
+      0.42,
+      0.6385
+     ],
+     "callout": "E1"
+    },
+    "layout_status": "verified_on_plan"
+   }
+  ],
+  "entrances": [
+   {
+    "id": "ent-142-marlowe-st",
+    "label": "142 MARLOWE ST",
+    "floor": 1,
+    "street_label": "MARLOWE ST",
+    "connects_to_space_id": "f1-west-vestibule-142",
+    "pos_m": [
+     4.0,
+     0.0
+    ],
+    "access_confirmed": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.165,
+      0.7308,
+      0.195,
+      0.7769
+     ],
+     "callout": "142 MARLOWE ST"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "ent-144-marlowe-st",
+    "label": "144 MARLOWE ST",
+    "floor": 1,
+    "street_label": "MARLOWE ST",
+    "connects_to_space_id": "f1-east-vestibule-144",
+    "pos_m": [
+     19.0,
+     0.0
+    ],
+    "access_confirmed": true,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.615,
+      0.7308,
+      0.645,
+      0.7769
+     ],
+     "callout": "144 MARLOWE ST"
+    },
+    "layout_status": "verified_on_plan"
+   },
+   {
+    "id": "ent-rear-alley",
+    "label": "ALLEY GATE - KEYED",
+    "floor": 1,
+    "street_label": "NORTH SERVICE ALLEY",
+    "connects_to_space_id": "f1-rear-service-vestibule",
+    "pos_m": [
+     22.75,
+     14.0
+    ],
+    "access_confirmed": false,
+    "source_ref": {
+     "sheet": "A-1",
+     "region_norm": [
+      0.7275,
+      0.0846,
+      0.7575,
+      0.1308
+     ],
+     "callout": "ALLEY GATE - KEYED"
+    },
+    "layout_status": "verified_on_plan"
+   }
+  ]
+ },
+ "conditions": []
+}
