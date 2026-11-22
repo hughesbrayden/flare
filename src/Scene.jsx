@@ -283,7 +283,8 @@ function TouchScroll({ on }) {
 function CameraRig({ focus, exploded }) {
   const { camera, controls, size } = useThree();
   // Narrow screens (phones) see the same framing, scaled to fit.
-  const fit = Math.min(1, size.width / 760, size.height / 620);
+  // Phone-sized canvases (< 560px wide) get extra margin so the whole exploded stack stays in frame.
+  const fit = Math.min(1, size.width / 760, size.height / 620) * (size.width < 560 ? 0.8 : 1);
 
   useEffect(() => {
     if (!controls) return;

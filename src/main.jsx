@@ -4,6 +4,7 @@ import Story from './story/Story.jsx';
 import App from './App.jsx';
 import './styles.css';
 import './story/story.css';
+import './story/mobile.css';
 
 function Root() {
   const [path, setPath] = useState(() => window.location.pathname);

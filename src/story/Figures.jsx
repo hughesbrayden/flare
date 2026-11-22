@@ -6,7 +6,34 @@ export function ClockFigure() {
   const PX = 1.45; // px per second
   const x = (s) => X0 + s * PX;
   const ticks = [0, 60, 120, 180, 240, 300];
+  const pctOf = (s) => `${(s / 330) * 100}%`;
   return (
+    <>
+    {/* Phones: the same two clocks, stacked in HTML so the text stays legible (hidden on desktop by CSS). */}
+    <div className="clock-m" role="img" aria-label="Two timelines in seconds: the engine's turnout and travel targets, and flashover times in UL tests">
+      <div className="cm-row">
+        <div className="cm-title">First engine <span>clock starts at the call</span></div>
+        <div className="cm-track">
+          <i className="cm-seg light" style={{ left: 0, width: pctOf(80) }}>80 s</i>
+          <i className="cm-seg ink" style={{ left: pctOf(80), width: pctOf(240) }}>240 s travel</i>
+        </div>
+        <div className="cm-note">turnout, then travel; target met on 90% of incidents</div>
+      </div>
+      <div className="cm-row">
+        <div className="cm-title">Modern room <span>clock starts at ignition</span></div>
+        <div className="cm-track">
+          <i className="cm-dots" style={{ left: 0, width: pctOf(200) }} />
+          <i className="cm-seg red" style={{ left: pctOf(200), width: pctOf(85) }} />
+        </div>
+        <div className="cm-note"><b>flashover 3:20–4:45</b> · legacy furnishings took about 30 minutes; off this scale</div>
+      </div>
+      <div className="cm-axis">
+        {ticks.map((t) => (
+          <span key={t} style={{ left: pctOf(t) }}>{t / 60}:00</span>
+        ))}
+        <span className="unit" style={{ left: '100%' }}>min</span>
+      </div>
+    </div>
     <svg className="fig fig-clock" viewBox="0 0 640 250" role="img" aria-label="Two timelines in seconds: the engine's turnout and travel targets, and flashover times in UL tests">
       <g className="axis">
         <line x1={x(0)} y1="210" x2={x(330)} y2="210" />
@@ -36,6 +63,7 @@ export function ClockFigure() {
       <text x={x(242)} y="114" textAnchor="middle" className="note strong">flashover 3:20–4:45</text>
       <text x={x(0)} y="166" className="note">legacy furnishings took about 30 minutes; off this scale</text>
     </svg>
+    </>
   );
 }
 

@@ -1,0 +1,144 @@
+/* Phone layer. Loaded last (main.jsx). Every rule is inside a phone media query, except the default that hides
+   the phone-only clock figure, so desktop (>= 1024px) renders exactly as before. */
+.clock-m { display: none; }
+
+/* ---------- phones: portrait, and landscape phones (short and narrower than desktop) ---------- */
+@media (max-width: 760px), (max-width: 1023px) and (max-height: 500px) {
+  /* bottom bar: count + two 44px arrows; the small step dots are dropped (swipe / arrows navigate) */
+  .deck { --bottom: 64px; }
+  .deck-controls { padding: 0 12px; background: #fff; border-top: 1px solid var(--rule); }
+  .dots button { display: none; }
+  .dots .count { margin-left: 0; font-size: 13px; }
+  .arrows { gap: 8px; }
+  .arrows button { width: 44px; height: 44px; }
+
+  /* single-screen slides: grow with content instead of a fixed-height grid; the frame scrolls vertically */
+  .layout-single .frame-inner,
+  .layout-single-wide .frame-inner {
+    height: auto; min-height: 100%;
+    grid-template-columns: minmax(0, 1fr); grid-template-rows: none;
+    align-content: start; row-gap: 24px;
+    padding: 24px 16px calc(var(--bottom) + 24px);
+  }
+  .layout-single .frame-inner > *, .layout-single-wide .frame-inner > * { align-self: start; }
+  .deck h1, .layout-single h1 { font-size: 36px; line-height: 1.05; }
+  .deck h2 { font-size: 28px; line-height: 1.1; }
+  .layout-single-wide h2 { font-size: 28px; }
+  .lede, .lede p { font-size: 16px; }
+  .kicker { font-size: 13px; }
+  .label { font-size: 12px; }
+
+  /* evidence: one stat per row, number beside its line (overrides the inline 3-column style) */
+  .evidence, .evidence.center { grid-template-columns: minmax(0, 1fr) !important; gap: 16px; text-align: left; padding-top: 16px; }
+  .evidence .ev { display: grid; grid-template-columns: 104px minmax(0, 1fr); column-gap: 14px; align-items: baseline; }
+  .evidence .ev-v { font-size: 30px; white-space: normal; }
+  .evidence .ev p, .evidence.center .ev p { margin: 0; max-width: none; font-size: 14px; line-height: 1.45; }
+  .stats-right .ev { padding: 14px 0; }
+  .stats-right .ev-v { font-size: 34px; }
+
+  /* sources row: readable, comfortable tap height */
+  .src-row { font-size: 13px; gap: 0 14px; }
+  .src-row a { display: inline-flex; align-items: center; min-height: 40px; }
+  .src { font-size: 13px; }
+  sup.ref { font-size: 13px; vertical-align: super; line-height: 0; }
+  sup.ref a { display: inline-block; padding: 10px 6px; margin: -10px -3px; }
+
+  /* slide 01: the stacked HTML clocks replace the wide SVG */
+  .clock-m { display: grid; gap: 18px; width: 100%; padding-bottom: 22px; position: relative; }
+  .fig-clock { display: none; }
+  .cm-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .cm-title span { display: block; font-size: 13px; font-weight: 400; color: var(--muted); }
+  .cm-track { position: relative; height: 24px; margin: 8px 0 6px; }
+  .cm-seg { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 13px; white-space: nowrap; overflow: hidden; }
+  .cm-seg.light { background: var(--wash); border: 1px solid var(--ink); color: var(--ink); }
+  .cm-seg.ink { background: var(--ink); color: #fff; }
+  .cm-seg.red { background: var(--red); }
+  .cm-dots { position: absolute; top: 50%; height: 0; border-top: 2px dotted var(--gray); }
+  .cm-note { font-size: 13px; line-height: 1.4; color: var(--muted); }
+  .cm-note b { color: var(--red); font-weight: 600; }
+  .cm-axis { position: relative; height: 18px; border-top: 1px solid var(--muted); margin-right: 26px; }
+  .cm-axis span { position: absolute; top: 4px; transform: translateX(-50%); font-size: 13px; color: var(--muted); }
+  .cm-axis span:first-child { transform: none; }
+  .cm-axis span.unit { transform: none; margin-left: 6px; }
+
+  /* slide 03: the yes/partly/no table becomes one card per tool, each criterion labelled */
+  .xtable thead { display: none; }
+  .xtable, .xtable tbody, .xtable tr, .xtable tbody th, .xtable td { display: block; width: 100%; }
+  .xtable tr { border: 1px solid var(--rule); padding: 4px 14px; margin-bottom: 12px; }
+  .xtable tr.ours { border-color: var(--red); }
+  .xtable tbody th { font-size: 16px; padding: 10px 0 8px; border-bottom: 1px solid var(--rule); text-align: left; }
+  .xtable td { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 18px; text-align: right; opacity: 1; }
+  .xtable td:last-child { border-bottom: 0; }
+  .xtable td::before { content: attr(data-col); font-size: 13px; line-height: 1.35; color: var(--muted); text-align: left; letter-spacing: 0; text-transform: none; }
+  .xtable td.no { color: rgba(200, 16, 46, 0.5); opacity: 1; }
+  .cgrid .src { margin-top: 4px; }
+
+  /* sources list */
+  .sources .sid { font-size: 13px; }
+  .sources a { display: inline-block; padding: 10px 8px; margin: -10px -4px; min-width: 40px; text-align: center; }
+
+  /* slide 04 */
+  .bt-line .bt-k, .bt-line .bt-k .n { font-size: 13px; }
+
+  /* slide 02: view on top, chat below it sized so the latest message is on screen without scrolling the page */
+  .fl-chat-head, .fl-chat-head span, .fl-chat-head b { font-size: 13px; }
+  .msg .who { font-size: 13px; letter-spacing: 0.06em; }
+  .msg.m-flare p, .msg.m-officer .bubble, .fl-input { font-size: 14px; }
+  .msg.m-flare.list p:not(:first-of-type) { font-size: 13px; }
+  .fl-call .t { font-size: 13px; letter-spacing: 0.06em; }
+  .fl-sheet figcaption, .fl-gen p, .fl-gen small { font-size: 13px; }
+  .fl-chrome { font-size: 13px; letter-spacing: 0.04em; height: auto; min-height: 26px; padding: 4px 10px; }
+}
+
+/* slide 02 stacks below 560px (flare.css); size the two halves to the screen */
+@media (max-width: 560px) {
+  .flare { gap: 12px; padding-top: 12px; padding-bottom: calc(var(--bottom) + 12px); }
+  /* the intro frame's label wraps to two lines on phones: start the section/canvas below it */
+  .flare:not(.expanded) .fl-section, .flare:not(.expanded) .fl-canvas { top: 46px; }
+  .flare.expanded .fl-view { height: 48vh; }
+  .flare.expanded .fl-chat { height: calc(100dvh - 48vh - var(--bottom) - 36px - 2px); min-height: 220px; }
+  .flare.expanded .fl-log { flex: 1; min-height: 0; overflow-y: auto; }
+  /* once the dispatch card is a header (gathering onwards), the model frames between it and a bottom band */
+  .flare.beat-2 .fl-canvas, .flare.beat-3 .fl-canvas, .flare.beat-4 .fl-canvas, .flare.beat-5 .fl-canvas { top: 66px; bottom: 48px; }
+  .fl-chip { font-size: 13px; left: 8px; bottom: 4px; min-height: 40px; max-width: calc(100% - 16px); display: inline-flex; align-items: center; }
+  .fl-sheets { inset: 92px 8px 8px; }
+  .fl-sheet-grid { gap: 8px; }
+  .fl-gen p { margin-top: 4px; }
+  .fl-call.compact { left: 8px; top: 8px; padding: 6px 10px; }
+  .fl-call.compact .l { font-size: 16px; }
+}
+
+/* small phones (e.g. 375x667) */
+@media (max-width: 760px) and (max-height: 700px) {
+  .deck h1, .layout-single h1 { font-size: 32px; }
+  .flare.expanded .fl-view { height: 42vh; }
+  .flare.expanded .fl-chat { height: calc(100dvh - 42vh - var(--bottom) - 36px - 2px); min-height: 200px; }
+  .fl-call.compact .t:last-child { display: none; }
+  .flare.beat-2 .fl-canvas, .flare.beat-3 .fl-canvas, .flare.beat-4 .fl-canvas, .flare.beat-5 .fl-canvas { top: 50px; bottom: 46px; }
+}
+
+/* ---------- landscape phones (short and not desktop-wide) ---------- */
+@media (max-width: 1023px) and (max-height: 500px) {
+  .deck { --bottom: 56px; }
+  .layout-single .frame-inner,
+  .layout-single-wide .frame-inner { height: auto; min-height: 100%; grid-template-rows: none; align-content: start; padding-top: 16px; padding-bottom: calc(var(--bottom) + 16px); }
+  .deck h1, .layout-single h1 { font-size: 32px; }
+  .arrows button { width: 44px; height: 44px; }
+  /* slide 02 keeps view and chat side by side; the intro copy and frame scale to the short screen */
+  .flare .fl-intro h2 { font-size: 24px; }
+  .flare .fl-intro .lede, .flare .fl-intro .lede p { font-size: 14px; margin-top: 8px; }
+  .flare:not(.expanded) .fl-chat { display: none; }
+  .fl-chip { font-size: 13px; min-height: 40px; display: inline-flex; align-items: center; bottom: 4px; }
+  .fl-call { padding: 12px 16px; }
+  .fl-call .l { font-size: 20px; }
+  .fl-call.compact { padding: 4px 10px; }
+  .fl-call.compact .l { font-size: 15px; }
+  .fl-call.compact .t:last-child { display: none; }
+  .fl-sheets { inset: 64px 12px 8px; }
+  .fl-sheet-grid { width: min(300px, 100%); gap: 6px; }
+  .fl-legend { display: none; }
+  .flare.beat-4 .fl-canvas, .flare.beat-5 .fl-canvas { bottom: 46px; }
+  .fl-chat-head { padding: 8px 12px; }
+  .fl-composer { padding: 6px 10px; }
+  .bt-line .bt-k, .bt-line .bt-k .n { font-size: 13px; }
+}

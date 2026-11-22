@@ -336,7 +336,7 @@ function CompareGrid() {
             <tr key={r.name} className={r.ours ? 'ours' : ''}>
               <th scope="row">{r.name}</th>
               {r.cells.map((c, i) => (
-                <td key={i} className={c} aria-label={MARK_LABEL[c]}>{MARK[c]}</td>
+                <td key={i} className={c} aria-label={MARK_LABEL[c]} data-col={GRID_COLS[i]}>{MARK[c]}</td>
               ))}
             </tr>
           ))}
