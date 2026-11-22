@@ -160,7 +160,7 @@ function Composer({ text, sending }) {
             <i className="caret" />
           </>
         ) : (
-          <span className="ph">Ask about the building…</span>
+          <span className="ph">Scripted playback · press →</span>
         )}
       </div>
       <div className="fl-send">↑</div>
