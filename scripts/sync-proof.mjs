@@ -3,6 +3,7 @@
 //   - eval/run.json            (Managed Agents run)
 //   - eval/fast_run.json       (fast pass + dispatch call timing, optional until W1 lands)
 //   - eval/investigations.json (parallel investigator agents, optional until W2 lands)
+//   - eval/decisions_run.json  (Gemini Decisions API dispatch mapping, optional)
 // Usage: node scripts/sync-proof.mjs [path/to/run.json]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -115,6 +116,37 @@ if (existsSync(invPath)) {
   };
 }
 
+// Read decisions_run.json if present (Decisions API dispatch mapping)
+const decPath = resolve(evalDir, 'decisions_run.json');
+let decisions = { pending: true, source: null };
+if (existsSync(decPath)) {
+  const d = JSON.parse(readFileSync(decPath, 'utf8'));
+  const ok = (d.calls ?? []).filter((c) => !c.error);
+  const ex = (c) => ({
+    case: c.case,
+    text: c.text,
+    latency_ms: c.latency_ms,
+    needs_confirmation: c.needs_confirmation,
+    target: { choice: c.answers.target.choice, probability: c.answers.target.probability },
+    condition: { choice: c.answers.condition.choice, probability: c.answers.condition.probability },
+    kind: { choice: c.answers.kind.choice, probability: c.answers.kind.probability },
+  });
+  decisions = {
+    pending: false,
+    source: 'pipeline/eval/decisions_run.json',
+    status: d.status,
+    model: d.model,
+    threshold: d.threshold,
+    started: d.started,
+    median_ms: d.latency_ms?.median ?? null,
+    min_ms: d.latency_ms?.min ?? null,
+    max_ms: d.latency_ms?.max ?? null,
+    baseline_ms: d.baseline?.latency_ms ?? null,
+    baseline_model: d.baseline?.model ?? null,
+    examples: ok.map(ex),
+  };
+}
+
 const proof = {
   source: 'pipeline eval/run.json (latest live run)',
   mode: run.mode,
@@ -157,11 +189,12 @@ const proof = {
   totals: run.totals,
   fast_run: fastRun,
   investigations,
+  decisions,
 };
 
 writeFileSync(resolve(app, 'src/data/proof.json'), JSON.stringify(proof, null, 1) + '\n');
 console.log(
   'Wrote src/data/proof.json from',
   src,
-  `(fast_run: ${fastRun.pending ? 'pending' : 'synced'}, investigations: ${investigations.pending ? 'pending' : 'synced'})`,
+  `(fast_run: ${fastRun.pending ? 'pending' : 'synced'}, investigations: ${investigations.pending ? 'pending' : 'synced'}, decisions: ${decisions.pending ? 'pending' : 'synced'})`,
 );

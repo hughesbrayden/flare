@@ -387,5 +387,110 @@
    "seconds": 72.7,
    "cost_usd": 0.0874
   }
+ },
+ "decisions": {
+  "pending": false,
+  "source": "pipeline/eval/decisions_run.json",
+  "status": "completed",
+  "model": "gemini-decision-1",
+  "threshold": 0.7,
+  "started": "2026-11-22T00:13:41+00:00",
+  "median_ms": 316,
+  "min_ms": 254,
+  "max_ms": 1028,
+  "baseline_ms": 3400,
+  "baseline_model": "gemini-4-hydrogen",
+  "examples": [
+   {
+    "case": "real",
+    "text": "Engine 7 respond 144 Marlowe St, smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby.",
+    "latency_ms": 1028,
+    "needs_confirmation": false,
+    "target": {
+     "choice": "f4-apt-4c",
+     "probability": 0.7496
+    },
+    "condition": {
+     "choice": "f4-east-lobby",
+     "probability": 0.8643
+    },
+    "kind": {
+     "choice": "smoke",
+     "probability": 0.9895
+    }
+   },
+   {
+    "case": "clear",
+    "text": "Ladder 3 respond 144 Marlowe St, apartment 2B, kitchen fire, flames visible from the stove.",
+    "latency_ms": 413,
+    "needs_confirmation": false,
+    "target": {
+     "choice": "f2-apt-2b",
+     "probability": 0.9998
+    },
+    "condition": {
+     "choice": "f2-apt-2b",
+     "probability": 0.9902
+    },
+    "kind": {
+     "choice": "fire",
+     "probability": 0.9982
+    }
+   },
+   {
+    "case": "ambiguous",
+    "text": "Smoke on the fourth floor, can't tell which apartment.",
+    "latency_ms": 300,
+    "needs_confirmation": true,
+    "target": {
+     "choice": "f4-east-corridor",
+     "probability": 0.1938
+    },
+    "condition": {
+     "choice": "none",
+     "probability": 0.4528
+    },
+    "kind": {
+     "choice": "smoke",
+     "probability": 0.9988
+    }
+   },
+   {
+    "case": "blockage",
+    "text": "East lobby door jammed, can't get through.",
+    "latency_ms": 254,
+    "needs_confirmation": true,
+    "target": {
+     "choice": "f1-east-vestibule-144",
+     "probability": 0.2297
+    },
+    "condition": {
+     "choice": "f1-east-vestibule-144",
+     "probability": 0.4623
+    },
+    "kind": {
+     "choice": "blocked",
+     "probability": 0.9909
+    }
+   },
+   {
+    "case": "radio",
+    "text": "Engine 7 to command, on scene, 4 Charlie, smoke condition in the public hall, fourth floor, east side.",
+    "latency_ms": 316,
+    "needs_confirmation": true,
+    "target": {
+     "choice": "f4-east-corridor",
+     "probability": 0.6861
+    },
+    "condition": {
+     "choice": "f4-east-corridor",
+     "probability": 0.7383
+    },
+    "kind": {
+     "choice": "smoke",
+     "probability": 0.994
+    }
+   }
+  ]
  }
 }

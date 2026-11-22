@@ -1,0 +1,389 @@
+{
+  "model": "gemini-decision-1",
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/decisions",
+  "threshold": 0.7,
+  "started": "2026-11-22T00:13:41+00:00",
+  "status": "completed",
+  "latency_ms": {
+    "min": 254,
+    "median": 316,
+    "max": 1028
+  },
+  "baseline": {
+    "source": "eval/fast_run.json dispatch_call",
+    "model": "gemini-4-hydrogen",
+    "latency_ms": 3400
+  },
+  "calls": [
+    {
+      "text": "Engine 7 respond 144 Marlowe St, smoke showing from apartment 4C, caller reports heavy smoke in the fourth floor east lobby.",
+      "model": "gemini-decision-1",
+      "threshold": 0.7,
+      "latency_ms": 1028,
+      "at": "2026-11-22T00:13:41+00:00",
+      "answers": {
+        "target": {
+          "choice": "f4-apt-4c",
+          "probability": 0.7496,
+          "runner_up": [
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.2401
+            },
+            {
+              "option": "f4-east-corridor",
+              "probability": 0.0037
+            }
+          ],
+          "needs_confirmation": false
+        },
+        "condition": {
+          "choice": "f4-east-lobby",
+          "probability": 0.8643,
+          "runner_up": [
+            {
+              "option": "f4-apt-4c",
+              "probability": 0.1151
+            },
+            {
+              "option": "f4-east-corridor",
+              "probability": 0.0089
+            }
+          ],
+          "needs_confirmation": false
+        },
+        "kind": {
+          "choice": "smoke",
+          "probability": 0.9895,
+          "runner_up": [
+            {
+              "option": "other",
+              "probability": 0.0053
+            },
+            {
+              "option": "fire",
+              "probability": 0.0041
+            }
+          ],
+          "needs_confirmation": false
+        }
+      },
+      "needs_confirmation": false,
+      "low_confidence": [],
+      "applied": {
+        "target_space_id": "f4-apt-4c",
+        "report": {
+          "space_id": "f4-east-lobby",
+          "kind": "smoke"
+        }
+      },
+      "usage": {
+        "total_tokens": 2241,
+        "total_input_tokens": 2241,
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 2241
+          }
+        ],
+        "total_output_tokens": 0
+      },
+      "error": null,
+      "case": "real"
+    },
+    {
+      "text": "Ladder 3 respond 144 Marlowe St, apartment 2B, kitchen fire, flames visible from the stove.",
+      "model": "gemini-decision-1",
+      "threshold": 0.7,
+      "latency_ms": 413,
+      "at": "2026-11-22T00:13:41+00:00",
+      "answers": {
+        "target": {
+          "choice": "f2-apt-2b",
+          "probability": 0.9998,
+          "runner_up": [
+            {
+              "option": "f2-apt-2c",
+              "probability": 0.0001
+            },
+            {
+              "option": "f1-east-vestibule-144",
+              "probability": 0.0
+            }
+          ],
+          "needs_confirmation": false
+        },
+        "condition": {
+          "choice": "f2-apt-2b",
+          "probability": 0.9902,
+          "runner_up": [
+            {
+              "option": "none",
+              "probability": 0.0072
+            },
+            {
+              "option": "f2-apt-2c",
+              "probability": 0.0003
+            }
+          ],
+          "needs_confirmation": false
+        },
+        "kind": {
+          "choice": "fire",
+          "probability": 0.9982,
+          "runner_up": [
+            {
+              "option": "other",
+              "probability": 0.0012
+            },
+            {
+              "option": "smoke",
+              "probability": 0.0003
+            }
+          ],
+          "needs_confirmation": false
+        }
+      },
+      "needs_confirmation": false,
+      "low_confidence": [],
+      "applied": {
+        "target_space_id": "f2-apt-2b",
+        "report": {
+          "space_id": "f2-apt-2b",
+          "kind": "fire"
+        }
+      },
+      "usage": {
+        "total_tokens": 2236,
+        "total_input_tokens": 2236,
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 2236
+          }
+        ],
+        "total_output_tokens": 0
+      },
+      "error": null,
+      "case": "clear"
+    },
+    {
+      "text": "Smoke on the fourth floor, can't tell which apartment.",
+      "model": "gemini-decision-1",
+      "threshold": 0.7,
+      "latency_ms": 300,
+      "at": "2026-11-22T00:13:42+00:00",
+      "answers": {
+        "target": {
+          "choice": "f4-east-corridor",
+          "probability": 0.1938,
+          "runner_up": [
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.1374
+            },
+            {
+              "option": "f4-apt-4d",
+              "probability": 0.1293
+            }
+          ],
+          "needs_confirmation": true
+        },
+        "condition": {
+          "choice": "none",
+          "probability": 0.4528,
+          "runner_up": [
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.1791
+            },
+            {
+              "option": "f4-east-corridor",
+              "probability": 0.1396
+            }
+          ],
+          "needs_confirmation": true
+        },
+        "kind": {
+          "choice": "smoke",
+          "probability": 0.9988,
+          "runner_up": [
+            {
+              "option": "other",
+              "probability": 0.0006
+            },
+            {
+              "option": "fire",
+              "probability": 0.0005
+            }
+          ],
+          "needs_confirmation": false
+        }
+      },
+      "needs_confirmation": true,
+      "low_confidence": [
+        "target",
+        "condition"
+      ],
+      "applied": null,
+      "usage": {
+        "total_tokens": 2224,
+        "total_input_tokens": 2224,
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 2224
+          }
+        ],
+        "total_output_tokens": 0
+      },
+      "error": null,
+      "case": "ambiguous"
+    },
+    {
+      "text": "East lobby door jammed, can't get through.",
+      "model": "gemini-decision-1",
+      "threshold": 0.7,
+      "latency_ms": 254,
+      "at": "2026-11-22T00:13:42+00:00",
+      "answers": {
+        "target": {
+          "choice": "f1-east-vestibule-144",
+          "probability": 0.2297,
+          "runner_up": [
+            {
+              "option": "f3-east-lobby",
+              "probability": 0.2073
+            },
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.1736
+            }
+          ],
+          "needs_confirmation": true
+        },
+        "condition": {
+          "choice": "f1-east-vestibule-144",
+          "probability": 0.4623,
+          "runner_up": [
+            {
+              "option": "none",
+              "probability": 0.229
+            },
+            {
+              "option": "f2-east-lobby",
+              "probability": 0.0868
+            }
+          ],
+          "needs_confirmation": true
+        },
+        "kind": {
+          "choice": "blocked",
+          "probability": 0.9909,
+          "runner_up": [
+            {
+              "option": "other",
+              "probability": 0.0067
+            },
+            {
+              "option": "smoke",
+              "probability": 0.0011
+            }
+          ],
+          "needs_confirmation": false
+        }
+      },
+      "needs_confirmation": true,
+      "low_confidence": [
+        "target",
+        "condition"
+      ],
+      "applied": null,
+      "usage": {
+        "total_tokens": 2222,
+        "total_input_tokens": 2222,
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 2222
+          }
+        ],
+        "total_output_tokens": 0
+      },
+      "error": null,
+      "case": "blockage"
+    },
+    {
+      "text": "Engine 7 to command, on scene, 4 Charlie, smoke condition in the public hall, fourth floor, east side.",
+      "model": "gemini-decision-1",
+      "threshold": 0.7,
+      "latency_ms": 316,
+      "at": "2026-11-22T00:13:42+00:00",
+      "answers": {
+        "target": {
+          "choice": "f4-east-corridor",
+          "probability": 0.6861,
+          "runner_up": [
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.1271
+            },
+            {
+              "option": "f4-ne-hall",
+              "probability": 0.1267
+            }
+          ],
+          "needs_confirmation": true
+        },
+        "condition": {
+          "choice": "f4-east-corridor",
+          "probability": 0.7383,
+          "runner_up": [
+            {
+              "option": "f4-east-lobby",
+              "probability": 0.1675
+            },
+            {
+              "option": "f4-ne-hall",
+              "probability": 0.0612
+            }
+          ],
+          "needs_confirmation": false
+        },
+        "kind": {
+          "choice": "smoke",
+          "probability": 0.994,
+          "runner_up": [
+            {
+              "option": "other",
+              "probability": 0.0038
+            },
+            {
+              "option": "clear",
+              "probability": 0.001
+            }
+          ],
+          "needs_confirmation": false
+        }
+      },
+      "needs_confirmation": true,
+      "low_confidence": [
+        "target"
+      ],
+      "applied": null,
+      "usage": {
+        "total_tokens": 2237,
+        "total_input_tokens": 2237,
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 2237
+          }
+        ],
+        "total_output_tokens": 0
+      },
+      "error": null,
+      "case": "radio"
+    }
+  ]
+}

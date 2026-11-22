@@ -19,6 +19,16 @@ const fmtTime = (s) => {
 };
 const STITCH = FAST?.stitch_ms != null ? `${Math.max(1, Math.round(FAST.stitch_ms))} ms` : null;
 const PARSE = FAST?.dispatch_call_s != null ? `${FAST.dispatch_call_s.toFixed(1)} s` : null;
+// Gemini Decisions API run (decisions_run.json): median latency and the real dispatch example.
+const DEC = proof.decisions && !proof.decisions.pending ? proof.decisions : null;
+const DEC_MS = DEC?.median_ms != null ? `${DEC.median_ms} ms` : null;
+const DEC_EX = (() => {
+  const e = DEC?.examples?.find((x) => x.case === 'real');
+  if (!e) return null;
+  const space = L.spaces.find((s) => s.id === e.condition.choice);
+  const place = (space?.label ?? e.condition.choice).toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  return { place, p: e.condition.probability.toFixed(2) };
+})();
 const NOTE7_SHEETS = (INV?.note7?.evidence ?? []).filter((e) => e.sheet !== 'A-4' && e.quote.includes('GENERAL NOTES')).map((e) => e.sheet);
 
 // A real report from the dispatch call (fast_run.json), with the space it was mapped to.
@@ -39,7 +49,13 @@ const STEPS = [
     sub: `Checker + ${INV?.count != null ? `${INV.count} ` : ''}investigator Managed Agents fix misreads and cite missing notes`,
     hi: true,
   },
-  { no: '04', verb: 'Route live', sub: `Gemini parses updates${PARSE ? ` (${PARSE})` : ''} · browser code computes paths in milliseconds` },
+  {
+    no: '04',
+    verb: 'Route live',
+    sub: DEC_MS
+      ? `Gemini Decisions API maps the call to the building (${DEC_MS}, with confidence) · browser code computes paths in milliseconds`
+      : `Gemini parses updates${PARSE ? ` (${PARSE})` : ''} · browser code computes paths in milliseconds`,
+  },
 ];
 
 function RenderCompare() {
@@ -120,8 +136,13 @@ export default function BuiltSlide() {
               <span className="muted">stairs and halls, no elevators</span>
             </li>
             <li>
-              <b className="nowrap">Radio / call{PARSE ? ` · ${PARSE}` : ''}</b>
-              <span className="muted">{LOBBY_REPORT ? `e.g. “${LOBBY_REPORT.text}” → ${LOBBY_REPORT.place}` : 'a report mapped onto the model'}</span>
+              <b>Radio / call{DEC_MS ? ` · Decisions API, ${DEC_MS}` : PARSE ? ` · ${PARSE}` : ''}</b>
+              <span className="muted">
+                {LOBBY_REPORT
+                  ? `e.g. “${LOBBY_REPORT.text}” → ${DEC_EX ? `${DEC_EX.place} (${DEC_EX.p})` : LOBBY_REPORT.place}`
+                  : 'a report mapped onto the model'}
+                {DEC && ' · low confidence → asks the officer'}
+              </span>
             </li>
             <li>
               <b>Officer chat</b>

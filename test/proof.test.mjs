@@ -57,3 +57,18 @@ test('investigations metadata is synced and preserves drafted_awaiting_review wh
     assert.equal(proof.investigations.note7.keep_status, 'drafted_awaiting_review');
   }
 });
+
+test('decisions metadata is synced and low confidence is never applied when decisions_run.json exists', () => {
+  assert.ok(proof.decisions && typeof proof.decisions.pending === 'boolean');
+  const decPath = resolve(evalDir, 'decisions_run.json');
+  if (existsSync(decPath)) {
+    const raw = JSON.parse(readFileSync(decPath, 'utf8'));
+    assert.equal(proof.decisions.pending, false, 'run node scripts/sync-proof.mjs to sync decisions_run.json');
+    assert.equal(proof.decisions.model, raw.model);
+    assert.equal(proof.decisions.median_ms, raw.latency_ms.median);
+    for (const e of proof.decisions.examples) {
+      const low = [e.target, e.condition, e.kind].some((a) => a.probability < proof.decisions.threshold);
+      assert.equal(e.needs_confirmation, low);
+    }
+  }
+});
